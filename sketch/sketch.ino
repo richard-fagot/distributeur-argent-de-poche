@@ -4,51 +4,44 @@
 void display(String msg);
 void display(String msg, int duration, void (*callback)());
 
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
-//  Définition des broches
+//  Paramètres du lecteur de carte à puce.
 //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 static const byte CARD_DETECTOR_PIN = 13; // Interupteur de détection de carte.
 
 
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
-// Définition des constantes
+// Paramètres de la détection d'insertion et de retrait de la carte à puce.
 //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-static const byte CARD_DETECTED = LOW; // Etat de la broche de détection de carte lorsqu'une carte est présente.
-static const byte NO_CARD_DETECTED = HIGH; // Etat de la broche de détection de carte en l'absence de carte.
+static const byte CARD_DETECTED = LOW; // État de la broche de détection de carte lorsqu'une carte est présente.
+static const byte NO_CARD_DETECTED = HIGH; // État de la broche de détection de carte en l'absence de carte.
 
-
-///////////////////////////////////////////////////////////////////
-//
-// Définition des variables
-//
-///////////////////////////////////////////////////////////////////
-
-boolean smartcardDataCollected = false;
-boolean readyToGetCode = false;
-boolean inviteToEnterCodeDisplayed = false; // Permet d'afficher l'invitation
-                                            // à saisir le code sans le faire 
-                                            // à chaque passage dans la boucle.
 boolean previousCardState = NO_CARD_DETECTED; // Permet de détecter un changement
                                               // d'état de présence de la carte.
 
-boolean insertCardMsgHasBeenDisplayed = false;
 
-
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
-// Smartcard Data
+// Données de la carte à puce.
 //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 String name;
 unsigned int code;
-unsigned int amount;
+unsigned int pocketMoney;
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// États de l'automate fini.
+//
+///////////////////////////////////////////////////////////////////////////////
 
 enum state {
   BEGIN,
@@ -65,30 +58,45 @@ enum state {
 state STATE;
 
 
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Définition des paramètres de distribution des pièces
 //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-static const byte NUMBER_OF_COIN_TYPES = 2;
-static const byte coinsValues[] = {200,100};
-static const byte NO_COIN = 255;
-static const byte SEQUENCE_MAX = 5;
-byte servoIndexSequence[SEQUENCE_MAX]; // la séquence contient les index des 
-                             // pièces décrites dans coinsValue.
+static const byte NUMBER_OF_COIN_TYPES = 2; // Nombre de type de pièces 
+                                            // disponibles dans le distributeur.
+
+static const byte coinsValues[] = {200,100}; // Liste des valeurs en centimes des
+                                             // pièces disponibles dans le 
+                                             // distributeur.
+
+static const byte NO_COIN = 255; // Constante représentant la fin de séquence de
+                                 // distribution. On laplace dans la variable
+                                 // servoIndexSequence.
+
+static const byte MAX_SEQUENCE_STEPS = 5; // Nombre maximal d'étapes dans la séquence de
+                                          // distribution.
+
+byte servoIndexSequence[MAX_SEQUENCE_STEPS]; // la séquence contient les index des 
+                                             // servos ::servos[] correspondant
+                                             // aux pièces décrites dans coinsValue.
 
 Servo servo_2euro_pin10;
 Servo servo_1euro_pin11;
 
-Servo servos[] = {servo_2euro_pin10, servo_1euro_pin11};
+Servo servos[] = {servo_2euro_pin10
+                , servo_1euro_pin11}; // l'ordre des servos doit correspondre à
+                                      // l'ordre des pièces dans ::coinsValues[]
+
 byte servoPins[] = {10, 11};
 
-///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
 //
 // Définition des paramètres du clavier.
 //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 const byte ROWS = 4; 
 const byte COLS = 4; 
@@ -105,20 +113,23 @@ byte colPins[COLS] = {5, 4, 3, 2};
 Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
 
-static const int BASE = 10;
-int userTypedCode = 0;
+static const int BASE = 10; // Le code tapé au clavier est en base 10.
+int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-///////////////////////** PROGRAMME ** ////////////////////////////
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////** PROGRAMME ** //////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 void setup() {
   Serial.begin(9600);
+
   pinMode(CARD_DETECTOR_PIN, INPUT);
-  initializeServo();
+  
+  initializeServos();
+  
   STATE = BEGIN;
   
   // Tests unitaires
@@ -160,7 +171,7 @@ void loop() {
     case WAIT_FOR_CARD_REMOVE:
     	if(isCardRemoved()) {
           	String msg = "Distribution de ";
-          	msg.concat(amount / 100);
+          	msg.concat(pocketMoney / 100);
           	msg.concat(" €");
       		display(msg);
           	STATE = DISTRIBUTION;
@@ -226,10 +237,11 @@ boolean isCardRemoved() {
   
   return false;
 }
+
 /**
   * Configuration et mise en position initiale des servos.
   */
-void initializeServo() {
+void initializeServos() {
   for(int servoIndex = 0 ; servoIndex < NUMBER_OF_COIN_TYPES ; servoIndex++) {
     servos[servoIndex].attach(servoPins[servoIndex]);
     servos[servoIndex].write(0);
@@ -239,7 +251,8 @@ void initializeServo() {
   
   for(int servoIndex = 0 ; servoIndex < NUMBER_OF_COIN_TYPES ; servoIndex++) {
     servos[servoIndex].detach();
-  }
+  } // Le fait de détacher les servos permet de les laisser dans leur position
+    // sans avoir le bruit qu'ils font quand ils essaient de la maintenir.
 }
 
 
@@ -273,14 +286,13 @@ void captureAndProcessUserEntries() {
   * dans la carte.
   */
 void giveMyMoney() {
-  //:TODO
-  distributionSequence(amount);    
+  distributionSequence(pocketMoney);    
   startDistributionSequence(); 
 }
 
 /**
   * Détermine la séquence de distribution des pièces
-  *  dans un tableau du type [pièce de 2€, pièce de 2€, pièce de 1€]
+  * dans un tableau du type [pièce de 2€, pièce de 2€, pièce de 1€, RIEN, RIEN]
   */
 void distributionSequence(int valueToDistribute) {
   byte sequenceIndex = 0;
@@ -309,7 +321,7 @@ void distributionSequence(int valueToDistribute) {
       servoIndexSequence[sequenceIndex] = coinValueIndex;
       sequenceIndex++;
       
-      if(sequenceIndex >= SEQUENCE_MAX) {
+      if(sequenceIndex >= MAX_SEQUENCE_STEPS) {
         emptySequence(servoIndexSequence);
         return;
       }
@@ -327,7 +339,7 @@ void distributionSequence(int valueToDistribute) {
   */
 void startDistributionSequence() {
   byte servoIndex;
-  for(int sequenceIndex = 0 ; sequenceIndex < SEQUENCE_MAX ; sequenceIndex++) {
+  for(int sequenceIndex = 0 ; sequenceIndex < MAX_SEQUENCE_STEPS ; sequenceIndex++) {
     servoIndex = servoIndexSequence[sequenceIndex];
     Serial.println(servoIndex);
     
@@ -337,6 +349,9 @@ void startDistributionSequence() {
   }
 }
 
+/**
+ * Lance les actions sur les servos pour faire tomber la pièce.
+ */
 void dropCoin(byte servoIndex) {
   Servo servo = servos[servoIndex];
   byte servoPin = servoPins[servoIndex];
@@ -356,7 +371,7 @@ void dropCoin(byte servoIndex) {
   * Initialise un tableau de séquence 
   */
 void emptySequence(byte sequence[]) {
-  for(int j = 0 ; j < SEQUENCE_MAX ; j++) {
+  for(int j = 0 ; j < MAX_SEQUENCE_STEPS ; j++) {
     sequence[j] = NO_COIN;
   }
 }
@@ -372,8 +387,8 @@ void manageWrongCode() {
 }
 
 /**
- * Récupère les informations stockées dans la carte.
- * Une fois lues, on attend la saisie du code.
+ * Récupère les informations stockées dans la carte à puce.
+ * 
  */
 void collectSmartcardData() {
   //:TODO : get card data
@@ -382,18 +397,18 @@ void collectSmartcardData() {
 }
 
 
-/**********************************************************/
-/*********************** MOCK *****************************/
-/**********************************************************/
+/*****************************************************************************/
+/********************************* MOCK **************************************/
+/*****************************************************************************/
 void mockCollectSmartcardData() {
   name = "Elsa";
   code = 2436;
-  amount = 300;
+  pocketMoney = 300;
 }
 
-/**********************************************************/
-/*********************** UNIT TESTS ***********************/
-/**********************************************************/
+/*****************************************************************************/
+/******************************* UNIT TESTS **********************************/
+/*****************************************************************************/
 void testSuiteDistributionSequence() {
   // Test exactly one coin, corresponding to the first in the coint list
   byte expectedResult1[] = {0, NO_COIN, NO_COIN, NO_COIN, NO_COIN};
@@ -421,7 +436,7 @@ void testDistributionSequence(int moneyAmount, byte expectedResult[], String tit
   
   boolean success = true;
   
-  for(byte i  = 0 ; i < SEQUENCE_MAX ; i++) {
+  for(byte i  = 0 ; i < MAX_SEQUENCE_STEPS ; i++) {
     if(servoIndexSequence[i] != expectedResult[i]) {
       success = false;
       break;
@@ -430,8 +445,8 @@ void testDistributionSequence(int moneyAmount, byte expectedResult[], String tit
   
   if(!success) {
     Serial.print("FAIL - "); Serial.println(title);
-    Serial.print("Expected - "); printArray(expectedResult, SEQUENCE_MAX); Serial.println();
-    Serial.print("Was      - "); printArray(servoIndexSequence, SEQUENCE_MAX); Serial.println();
+    Serial.print("Expected - "); printArray(expectedResult, MAX_SEQUENCE_STEPS); Serial.println();
+    Serial.print("Was      - "); printArray(servoIndexSequence, MAX_SEQUENCE_STEPS); Serial.println();
   } else {
     Serial.print("SUCCESS - "); Serial.println(title);
   }

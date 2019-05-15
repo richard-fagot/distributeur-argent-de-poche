@@ -51,7 +51,7 @@ Pour cela j'ai utilisé *Tinkercad* qui offre, entre autre, un environnement de 
 - 3 arduinos, un lcd et clavier : tinkercad n'en demandait pas tant...
 
 ## Electronique
-### Les servomoteurs
+### Le bruit des servomoteurs
 Les servos que j'ai choisi sont commandés en PWM qui traduit l'angle auquel on veut que le servo aille.
 Une fois arrivé à l'angle indiqué le servo fait tout ce qu'il peut pour s'y maintenir. Il fait des gros efforts pour ça et ça s'entend...
 Le distributeur ayant vocation à se trouver dans le salon, c'était inenvisageable d'avoir ce bruit en permanence.
@@ -77,3 +77,14 @@ La broche 13 est souvent reliée à une led soudée sur l'arduino. La LED est re
 Mais on peut se servir de cette broche pour autre chose, par exemple, pour y brancher un interrupteur. C'est ce que j'ai fait. J'ai configurer la broche en INPUT_PULLUP et je détecte les états HAUT et BAS de la broche en fonction de la position de l’interrupteur. Sauf que j'avais un niveau BAS quelque soit la position de l'interrupteur.
 
 En fait, c'est à cause de la LED. La résistance qui y est associée est trop faible et relie la broche 13 en permanence à l'état BAS. Pour corriger cela, il faut ajouter une résistance de PULLUP externe d'au moins 1kOhms.
+
+### Machine à état
+J'ai commencé à coder de façon simple, assez linéaire. Mais assez rapidemment, je me suis retrouvé avec plein de booléens un peu partout pour contrôler le nombre de passages dans certains bouts de code et plus particulièrement pour savoir où j'en étais dans les étapes, dans quel état j'erre. 
+
+Ce qui m'a conduit à coder mon programme grâce à une machine à état (simplifiée de chez simplifiée, un bon gros switch quoi). Pour une meilleur lisibilité, j'ai essayé autant que possible de faire les changements d'état dans le switch principal (parce que sinon c'est vite difficile de repérer le fil conducteur (cas nominal) du programme).
+
+
+Cela m'a permis de résoudre des problèmes de répétitions non nécessaires d'exécution de code, comme par exemple afficher un message sur le LCD. Dans ce dernier cas, une seule exécution suffit à afficher et maintenir un texte, mais comme l'arduino passe dans sa boucle des millions de fois par seconde (ou pas loin), avec la machine à état j'ai un état qui affiche le message une fois et passe à un état suivant.
+
+### Les pièces de monnaie pour tester
+Ne les laissez pas trop près de l'arduino. Les pièces sont en métal, le métal est conducteur et les arduino n'aiment pas les courts-circuits.
