@@ -166,7 +166,7 @@ void loop() {
     	STATE = WAIT_FOR_CARD_REMOVE;
     	break;
     case WRONG_CODE:
-    	display("Code Faux", 2000, manageWrongCode);
+    	display("Code Faux", 2000, returnToSayHelloState);
     	break;
     case WAIT_FOR_CARD_REMOVE:
     	if(isCardRemoved()) {
@@ -380,7 +380,7 @@ void emptySequence(byte sequence[]) {
  * Quand l'utilisateur a saisi un code faux
  * on l'invite à recommencer.
  */
-void manageWrongCode() {
+void returnToSayHelloState() {
   //:TODO
   userTypedCode = 0;
   STATE = SAY_HELLO;
