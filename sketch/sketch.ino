@@ -1,6 +1,84 @@
 #include <Keypad.h> //Keypad by Mark Stanley, Alexander Brevig Version 3.1.1
 #include <Servo.h>  // Librairie par défaut
 
+class SingleCoinDistributor {
+    private:
+        Servo servo;
+        byte pin;
+        static const byte INITIAL_POSITION = 0;
+        static const byte FINAL_POSITION = 180;
+        enum move_state {
+            attach,
+            detach,
+            first_move,
+            second_move
+        };
+        move_state STATE = attach;
+        unsigned long MOVING_DELAY = 2000;
+        unsigned long previousMillis = 0;
+    public:
+        SingleCoinDistributor(byte servoPin) {
+            pin = servoPin;
+        }
+
+        void distributeOneCoin() {
+
+            switch(STATE) {
+            case attach:
+    	        Serial.println("Attach");
+    	        Serial.println("Move to 0");
+    	        previousMillis = millis();
+    	        STATE = first_move;
+    	        break;
+            case first_move:
+    	        if(millis() - previousMillis > MOVING_DELAY) {
+          	        Serial.println("Move to 180");
+			        STATE = second_move;    
+          	        previousMillis = millis();
+  		        }
+    	        break;
+            case second_move:
+    	        if(millis() - previousMillis > MOVING_DELAY) {
+                Serial.println("Detach");
+    	        }
+    	        break;
+            case detach: break;
+        }
+
+    }
+
+};
+
+class Distributor {
+    private:
+    static const unsigned long SERVO_ACTION_DELAY = 2000;
+    byte nextSingleCoinDistributor;
+    SingleCoinDistributor *sequence[2];
+    unsigned long previousMillis;
+    boolean isDistributionFinished;
+
+    void next() {
+        sequence[nextSingleCoinDistributor]->distributeOneCoin();
+        nextSingleCoinDistributor++;
+        
+    }
+
+    public:
+    Distributor() {
+        nextSingleCoinDistributor = 0;
+        previousMillis = 0;
+        isDistributionFinished = false;
+    };
+
+    void distribute() {
+        next();
+    };
+
+    boolean hasFinished() {
+        return isDistributionFinished;
+    }
+};
+
 void display(String msg);
 void display(String msg, int duration, void (*callback)());
 
@@ -117,6 +195,8 @@ static const int BASE = 10; // Le code tapé au clavier est en base 10.
 int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
+Distributor distributor;
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////** PROGRAMME ** //////////////////////////////////
@@ -178,6 +258,7 @@ void loop() {
     	}
     	break;
     case DISTRIBUTION:
+        distributor.distribute();
     	giveMyMoney();
     	display("Au revoir " + name);
     	delay(2000);
