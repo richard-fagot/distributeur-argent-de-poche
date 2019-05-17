@@ -16,6 +16,7 @@ class SingleCoinDistributor {
         move_state STATE = attach;
         unsigned long MOVING_DELAY = 2000;
         unsigned long previousMillis = 0;
+
     public:
         SingleCoinDistributor(byte servoPin) {
             pin = servoPin;
