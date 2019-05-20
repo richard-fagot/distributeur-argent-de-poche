@@ -1,84 +1,7 @@
 #include <Keypad.h> //Keypad by Mark Stanley, Alexander Brevig Version 3.1.1
 #include <Servo.h>  // Librairie par défaut
+#include "PocketMoneyDistributor.h"
 
-class SingleCoinDistributor {
-    private:
-        Servo servo;
-        byte pin;
-        static const byte INITIAL_POSITION = 0;
-        static const byte FINAL_POSITION = 180;
-        enum move_state {
-            attach,
-            detach,
-            first_move,
-            second_move
-        };
-        move_state STATE = attach;
-        unsigned long MOVING_DELAY = 2000;
-        unsigned long previousMillis = 0;
-
-    public:
-        SingleCoinDistributor(byte servoPin) {
-            pin = servoPin;
-        }
-
-        void distributeOneCoin() {
-
-            switch(STATE) {
-            case attach:
-    	        Serial.println("Attach");
-    	        Serial.println("Move to 0");
-    	        previousMillis = millis();
-    	        STATE = first_move;
-    	        break;
-            case first_move:
-    	        if(millis() - previousMillis > MOVING_DELAY) {
-          	        Serial.println("Move to 180");
-			        STATE = second_move;    
-          	        previousMillis = millis();
-  		        }
-    	        break;
-            case second_move:
-    	        if(millis() - previousMillis > MOVING_DELAY) {
-                Serial.println("Detach");
-    	        }
-    	        break;
-            case detach: break;
-        }
-
-    }
-
-};
-
-class Distributor {
-    private:
-    static const unsigned long SERVO_ACTION_DELAY = 2000;
-    byte nextSingleCoinDistributor;
-    SingleCoinDistributor *sequence[2];
-    unsigned long previousMillis;
-    boolean isDistributionFinished;
-
-    void next() {
-        sequence[nextSingleCoinDistributor]->distributeOneCoin();
-        nextSingleCoinDistributor++;
-        
-    }
-
-    public:
-    Distributor() {
-        nextSingleCoinDistributor = 0;
-        previousMillis = 0;
-        isDistributionFinished = false;
-    };
-
-    void distribute() {
-        next();
-    };
-
-    boolean hasFinished() {
-        return isDistributionFinished;
-    }
-};
 
 void display(String msg);
 void display(String msg, int duration, void (*callback)());
@@ -139,40 +62,6 @@ state STATE;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Définition des paramètres de distribution des pièces
-//
-///////////////////////////////////////////////////////////////////////////////
-
-static const byte NUMBER_OF_COIN_TYPES = 2; // Nombre de type de pièces 
-                                            // disponibles dans le distributeur.
-
-static const byte coinsValues[] = {200,100}; // Liste des valeurs en centimes des
-                                             // pièces disponibles dans le 
-                                             // distributeur.
-
-static const byte NO_COIN = 255; // Constante représentant la fin de séquence de
-                                 // distribution. On laplace dans la variable
-                                 // servoIndexSequence.
-
-static const byte MAX_SEQUENCE_STEPS = 5; // Nombre maximal d'étapes dans la séquence de
-                                          // distribution.
-
-byte servoIndexSequence[MAX_SEQUENCE_STEPS]; // la séquence contient les index des 
-                                             // servos ::servos[] correspondant
-                                             // aux pièces décrites dans coinsValue.
-
-Servo servo_2euro_pin10;
-Servo servo_1euro_pin11;
-
-Servo servos[] = {servo_2euro_pin10
-                , servo_1euro_pin11}; // l'ordre des servos doit correspondre à
-                                      // l'ordre des pièces dans ::coinsValues[]
-
-byte servoPins[] = {10, 11};
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
 // Définition des paramètres du clavier.
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -196,7 +85,8 @@ static const int BASE = 10; // Le code tapé au clavier est en base 10.
 int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
-Distributor distributor;
+//Distributor distributor;
+PocketMoneyDistributor distributor;
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -208,9 +98,13 @@ void setup() {
   Serial.begin(9600);
 
   pinMode(CARD_DETECTOR_PIN, INPUT);
-  
-  initializeServos();
-  
+
+  // Crée un distributeur contenant deux types de pièces :
+  // - des pièces de 2€ dont le servo est relié à la broche 10 ;
+  // - des pièces de 1€ dont le servo est relié à la broche 11.
+  distributor.setup(2, 10, 200, 11, 100);
+
+
   STATE = BEGIN;
   
   // Tests unitaires
@@ -259,8 +153,7 @@ void loop() {
     	}
     	break;
     case DISTRIBUTION:
-        distributor.distribute();
-    	giveMyMoney();
+      distributor.distribute(pocketMoney);
     	display("Au revoir " + name);
     	delay(2000);
     	STATE = BEGIN;
@@ -321,24 +214,6 @@ boolean isCardRemoved() {
 }
 
 /**
-  * Configuration et mise en position initiale des servos.
-  */
-void initializeServos() {
-  for(int servoIndex = 0 ; servoIndex < NUMBER_OF_COIN_TYPES ; servoIndex++) {
-    servos[servoIndex].attach(servoPins[servoIndex]);
-    servos[servoIndex].write(0);
-  }
-  
-  delay(3000);
-  
-  for(int servoIndex = 0 ; servoIndex < NUMBER_OF_COIN_TYPES ; servoIndex++) {
-    servos[servoIndex].detach();
-  } // Le fait de détacher les servos permet de les laisser dans leur position
-    // sans avoir le bruit qu'ils font quand ils essaient de la maintenir.
-}
-
-
-/**
  * Capture les entrées saisies au clavier numérique 
  * et lance les actions correspondantes.
  */
@@ -363,100 +238,6 @@ void captureAndProcessUserEntries() {
   
 }
 
-/**
-  * Distribue les pièces dans la quantité indiquée
-  * dans la carte.
-  */
-void giveMyMoney() {
-  distributionSequence(pocketMoney);    
-  startDistributionSequence(); 
-}
-
-/**
-  * Détermine la séquence de distribution des pièces
-  * dans un tableau du type [pièce de 2€, pièce de 2€, pièce de 1€, RIEN, RIEN]
-  */
-void distributionSequence(int valueToDistribute) {
-  byte sequenceIndex = 0;
-  int remainingValueToDistribute = valueToDistribute;
-  byte coinValueIndex = 0;
-  byte coinsCount = 0;
-  
-  // Initialisation avec une séquence vide
-  emptySequence(servoIndexSequence);
-  
-  while(remainingValueToDistribute != 0) {
-    
-    // Si il n'y a pas suffisamment de type de valeurs faciales
-    // pour faire le montant à distribuer, on vide la séquence
-    // et on s'arrête ==> pas de distribution de pièce.
-    if(coinValueIndex >= NUMBER_OF_COIN_TYPES) {
-      emptySequence(servoIndexSequence);
-      return;
-    }
-    
-    // Combien de pièces de la valeur faciale courante y-a-t'il
-    // dans ce qu'il reste à distribuer ?
-    coinsCount = remainingValueToDistribute / coinsValues[coinValueIndex];
-      
-    for(byte i = 0 ; i < coinsCount ; i++) {
-      servoIndexSequence[sequenceIndex] = coinValueIndex;
-      sequenceIndex++;
-      
-      if(sequenceIndex >= MAX_SEQUENCE_STEPS) {
-        emptySequence(servoIndexSequence);
-        return;
-      }
-    }
-
-    remainingValueToDistribute -= coinsValues[coinValueIndex]*coinsCount;
-    coinValueIndex++;
-      
-  }
-}
-
-/**
-  * Exécute la sequence de distribution en activant les
-  * servos correspondants les uns après les autres.
-  */
-void startDistributionSequence() {
-  byte servoIndex;
-  for(int sequenceIndex = 0 ; sequenceIndex < MAX_SEQUENCE_STEPS ; sequenceIndex++) {
-    servoIndex = servoIndexSequence[sequenceIndex];
-    Serial.println(servoIndex);
-    
-    // Détection de la fin de la séquence si elle ne rempli pas tout le tableau
-    if(NO_COIN == servoIndex) break;
-    dropCoin(servoIndex);
-  }
-}
-
-/**
- * Lance les actions sur les servos pour faire tomber la pièce.
- */
-void dropCoin(byte servoIndex) {
-  Servo servo = servos[servoIndex];
-  byte servoPin = servoPins[servoIndex];
-  
-  servo.attach(servoPin);
-  
-  servo.write(180);
-  delay(3000);
-  servo.write(0);
-  delay(3000);
-  
-  servo.detach();
-}
-
-
-/**
-  * Initialise un tableau de séquence 
-  */
-void emptySequence(byte sequence[]) {
-  for(int j = 0 ; j < MAX_SEQUENCE_STEPS ; j++) {
-    sequence[j] = NO_COIN;
-  }
-}
 
 /**
  * Quand l'utilisateur a saisi un code faux
@@ -490,7 +271,7 @@ void mockCollectSmartcardData() {
 
 /*****************************************************************************/
 /******************************* UNIT TESTS **********************************/
-/*****************************************************************************/
+/****************************************************************************
 void testSuiteDistributionSequence() {
   // Test exactly one coin, corresponding to the first in the coint list
   byte expectedResult1[] = {0, NO_COIN, NO_COIN, NO_COIN, NO_COIN};
@@ -544,3 +325,4 @@ void testDistributionSequence(int moneyAmount, byte expectedResult[], String tit
    Serial.print(array[size-1]);
    Serial.print("]");
  }
+*/

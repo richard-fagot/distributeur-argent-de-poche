@@ -28,3 +28,6 @@ Tant qu'à y être, ça me semble intéressant de partager tout ça, alors ce jo
 - **Cura** pour préparer les pièces destinées à l'impression 3D ;
 - **Tinkercad** pour la simulation d'un environnement Arduino ;
 - **EasyEDA** pour la conception de la partie électronique et du PCB.
+
+#Références
+Eviter la fragmentation de la pile : https://cpp4arduino.com/2018/11/06/what-is-heap-fragmentation.html
