@@ -130,9 +130,15 @@ void loop() {
     	collectSmartcardData();
     	STATE = SAY_HELLO;
     	break;
-    case SAY_HELLO:
-    	display("Bonjour " + name + ", entre ton code");
+    case SAY_HELLO: 
+    {
+      String msg = "Bonjour "; // Dans un switch on n'a pas le droit d'initialiser des variables. Soit il faut appeler une fonction soir il faut mettre le code entre {}
+      msg += name;
+      msg += ", entre ton code";
+    	display( msg.c_str() );
     	STATE = CAPTURE_USER_ENTRIES;
+    }
+      break;
     case CAPTURE_USER_ENTRIES:
     	captureAndProcessUserEntries();
     	break;
@@ -148,15 +154,19 @@ void loop() {
           	String msg = "Distribution de ";
           	msg.concat(pocketMoney / 100);
           	msg.concat(" €");
-      		display(msg);
+      		  display(msg.c_str());
           	STATE = DISTRIBUTION;
     	}
     	break;
     case DISTRIBUTION:
+    {
       distributor.distribute(pocketMoney);
-    	display("Au revoir " + name);
+      String msg = "Au revoir ";
+      msg += name;
+    	display( msg.c_str());
     	delay(2000);
     	STATE = BEGIN;
+    }
     	break;
     default: break;
   }
@@ -166,23 +176,23 @@ void loop() {
 /**
   * Fonction utilitaire pour le débogage.
   */
-void log(String msg) {
+void log(const char* msg) {
   	String logMsg = "Log - ";
   	logMsg.concat(msg);
   
-	Serial.println(logMsg);  
+	  Serial.println(logMsg);  
 }
 
 
 /**
   * Affiche le message sur l'écran LCD
   */
-void display(String msg) {
+void display(const char* msg) {
   //:TODO
   Serial.println(msg);
 }
 
-void display(String msg, int duration, void (*callback)()) {
+void display(const char* msg, int duration, void (*callback)()) {
   display(msg);
   delay(duration);
   (*callback)();
@@ -224,7 +234,7 @@ void captureAndProcessUserEntries() {
   if (customKey){
     if(customKey >= 48 && customKey <= 57) {
       userTypedCode = userTypedCode * BASE + (customKey - 48);
-      log(String(userTypedCode));
+      log(userTypedCode);
     }
     
     if(customKey == '#') {
