@@ -10,7 +10,7 @@ CoinPusher::CoinPusher(byte servoPin, int coinValue) {
 
 void CoinPusher::initialize() {
     servo.attach(pin);
-    servo.write(0);
+    servo.write(180);
     delay(2000);
     servo.detach();
     STATE = READY_TO_MOVE;
@@ -21,7 +21,7 @@ void CoinPusher::pushCoin() {
       case READY_TO_MOVE:
       case GOTO_PUSH_POSITION:
       	servo.attach(pin);
-      	servo.write(180);
+      	servo.write(0);
       	STATE = WAIT;
       	nextState = GOTO_INITIAL_POSITION;
       	previousMillis = millis();
@@ -34,7 +34,7 @@ void CoinPusher::pushCoin() {
         }
       	break;
       case GOTO_INITIAL_POSITION:
-    	servo.write(0);
+    	  servo.write(180);
       	STATE = WAIT;
       	nextState = FINISH;
       	previousMillis = millis();

@@ -12,7 +12,7 @@ void display(String msg, int duration, void (*callback)());
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-static const byte CARD_DETECTOR_PIN = 13; // Interupteur de détection de carte.
+static const byte CARD_DETECTOR_PIN = 2; // Interupteur de détection de carte.
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ char hexaKeys[ROWS][COLS] = {
 byte rowPins[ROWS] = {9, 8, 7, 6}; 
 byte colPins[COLS] = {5, 4, 3, 2};  
 
-Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
+//Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
 
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
@@ -97,12 +97,12 @@ PocketMoneyDistributor distributor;
 void setup() {
   Serial.begin(9600);
 
-  pinMode(CARD_DETECTOR_PIN, INPUT);
+  pinMode(CARD_DETECTOR_PIN, INPUT_PULLUP);
 
   // Crée un distributeur contenant deux types de pièces :
   // - des pièces de 2€ dont le servo est relié à la broche 10 ;
   // - des pièces de 1€ dont le servo est relié à la broche 11.
-  distributor.setup(2, 10, 200, 11, 100);
+  distributor.setup(2, 9, 200, 3, 100);
 
 
   STATE = BEGIN;
@@ -140,7 +140,8 @@ void loop() {
     }
       break;
     case CAPTURE_USER_ENTRIES:
-    	captureAndProcessUserEntries();
+      mockCaptureAndProcessUserEntries();
+    	//captureAndProcessUserEntries();
     	break;
     case GOOD_CODE:
     	display("Code bon, retire ta carte");
@@ -161,11 +162,13 @@ void loop() {
     case DISTRIBUTION:
     {
       distributor.distribute(pocketMoney);
-      String msg = "Au revoir ";
-      msg += name;
-    	display( msg.c_str());
-    	delay(2000);
-    	STATE = BEGIN;
+      if(distributor.hasFinished()) {
+        String msg = "Au revoir ";
+        msg += name;
+        display( msg.c_str());
+        delay(2000);
+        STATE = BEGIN; 
+      }
     }
     	break;
     default: break;
@@ -226,7 +229,7 @@ boolean isCardRemoved() {
 /**
  * Capture les entrées saisies au clavier numérique 
  * et lance les actions correspondantes.
- */
+ 
 void captureAndProcessUserEntries() {
 
   char customKey = customKeypad.getKey();
@@ -247,7 +250,7 @@ void captureAndProcessUserEntries() {
   }
   
 }
-
+*/
 
 /**
  * Quand l'utilisateur a saisi un code faux
@@ -279,6 +282,10 @@ void mockCollectSmartcardData() {
   pocketMoney = 300;
 }
 
+void mockCaptureAndProcessUserEntries() {
+  userTypedCode = 2436;
+  STATE = GOOD_CODE;
+}
 /*****************************************************************************/
 /******************************* UNIT TESTS **********************************/
 /****************************************************************************

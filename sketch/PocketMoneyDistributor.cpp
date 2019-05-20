@@ -61,7 +61,7 @@ void PocketMoneyDistributor::setup(int nbCoinTypes, ...) {
       coinPusher[i] = cp;
       coinPusher[i]->initialize();
     }
-	va_end(ap); 
+	  va_end(ap); 
 }
 
 void PocketMoneyDistributor::computeDistributionSequence(int pocketMoneyAmount) {
