@@ -9,9 +9,12 @@ CoinPusher::CoinPusher(byte servoPin, int coinValue) {
 }
 
 void CoinPusher::initialize() {
+    Serial.print("Initialize \t");
+    Serial.println(pin);
     servo.attach(pin);
     servo.write(180);
     delay(2000);
+    Serial.println("2s");
     servo.detach();
     STATE = READY_TO_MOVE;
 }

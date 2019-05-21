@@ -1,7 +1,14 @@
 #include <Keypad.h> //Keypad by Mark Stanley, Alexander Brevig Version 3.1.1
 #include <Servo.h>  // Librairie par défaut
+#include <string.h>
+#include <Wire.h>
+#include <ds3231.h> //ds3231FS by Petre Rodan
 #include "PocketMoneyDistributor.h"
+#include "Displayer.h"
 
+ts timeDetails;
+
+//////////////////////////////////////////////////////////////
 
 void display(String msg);
 void display(String msg, int duration, void (*callback)());
@@ -50,15 +57,19 @@ enum state {
   WAIT_FOR_CARD,   
   COLLECT_CARD_DATA,
   SAY_HELLO,
+  NOT_THE_GOOD_DAY,
   CAPTURE_USER_ENTRIES,
   GOOD_CODE,
   WRONG_CODE,
   WAIT_FOR_CARD_REMOVE,
-  DISTRIBUTION
+  DISTRIBUTION,
+  WAIT
 };
 
 state STATE;
-
+state nextState;
+unsigned long delayInterval;
+unsigned long previousMillis;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -88,6 +99,8 @@ int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 //Distributor distributor;
 PocketMoneyDistributor distributor;
 
+Displayer displayer;
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 /////////////////////////////** PROGRAMME ** //////////////////////////////////
@@ -95,6 +108,11 @@ PocketMoneyDistributor distributor;
 ///////////////////////////////////////////////////////////////////////////////
 
 void setup() {
+  
+  Wire.begin(); //start i2c (required for connection)
+  DS3231_init(DS3231_INTCN); //register the ds3231 (DS3231_INTCN is the default address of ds3231, this is set by macro for no performance loss)
+  
+  displayer.initialize();
   Serial.begin(9600);
 
   pinMode(CARD_DETECTOR_PIN, INPUT_PULLUP);
@@ -103,7 +121,7 @@ void setup() {
   // - des pièces de 2€ dont le servo est relié à la broche 10 ;
   // - des pièces de 1€ dont le servo est relié à la broche 11.
   distributor.setup(2, 9, 200, 3, 100);
-
+  distributor.initialize();
 
   STATE = BEGIN;
   
@@ -117,7 +135,8 @@ void loop() {
   
   switch(STATE) {
     case BEGIN:
-    	display("Insère ta carte");
+      displayer.clear();
+    	displayer.addLine("Insere ta carte");
     	STATE = WAIT_FOR_CARD;
     	break;
     case WAIT_FOR_CARD:
@@ -128,15 +147,36 @@ void loop() {
     	break;
     case COLLECT_CARD_DATA:
     	collectSmartcardData();
-    	STATE = SAY_HELLO;
+      DS3231_get(&timeDetails);
+      if(timeDetails.wday == 6) {
+        STATE = SAY_HELLO;  
+      } else {
+        STATE = NOT_THE_GOOD_DAY;
+      }
+    	
     	break;
     case SAY_HELLO: 
     {
-      String msg = "Bonjour "; // Dans un switch on n'a pas le droit d'initialiser des variables. Soit il faut appeler une fonction soir il faut mettre le code entre {}
-      msg += name;
-      msg += ", entre ton code";
-    	display( msg.c_str() );
+      displayer.clear();
+      displayer.addLine("Bonjour");
+      displayer.addLine(name.c_str());
+      displayer.addLine("Entre ton code");
+      userTypedCode = 0;
     	STATE = CAPTURE_USER_ENTRIES;
+    }
+      break;
+    case NOT_THE_GOOD_DAY:
+    {
+      displayer.clear();
+      displayer.addLine("Ce n'est pas le bon");
+      String msg = "jour ";
+      msg.concat(name);
+      displayer.addLine(msg.c_str());
+      displayer.addLine("Reviens samedi !");
+      delayInterval = 5000;
+      nextState = BEGIN;
+      STATE = WAIT;
+      previousMillis = millis();
     }
       break;
     case CAPTURE_USER_ENTRIES:
@@ -144,33 +184,46 @@ void loop() {
     	//captureAndProcessUserEntries();
     	break;
     case GOOD_CODE:
-    	display("Code bon, retire ta carte");
+      displayer.clear();
+      displayer.addLine("Code bon");
+      displayer.addLine("Retire ta carte");
     	STATE = WAIT_FOR_CARD_REMOVE;
     	break;
     case WRONG_CODE:
-    	display("Code Faux", 2000, returnToSayHelloState);
+      displayer.clear();
+    	displayer.addLine("Code Faux");
+      delayInterval = 5000;
+      nextState = SAY_HELLO;
+      STATE = WAIT;
+      previousMillis = millis();
     	break;
     case WAIT_FOR_CARD_REMOVE:
     	if(isCardRemoved()) {
-          	String msg = "Distribution de ";
-          	msg.concat(pocketMoney / 100);
-          	msg.concat(" €");
-      		  display(msg.c_str());
-          	STATE = DISTRIBUTION;
+          displayer.clear();
+          displayer.addLine("Distribution de");
+          String msg = "";
+          msg.concat(pocketMoney / 100);
+          msg.concat(" euro(s)");
+      		displayer.addLine(msg.c_str());
+          STATE = DISTRIBUTION;
     	}
     	break;
     case DISTRIBUTION:
     {
       distributor.distribute(pocketMoney);
       if(distributor.hasFinished()) {
-        String msg = "Au revoir ";
-        msg += name;
-        display( msg.c_str());
+        displayer.clear();
+        displayer.addLine("Au revoir");
+        displayer.addLine(name.c_str());
         delay(2000);
         STATE = BEGIN; 
       }
     }
     	break;
+    case WAIT:
+      if(millis() - previousMillis > delayInterval) {
+        STATE = nextState;
+      }
     default: break;
   }
 
@@ -193,6 +246,8 @@ void log(const char* msg) {
 void display(const char* msg) {
   //:TODO
   Serial.println(msg);
+  displayer.clear();
+  displayer.addLine(msg);
 }
 
 void display(const char* msg, int duration, void (*callback)()) {
@@ -200,6 +255,7 @@ void display(const char* msg, int duration, void (*callback)()) {
   delay(duration);
   (*callback)();
 }
+
 
 
 /**
@@ -262,6 +318,9 @@ void returnToSayHelloState() {
   STATE = SAY_HELLO;
 }
 
+void returnToBegin() {
+  STATE = BEGIN;
+}
 /**
  * Récupère les informations stockées dans la carte à puce.
  * 

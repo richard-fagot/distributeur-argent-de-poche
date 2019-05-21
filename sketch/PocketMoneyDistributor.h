@@ -35,6 +35,7 @@ class PocketMoneyDistributor {
   boolean hasFinished();
 
   void setup(int nbCoinTypes, ...);
+  void initialize();
 
   private:
   void computeDistributionSequence(int pocketMoneyAmount);

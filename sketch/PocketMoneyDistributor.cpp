@@ -59,11 +59,18 @@ void PocketMoneyDistributor::setup(int nbCoinTypes, ...) {
        
       CoinPusher *cp = new CoinPusher(coinPusherPin, coinValue);
       coinPusher[i] = cp;
-      coinPusher[i]->initialize();
+      //coinPusher[i]->initialize();
     }
 	  va_end(ap); 
 }
 
+void PocketMoneyDistributor::initialize() {
+  for(int i = 0 ; i < MAX_COIN_PUSHERS ; i++) {
+    if(NULL != coinPusher[i]) {
+      coinPusher[i]->initialize();
+    }
+  }
+}
 void PocketMoneyDistributor::computeDistributionSequence(int pocketMoneyAmount) {
     byte sequenceIndex = 0;
   	int remainingValueToDistribute = pocketMoneyAmount;
