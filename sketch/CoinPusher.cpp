@@ -13,7 +13,7 @@ void CoinPusher::initialize() {
     Serial.println(pin);
     servo.attach(pin);
     servo.write(180);
-    delay(2000);
+    delay(2000); // on veut vraiment bloquer les actions de l'arduino en attendant que les servo ait fini son mouvement.
     Serial.println("2s");
     servo.detach();
     STATE = READY_TO_MOVE;
@@ -37,7 +37,7 @@ void CoinPusher::pushCoin() {
         }
       	break;
       case GOTO_INITIAL_POSITION:
-    	  servo.write(180);
+    	servo.write(180);
       	STATE = WAIT;
       	nextState = FINISH;
       	previousMillis = millis();
@@ -46,7 +46,7 @@ void CoinPusher::pushCoin() {
       case FINISH:
       	servo.detach();
       	STATE = READY_TO_MOVE;
-      Serial.println("Finish move");
+        Serial.println("Finish move");
       	break;
         
     } 

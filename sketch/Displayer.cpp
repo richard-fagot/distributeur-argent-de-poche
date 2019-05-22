@@ -35,10 +35,12 @@ void Displayer::centerText(const char *msg, char centeredMsg[21]) {
     centeredMsg[i] = ' ';
   }
   centeredMsg[20] = '\0';
-  
+  // strcpy(centeredMsg, "                    "); //:OPTIM : utilise 26 octets de plus que la boucle
+
   int whiteSpaceLength = (20 - strlen(msg))/2;
   
-  for( int i = 0 ; i < strlen(msg) ; i++) {
+  int msgLength = strlen(msg);                 //:OPTIM : en faisant ça au lieu de le mettre dans la condition d'arrêt du for on économise 12 octets
+  for( int i = 0 ; i < msgLength ; i++) {
     centeredMsg[i+whiteSpaceLength] = msg[i];
   } 
 }

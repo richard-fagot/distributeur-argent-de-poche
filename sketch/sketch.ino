@@ -37,7 +37,7 @@ boolean previousCardState = NO_CARD_DETECTED; // Permet de détecter un changeme
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-String name;
+char name[20+1]; // 20 caractères max pour le prénom
 unsigned int code;
 unsigned int pocketMoney;
 
@@ -90,7 +90,7 @@ byte colPins[COLS] = {5, 4, 3, 2};
 
 
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
-int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
+unsigned int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
 //Distributor distributor;
@@ -155,7 +155,7 @@ void loop() {
     {
       displayer.clear();
       displayer.addLine("Bonjour");
-      displayer.addLine(name.c_str());
+      displayer.addLine(name);
       displayer.addLine("Entre ton code");
       userTypedCode = 0;
     	STATE = CAPTURE_USER_ENTRIES;
@@ -166,9 +166,9 @@ void loop() {
       displayer.clear();
       displayer.addLine("Retire ta carte.");
       displayer.addLine("Ce n'est pas le bon");
-      String msg = "jour ";
-      msg.concat(name);
-      displayer.addLine(msg.c_str());
+      char msg[21] = "jour ";
+      strcat(msg, name);
+      displayer.addLine(msg);
       displayer.addLine("Reviens samedi !");
       waitForCardRemoveThenGo(BEGIN);
     }
@@ -197,10 +197,10 @@ void loop() {
     {
       displayer.clear();
       displayer.addLine("Distribution de");
-      String msg = "";
-      msg.concat(pocketMoney / 100);
-      msg.concat(" euro(s)");
-      displayer.addLine(msg.c_str());
+      char totalToDistribute = pocketMoney / 100;
+      char msg[21] = {(char)('0' + totalToDistribute), '\0'};
+      strcat(msg, " euro(s)");
+      displayer.addLine(msg);
       STATE = DISTRIBUTION;
     }
       break;
@@ -210,7 +210,7 @@ void loop() {
       if(distributor.hasFinished()) {
         displayer.clear();
         displayer.addLine("Au revoir");
-        displayer.addLine(name.c_str());
+        displayer.addLine(name);
         waitThenGo(2000, BEGIN);
       }
     }
@@ -240,8 +240,8 @@ void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
   * Fonction utilitaire pour le débogage.
   */
 void log(const char* msg) {
-  	String logMsg = "Log - ";
-  	logMsg.concat(msg);
+  	char logMsg[81] = "Log - ";
+    strncat(logMsg, msg, 80);
   
 	  Serial.println(logMsg);  
 }
@@ -325,7 +325,7 @@ void collectSmartcardData() {
 /********************************* MOCK **************************************/
 /*****************************************************************************/
 void mockCollectSmartcardData() {
-  name = "Elsa";
+  strcpy(name, "Elsa");
   code = 2436;
   pocketMoney = 300;
 }
