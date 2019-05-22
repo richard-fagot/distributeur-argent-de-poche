@@ -8,10 +8,6 @@
 
 ts timeDetails;
 
-//////////////////////////////////////////////////////////////
-
-void display(String msg);
-void display(String msg, int duration, void (*callback)());
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -249,24 +245,6 @@ void log(const char* msg) {
   
 	  Serial.println(logMsg);  
 }
-
-
-/**
-  * Affiche le message sur l'écran LCD
-  */
-void display(const char* msg) {
-  //:TODO
-  Serial.println(msg);
-  displayer.clear();
-  displayer.addLine(msg);
-}
-
-void display(const char* msg, int duration, void (*callback)()) {
-  display(msg);
-  delay(duration);
-  (*callback)();
-}
-
 
 
 /**
