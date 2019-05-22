@@ -53,6 +53,23 @@ Diantre que c'est compliqué.
 - Impossible de faire appel à des librairies externes (choix interne limité) ;
 - 3 arduinos, un lcd et clavier : tinkercad n'en demandait pas tant...
 
+### Optimisation du code
+
+#### Fragmentation du tas
+Le diable s'habille en string :
+https://hackingmajenkoblog.wordpress.com/2016/02/04/the-evils-of-arduino-strings/
+
+https://cpp4arduino.com/2018/11/06/what-is-heap-fragmentation.html
+
+Le fait de remplacer des `string` par des `char*` permet de gagner pas mal de place en mémoire (taille du programme après compilation)
+
+| Taille | Action |
+|-------|-------|
+|8466| avec `display(String)` et `log(string)`|
+|8068| avec des `char*`|
+
+
+
 ## Electronique
 ### Le bruit des servomoteurs
 Les servos que j'ai choisi sont commandés en PWM qui traduit l'angle auquel on veut que le servo aille.

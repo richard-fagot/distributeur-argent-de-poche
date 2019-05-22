@@ -4,8 +4,8 @@
 
 /////////////// A REMPLACER PAR LCD /////////////////////////
 // OLED Display
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_GFX.h>     // Adafruit GFX Library by Adafruit
+#include <Adafruit_SSD1306.h> // Adafruit SSD1306 by Adafruit
 
 
 class Displayer {

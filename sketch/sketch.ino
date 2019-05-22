@@ -62,6 +62,7 @@ enum state {
   GOOD_CODE,
   WRONG_CODE,
   WAIT_FOR_CARD_REMOVE,
+  DISPLAY_DISTRIBUTION,
   DISTRIBUTION,
   WAIT
 };
@@ -142,8 +143,7 @@ void loop() {
     case WAIT_FOR_CARD:
      	if(isCardInserted()) {
         	STATE = COLLECT_CARD_DATA;
-          	log("Une carte a été insérée");
-      	}
+     	}
     	break;
     case COLLECT_CARD_DATA:
     	collectSmartcardData();
@@ -168,15 +168,13 @@ void loop() {
     case NOT_THE_GOOD_DAY:
     {
       displayer.clear();
+      displayer.addLine("Retire ta carte.");
       displayer.addLine("Ce n'est pas le bon");
       String msg = "jour ";
       msg.concat(name);
       displayer.addLine(msg.c_str());
       displayer.addLine("Reviens samedi !");
-      delayInterval = 5000;
-      nextState = BEGIN;
-      STATE = WAIT;
-      previousMillis = millis();
+      waitForCardRemoveThenGo(BEGIN);
     }
       break;
     case CAPTURE_USER_ENTRIES:
@@ -187,27 +185,29 @@ void loop() {
       displayer.clear();
       displayer.addLine("Code bon");
       displayer.addLine("Retire ta carte");
-    	STATE = WAIT_FOR_CARD_REMOVE;
+      waitForCardRemoveThenGo(DISPLAY_DISTRIBUTION);
     	break;
     case WRONG_CODE:
       displayer.clear();
     	displayer.addLine("Code Faux");
-      delayInterval = 5000;
-      nextState = SAY_HELLO;
-      STATE = WAIT;
-      previousMillis = millis();
+      waitThenGo(5000, SAY_HELLO);
     	break;
     case WAIT_FOR_CARD_REMOVE:
     	if(isCardRemoved()) {
-          displayer.clear();
-          displayer.addLine("Distribution de");
-          String msg = "";
-          msg.concat(pocketMoney / 100);
-          msg.concat(" euro(s)");
-      		displayer.addLine(msg.c_str());
-          STATE = DISTRIBUTION;
+          STATE = nextState;
     	}
     	break;
+    case DISPLAY_DISTRIBUTION:
+    {
+      displayer.clear();
+      displayer.addLine("Distribution de");
+      String msg = "";
+      msg.concat(pocketMoney / 100);
+      msg.concat(" euro(s)");
+      displayer.addLine(msg.c_str());
+      STATE = DISTRIBUTION;
+    }
+      break;
     case DISTRIBUTION:
     {
       distributor.distribute(pocketMoney);
@@ -215,8 +215,7 @@ void loop() {
         displayer.clear();
         displayer.addLine("Au revoir");
         displayer.addLine(name.c_str());
-        delay(2000);
-        STATE = BEGIN; 
+        waitThenGo(2000, BEGIN);
       }
     }
     	break;
@@ -227,6 +226,18 @@ void loop() {
     default: break;
   }
 
+}
+
+void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved) {
+  STATE = WAIT_FOR_CARD_REMOVE;
+  nextState = stateToGOAfterCardRemoved;
+}
+
+void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
+    delayInterval = interval;
+    nextState = stateToGOAfterWait;
+    STATE = WAIT;
+    previousMillis = millis();
 }
 
 /**
