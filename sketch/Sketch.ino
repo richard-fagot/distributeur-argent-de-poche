@@ -60,7 +60,9 @@ enum state {
   WAIT_FOR_CARD_REMOVE,
   DISPLAY_DISTRIBUTION,
   DISTRIBUTION,
-  WAIT
+  SAY_GOODBYE,
+  WAIT,
+  UNEXPECTED_CARD_REMOVE
 };
 
 state STATE;
@@ -130,17 +132,27 @@ void setup() {
 
 void loop() {
   
+  // Si la carte est retirée en dehors du process nominal,
+  // il est possible que les données n'aient pas été récupérées
+  // alors on dit simplement au revoir et on revient au début du process;
+  if(isCardRemoved() && WAIT_FOR_CARD_REMOVE != STATE) {
+    STATE = UNEXPECTED_CARD_REMOVE;
+  }
+
   switch(STATE) {
+
     case BEGIN:
       displayer.clear();
     	displayer.addLine("Insere ta carte");
     	STATE = WAIT_FOR_CARD;
     	break;
+    
     case WAIT_FOR_CARD:
      	if(isCardInserted()) {
         	STATE = COLLECT_CARD_DATA;
      	}
     	break;
+    
     case COLLECT_CARD_DATA:
     	collectSmartcardData();
       DS3231_get(&timeDetails);
@@ -151,6 +163,7 @@ void loop() {
       }
     	
     	break;
+    
     case SAY_HELLO: 
     {
       displayer.clear();
@@ -161,6 +174,7 @@ void loop() {
     	STATE = CAPTURE_USER_ENTRIES;
     }
       break;
+    
     case NOT_THE_GOOD_DAY:
     {
       displayer.clear();
@@ -173,26 +187,31 @@ void loop() {
       waitForCardRemoveThenGo(BEGIN);
     }
       break;
+    
     case CAPTURE_USER_ENTRIES:
       mockCaptureAndProcessUserEntries();
     	//captureAndProcessUserEntries();
     	break;
+    
     case GOOD_CODE:
       displayer.clear();
       displayer.addLine("Code bon");
       displayer.addLine("Retire ta carte");
       waitForCardRemoveThenGo(DISPLAY_DISTRIBUTION);
     	break;
+    
     case WRONG_CODE:
       displayer.clear();
     	displayer.addLine("Code Faux");
       waitThenGo(5000, SAY_HELLO);
     	break;
+    
     case WAIT_FOR_CARD_REMOVE:
     	if(isCardRemoved()) {
           STATE = nextState;
     	}
     	break;
+    
     case DISPLAY_DISTRIBUTION:
     {
       displayer.clear();
@@ -204,21 +223,34 @@ void loop() {
       STATE = DISTRIBUTION;
     }
       break;
+    
     case DISTRIBUTION:
     {
       distributor.distribute(pocketMoney);
       if(distributor.hasFinished()) {
-        displayer.clear();
-        displayer.addLine("Au revoir");
-        displayer.addLine(name);
-        waitThenGo(2000, BEGIN);
+        STATE = SAY_GOODBYE;  
       }
     }
     	break;
+    
+    case SAY_GOODBYE:
+      displayer.clear();
+      displayer.addLine("Au revoir");
+      displayer.addLine(name);
+      waitThenGo(2000, BEGIN);
+      break;
     case WAIT:
       if(millis() - previousMillis > delayInterval) {
         STATE = nextState;
       }
+      break;
+
+    case UNEXPECTED_CARD_REMOVE:
+      displayer.clear();
+      displayer.addLine("Au revoir");
+      waitThenGo(2000, BEGIN);
+      break;
+
     default: break;
   }
 
