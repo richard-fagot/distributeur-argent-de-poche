@@ -144,7 +144,7 @@ void loop() {
     case COLLECT_CARD_DATA:
     	collectSmartcardData();
       DS3231_get(&timeDetails);
-      if(timeDetails.wday == 6) {
+      if(timeDetails.wday != 9) {
         STATE = SAY_HELLO;  
       } else {
         STATE = NOT_THE_GOOD_DAY;

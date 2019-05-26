@@ -1,17 +1,16 @@
 #ifndef DISPLAYER_H
 #define DISPLAYER_H
 #include <arduino.h>
-
-/////////////// A REMPLACER PAR LCD /////////////////////////
-// OLED Display
-#include <Adafruit_GFX.h>     // Adafruit GFX Library by Adafruit
-#include <Adafruit_SSD1306.h> // Adafruit SSD1306 by Adafruit
+#include <LiquidCrystal_PCF8574.h> // by Mathias Hertel
 
 
 class Displayer {
   private:
-  Adafruit_SSD1306 OLED = Adafruit_SSD1306(0);
+  LiquidCrystal_PCF8574 lcd = LiquidCrystal_PCF8574(0x27);
+  byte NB_COLS = 20;
+  byte NB_ROWS = 4;
   byte lineIndex;
+
   void centerText(const char *msg, char centeredMsg[21]);
   
   public:
