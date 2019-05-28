@@ -49,3 +49,6 @@ Tant qu'à y être, ça me semble intéressant de partager tout ça, alors ce jo
 
 # Références
 - Éviter la fragmentation de la pile : https://cpp4arduino.com/2018/11/06/what-is-heap-fragmentation.html 
+- SLE4442 sur hackaday: https://hackaday.com/2008/11/25/how-to-read-a-fedex-kinkos-smart-card-sle4442/
+- SLE4442 datacheet : http://www.smartcardsupply.com/PDF/DS_sle4432_42_0795.pdf
+- SLE4442 sur docplayer : https://docplayer.fr/3533459-Carte-a-puce-sle-4432.html
