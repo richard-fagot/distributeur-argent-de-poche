@@ -68,9 +68,13 @@ Le fait de remplacer des `string` par des `char*` permet de gagner pas mal de pl
 |8466| avec `display(String)` et `log(string)`|
 |8068| avec des `char*`|
 
+### Tenir compte des spécificités de chaque arduino
+Tous les arduinos n'ont pas forcément le même comportement avec le même code :
+ - les broches ne sont pas forcéments les mêmes ;
+ - les fonctions associées au différentes broches peuvent être différentes (par exemple le timer1 qu'on trouve sur un uno se retrouve sur la broche 11 d'un mega) ;
+ - la fonction Serial nécessite un `while(!Serial) {}` sur un leonardo.
 
-
-## Electronique
+## Électronique
 ### Le bruit des servomoteurs
 Les servos que j'ai choisi sont commandés en PWM qui traduit l'angle auquel on veut que le servo aille.
 Une fois arrivé à l'angle indiqué le servo fait tout ce qu'il peut pour s'y maintenir. Il fait des gros efforts pour ça et ça s'entend...
@@ -90,6 +94,17 @@ Ce qui consomme le plus ici ce sont les servomoteurs.
 | LCD            | x                 |
 | Clavier        | x                 |
 | RTC            | x                 |
+
+### Les parasites
+Lorsqu'on fait les montages sur les breadboards on relie les différents éléments entre eux avec des fils. Et ces fils font de magnifiques antennes sensibles au 50Hz du courant domestique, aus lampes à décharge, aux moteurs qui tournent ou tout simplement quand on les touche (c'est même une propriété utilisée dans les capteurs capacitifs).
+
+Et il arrive que le montage ait des comportements étranges : des actions lancées par un bouton sur lequel on n'a pas appuyé, un écran LCD qui se met à verser dans la magie noire en inscrivant des signes cabalistiques mystérieux...
+
+Pour éviter cela, il faut :
+ - charger les lignes, en mettant une résistance de pullup par exemple ;
+ - ajouter un condensateur de filtrage entre la ligne et la masse pour bloquer les signaux basse fréquence.
+
+
 
 ## Arduino
 ### La broche 13
