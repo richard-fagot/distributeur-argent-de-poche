@@ -100,7 +100,7 @@ Lorsqu'on fait les montages sur les breadboards on relie les différents éléme
 
 Et il arrive que le montage ait des comportements étranges : des actions lancées par un bouton sur lequel on n'a pas appuyé, un écran LCD qui se met à verser dans la magie noire en inscrivant des signes cabalistiques mystérieux...
 
-Pour éviter cela, il faut :
+Pour éviter cela, il faut ([ref](https://forum.arduino.cc/index.php?topic=78406.0)) :
  - charger les lignes, en mettant une résistance de pullup par exemple ;
  - ajouter un condensateur de filtrage entre la ligne et la masse pour bloquer les signaux basse fréquence.
 
