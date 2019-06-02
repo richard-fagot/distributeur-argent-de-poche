@@ -18,7 +18,7 @@ Il faut toujours garder à l'esprit le mode de production des pièces, ici par F
 ### Comment visser le système bielle-manivelle
 Au repos et à l'initialisation du distributeur, toutes les bielles-manivelles sont en retrait. Dans cette position la manivelle est totalement cachée sous la bielle et la vis de fixation sur le servo n'est pas accessible. Au début je fixais la manivelle sans insérer le système dans le rail et je jouais sur la flexibilité du plastique pour la rentrer de force.
 
-Et puis j'ai pratiquer une ouverture de 5mm dans la bielle, là où se trouve la vis dans la position de repos.
+Et puis une petite ouverture de 5mm pratiquée dans la bielle, là où se trouve la vis dans la position de repos, c'est bien plus pratique.
 
 ## Impression 3D
 ### Laisser les pièces refroidir
@@ -30,6 +30,7 @@ Il faut être patient en impression 3D, patienter pendant le looooooonnnnnng tem
 
 ### La gestion du temps sans Delay
 Diantre que c'est compliqué.
+
 
 ### Tinkercad
     Après avoir malencontreusement grillé une carte, j'ai cherché une solution qui permette de tester son code dans un environnement virtuel, et donc sans risques pour la carte le temps de la première mise au point.
@@ -72,7 +73,7 @@ Le fait de remplacer des `string` par des `char*` permet de gagner pas mal de pl
 Tous les arduinos n'ont pas forcément le même comportement avec le même code :
  - les broches ne sont pas forcéments les mêmes ;
  - les fonctions associées au différentes broches peuvent être différentes (par exemple le timer1 qu'on trouve sur un uno se retrouve sur la broche 11 d'un mega) ;
- - la fonction Serial nécessite un `while(!Serial) {}` sur un leonardo.
+ - la fonction Serial nécessite un `while(!Serial) {}` sur un leonardo. C'est spécifique aux cartes basées sur un AVR de type 32u4 dont la Leonardo fait partie (mail la yùn également).
 
 ## Électronique
 ### Le bruit des servomoteurs
