@@ -1,11 +1,12 @@
 ---
 title: Distributeur Automatique d'Argent de Poche pour les enfants
 author: Richard Fagot
+lang: fr-FR
 ---
 
 # L'argent de poche
 
-Image de Calvin
+![Calvin et l'argent de poche](assets/img/calvin.jpg)
 
 
 ::: notes
@@ -19,6 +20,15 @@ Image de Calvin
 :::
 
 # Le projet
+
+:::::::::::::: {.columns}
+::: {.column width="40%"}
+contents...
+:::
+::: {.column width="60%"}
+contents...
+:::
+::::::::::::::
 
 ::: notes
 
@@ -52,3 +62,15 @@ Image de Calvin
 
 # L'impression 3D
 
+# L'Arduino
+
+```cpp
+void setup() {
+
+}
+
+void loop() {
+    
+}
+
+```
