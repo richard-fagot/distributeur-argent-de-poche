@@ -119,7 +119,7 @@ void setup() {
   // Crée un distributeur contenant deux types de pièces :
   // - des pièces de 2€ dont le servo est relié à la broche 10 ;
   // - des pièces de 1€ dont le servo est relié à la broche 11.
-  distributor.setup(2, 9, 200, 3, 100);
+  distributor.setup(3, 3, 200, 5, 100, 6, 50);
   distributor.initialize();
 
   STATE = BEGIN;
@@ -137,6 +137,7 @@ void loop() {
   // alors on dit simplement au revoir et on revient au début du process;
   if(isCardRemoved() && WAIT_FOR_CARD_REMOVE != STATE) {
     STATE = UNEXPECTED_CARD_REMOVE;
+    Serial.println("Unexpected card removed");
   }
 
   switch(STATE) {
@@ -184,7 +185,9 @@ void loop() {
       strcat(msg, name);
       displayer.addLine(msg);
       displayer.addLine("Reviens samedi !");
-      waitForCardRemoveThenGo(BEGIN);
+      //waitForCardRemoveThenGo(BEGIN);
+      STATE = WAIT_FOR_CARD_REMOVE;
+      nextState = BEGIN;
     }
       break;
     
@@ -197,17 +200,27 @@ void loop() {
       displayer.clear();
       displayer.addLine("Code bon");
       displayer.addLine("Retire ta carte");
-      waitForCardRemoveThenGo(DISPLAY_DISTRIBUTION);
+      //waitForCardRemoveThenGo(DISPLAY_DISTRIBUTION);
+      STATE = WAIT_FOR_CARD_REMOVE;
+      nextState = DISPLAY_DISTRIBUTION;
     	break;
     
     case WRONG_CODE:
       displayer.clear();
     	displayer.addLine("Code Faux");
-      waitThenGo(5000, SAY_HELLO);
+      //waitThenGo(5000, SAY_HELLO);
+      delayInterval = 5000;
+      nextState = SAY_HELLO;
+      STATE = WAIT;
+      previousMillis = millis();
     	break;
     
     case WAIT_FOR_CARD_REMOVE:
+      Serial.println("Wait for card remove");
     	if(isCardRemoved()) {
+        String s = "go to ";
+        s.concat(nextState==DISPLAY_DISTRIBUTION?"go to display distrib":"oups");
+          Serial.println( s);
           STATE = nextState;
     	}
     	break;
@@ -217,7 +230,8 @@ void loop() {
       displayer.clear();
       displayer.addLine("Distribution de");
       char totalToDistribute = pocketMoney / 100;
-      char msg[21] = {(char)('0' + totalToDistribute), '\0'};
+      byte cents = (pocketMoney - totalToDistribute * 100) / 10;
+      char msg[21] = {(char)('0' + totalToDistribute), ',', (char)('0' + cents), '0', '\0'};
       strcat(msg, " euro(s)");
       displayer.addLine(msg);
       STATE = DISTRIBUTION;
@@ -237,7 +251,11 @@ void loop() {
       displayer.clear();
       displayer.addLine("Au revoir");
       displayer.addLine(name);
-      waitThenGo(2000, BEGIN);
+      //waitThenGo(2000, BEGIN);
+      delayInterval = 2000;
+      nextState = BEGIN;
+      STATE = WAIT;
+      previousMillis = millis();
       break;
     case WAIT:
       if(millis() - previousMillis > delayInterval) {
@@ -248,7 +266,11 @@ void loop() {
     case UNEXPECTED_CARD_REMOVE:
       displayer.clear();
       displayer.addLine("Au revoir");
-      waitThenGo(2000, BEGIN);
+      //waitThenGo(2000, BEGIN);
+      delayInterval = 2000;
+      nextState = BEGIN;
+      STATE = WAIT;
+      previousMillis = millis();
       break;
 
     default: break;
@@ -297,6 +319,7 @@ boolean isCardInserted() {
 boolean isCardRemoved() {
    if(NO_CARD_DETECTED == digitalRead(CARD_DETECTOR_PIN) && CARD_DETECTED == previousCardState) {
      previousCardState = NO_CARD_DETECTED;
+     Serial.println("Card Removed");
      return true;
   }
   
@@ -359,7 +382,7 @@ void collectSmartcardData() {
 void mockCollectSmartcardData() {
   strcpy(name, "Elsa");
   code = 2436;
-  pocketMoney = 300;
+  pocketMoney = 350;
 }
 
 void mockCaptureAndProcessUserEntries() {
