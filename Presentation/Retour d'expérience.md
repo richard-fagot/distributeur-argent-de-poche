@@ -105,7 +105,17 @@ Pour éviter cela, il faut ([ref](https://forum.arduino.cc/index.php?topic=78406
  - charger les lignes, en mettant une résistance de pullup par exemple ;
  - ajouter un condensateur de filtrage entre la ligne et la masse pour bloquer les signaux basse fréquence.
 
+### Conception du PCB
+Il faut y aller par raffinements successifs : l'objectif est de placer les composants autour de l'arduino de telle sorte que les pistes ne se croisent pas. Déjà, en soit, ce routing n'a rien d'évident mais en plus on peut ne pas avoir le choix de certaines broches (par exemple la D9 pour le signal d'horloge de la carte à puce, les broches PWM pour les servos, les A4 et A5 pour le I2C, les A6 et A7 inutilisables en digital).
 
+Modifier les branchements sur l'arduino c'est fastidieux et c'est prendre un risque de se tromper et de griller la carte.
+
+Au début j'ai fait mes connexions comme je voulais car j'ai reçu le matériel et expérimenté au fur et à mesure et sur des arduinos différents sur plusieurs breadboard. Quand le temps est venu de mettre tout sur un seul arduino, le mieux a été d'utiliser EasyEDA pour faire le routing en prenant en compte toutes les contraintes. A un moment j'avais oublié les résistances de pull-up/pull-down et j'ai dû recommencé un bon morceau du circuit.
+
+Le switch est sur la broche D13 mais il faut faire attention à ne pas activer le debug de SCLib car cette dernière s'en sert pour autre chose.
+
+ - Penser à la taille des plaques de cuivres qu'on a, pour être sûr que ce qu'on fait à l'écran rentre bien ;
+ - Utiliser des straps : placer des pads aux endroits où l'on veut strapper et passer sur le calque haut pour les relier (pas obligatoire mais cela permet de visualiser le trajet du strap).
 
 ## Arduino
 ### La broche 13
