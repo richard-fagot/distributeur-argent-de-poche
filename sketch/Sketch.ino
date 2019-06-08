@@ -15,7 +15,7 @@ ts timeDetails;
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-static const byte CARD_DETECTOR_PIN = 2; // Interupteur de détection de carte.
+static const byte CARD_DETECTOR_PIN = 9; // Interupteur de détection de carte.
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -85,10 +85,10 @@ char hexaKeys[ROWS][COLS] = {
   {'7', '8', '9', 'C'},
   {'*', '0', '#', 'D'}};
   
-byte rowPins[ROWS] = {9, 8, 7, 6}; 
-byte colPins[COLS] = {5, 4, 3, 2};  
+byte rowPins[ROWS] = {A3, 2, 4, 7}; 
+byte colPins[COLS] = {8, 10, 11, 12};  
 
-//Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
+Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
 
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
@@ -192,8 +192,8 @@ void loop() {
       break;
     
     case CAPTURE_USER_ENTRIES:
-      mockCaptureAndProcessUserEntries();
-    	//captureAndProcessUserEntries();
+      //mockCaptureAndProcessUserEntries();
+    	captureAndProcessUserEntries();
     	break;
     
     case GOOD_CODE:
@@ -329,7 +329,7 @@ boolean isCardRemoved() {
 /**
  * Capture les entrées saisies au clavier numérique 
  * et lance les actions correspondantes.
- 
+ */
 void captureAndProcessUserEntries() {
 
   char customKey = customKeypad.getKey();
@@ -337,7 +337,6 @@ void captureAndProcessUserEntries() {
   if (customKey){
     if(customKey >= 48 && customKey <= 57) {
       userTypedCode = userTypedCode * BASE + (customKey - 48);
-      log(userTypedCode);
     }
     
     if(customKey == '#') {
@@ -350,7 +349,7 @@ void captureAndProcessUserEntries() {
   }
   
 }
-*/
+
 
 /**
  * Quand l'utilisateur a saisi un code faux
