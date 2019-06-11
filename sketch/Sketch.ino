@@ -5,6 +5,7 @@
 #include <ds3231.h> //ds3231FS by Petre Rodan
 #include "PocketMoneyDistributor.h"
 #include "Displayer.h"
+#include "SL44x2.h" //https://sourceforge.net/p/arduinosclib/wiki/Home/
 
 ts timeDetails;
 
@@ -15,21 +16,13 @@ ts timeDetails;
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-static const byte CARD_DETECTOR_PIN = 9; // Interupteur de détection de carte.
-
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Paramètres de la détection d'insertion et de retrait de la carte à puce.
-//
-///////////////////////////////////////////////////////////////////////////////
-
-static const byte CARD_DETECTED = LOW; // État de la broche de détection de carte lorsqu'une carte est présente.
-static const byte NO_CARD_DETECTED = HIGH; // État de la broche de détection de carte en l'absence de carte.
-
-boolean previousCardState = NO_CARD_DETECTED; // Permet de détecter un changement
-                                              // d'état de présence de la carte.
-
+const uint8_t SC_C2_RST = A1;
+const uint8_t SC_C1_VCC = A0;
+const uint8_t SC_C7_IO = A2;
+const uint8_t SC_C2_CLK = 9;
+const uint8_t SC_SWITCH_CARD_PRESENT= 13;
+const boolean SC_SWITCH_CARD_PRESENT_INVERT = false;
+SL44x2 sl44x2(SC_C7_IO, SC_C2_RST, SC_C1_VCC, SC_SWITCH_CARD_PRESENT, SC_C2_CLK, SC_SWITCH_CARD_PRESENT_INVERT);
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -85,8 +78,8 @@ char hexaKeys[ROWS][COLS] = {
   {'7', '8', '9', 'C'},
   {'*', '0', '#', 'D'}};
   
-byte rowPins[ROWS] = {A3, 2, 4, 7}; 
-byte colPins[COLS] = {8, 10, 11, 12};  
+byte rowPins[ROWS] = {7, 4, 2, A3}; 
+byte colPins[COLS] = {12, 11, 10, 8}; 
 
 Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
@@ -114,8 +107,6 @@ void setup() {
   displayer.initialize();
   Serial.begin(9600);
 
-  pinMode(CARD_DETECTOR_PIN, INPUT_PULLUP);
-
   // Crée un distributeur contenant deux types de pièces :
   // - des pièces de 2€ dont le servo est relié à la broche 10 ;
   // - des pièces de 1€ dont le servo est relié à la broche 11.
@@ -135,10 +126,12 @@ void loop() {
   // Si la carte est retirée en dehors du process nominal,
   // il est possible que les données n'aient pas été récupérées
   // alors on dit simplement au revoir et on revient au début du process;
-  if(isCardRemoved() && WAIT_FOR_CARD_REMOVE != STATE) {
+  /*
+  if(!sl44x2.cardInserted() && WAIT_FOR_CARD_REMOVE != STATE) {
     STATE = UNEXPECTED_CARD_REMOVE;
     Serial.println("Unexpected card removed");
   }
+  */
 
   switch(STATE) {
 
@@ -149,20 +142,21 @@ void loop() {
     	break;
     
     case WAIT_FOR_CARD:
-     	if(isCardInserted()) {
+     	if(sl44x2.cardInserted()) {
         	STATE = COLLECT_CARD_DATA;
      	}
     	break;
     
     case COLLECT_CARD_DATA:
-    	collectSmartcardData();
-      DS3231_get(&timeDetails);
-      if(timeDetails.wday != 9) {
-        STATE = SAY_HELLO;  
-      } else {
-        STATE = NOT_THE_GOOD_DAY;
+      if (sl44x2.cardReady()) {
+        collectSmartcardData();
+        DS3231_get(&timeDetails);
+        if(timeDetails.wday != 9) {
+          STATE = SAY_HELLO;  
+        } else {
+          STATE = NOT_THE_GOOD_DAY;
+        } 
       }
-    	
     	break;
     
     case SAY_HELLO: 
@@ -192,7 +186,6 @@ void loop() {
       break;
     
     case CAPTURE_USER_ENTRIES:
-      //mockCaptureAndProcessUserEntries();
     	captureAndProcessUserEntries();
     	break;
     
@@ -217,7 +210,8 @@ void loop() {
     
     case WAIT_FOR_CARD_REMOVE:
       Serial.println("Wait for card remove");
-    	if(isCardRemoved()) {
+    	if(!sl44x2.cardInserted()) {
+        sl44x2.cardRemoved();
         String s = "go to ";
         s.concat(nextState==DISPLAY_DISTRIBUTION?"go to display distrib":"oups");
           Serial.println( s);
@@ -278,6 +272,10 @@ void loop() {
 
 }
 
+int toInt(char c) {
+  return (int)(c - 48);
+}
+
 void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved) {
   STATE = WAIT_FOR_CARD_REMOVE;
   nextState = stateToGOAfterCardRemoved;
@@ -303,7 +301,7 @@ void log(const char* msg) {
 
 /**
   * Detecte l'insertion d'une carte.
-  */
+  
 boolean isCardInserted() {
    if(CARD_DETECTED == digitalRead(CARD_DETECTOR_PIN) && NO_CARD_DETECTED == previousCardState) {
      previousCardState = CARD_DETECTED;
@@ -312,10 +310,11 @@ boolean isCardInserted() {
   
   return false;
 }
+*/
 
 /**
   * Detecte le retrait d'une carte.
-  */
+  
 boolean isCardRemoved() {
    if(NO_CARD_DETECTED == digitalRead(CARD_DETECTOR_PIN) && CARD_DETECTED == previousCardState) {
      previousCardState = NO_CARD_DETECTED;
@@ -325,6 +324,7 @@ boolean isCardRemoved() {
   
   return false;
 }
+*/
 
 /**
  * Capture les entrées saisies au clavier numérique 
@@ -339,7 +339,7 @@ void captureAndProcessUserEntries() {
       userTypedCode = userTypedCode * BASE + (customKey - 48);
     }
     
-    if(customKey == '#') {
+    if(customKey == 'D') {
       if(userTypedCode == code) {
         STATE = GOOD_CODE;
       } else {
@@ -364,14 +364,20 @@ void returnToSayHelloState() {
 void returnToBegin() {
   STATE = BEGIN;
 }
+
 /**
  * Récupère les informations stockées dans la carte à puce.
  * 
  */
 void collectSmartcardData() {
-  //:TODO : get card data
-  mockCollectSmartcardData();
-  //
+  uint8_t  data[1+4+3+20];
+  uint16_t i = sl44x2.readMainMemory(0x60, data, 28);
+  
+  int length = data[0];
+  code = toInt(data[1])*1000 + toInt(data[2])*100 + toInt(data[3])*10 + toInt(data[4]);
+  pocketMoney = toInt(data[5])*100 + toInt(data[6])*10 + toInt(data[7]);
+  strncpy(name, data+8, length);
+  name[length] = '\0';
 }
 
 
