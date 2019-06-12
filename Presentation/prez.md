@@ -72,7 +72,7 @@ Richard Fagot
 # L'impression 3D
 
 # L'Arduino
-
+Le C++ c'est l'enfer : déclaration d'un int et d'un char [20] mais lecture de 21 caractère écrase une partie du int.
 ```cpp
 void setup() {
 
