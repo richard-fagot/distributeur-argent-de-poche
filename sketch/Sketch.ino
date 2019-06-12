@@ -6,7 +6,7 @@
 #include "PocketMoneyDistributor.h"
 #include "Displayer.h"
 #include "SL44x2.h" //https://sourceforge.net/p/arduinosclib/wiki/Home/
-
+#include "StateMachineEnum.h"
 ts timeDetails;
 
 
@@ -41,22 +41,7 @@ unsigned int pocketMoney;
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-enum state {
-  BEGIN,
-  WAIT_FOR_CARD,   
-  COLLECT_CARD_DATA,
-  SAY_HELLO,
-  NOT_THE_GOOD_DAY,
-  CAPTURE_USER_ENTRIES,
-  GOOD_CODE,
-  WRONG_CODE,
-  WAIT_FOR_CARD_REMOVE,
-  DISPLAY_DISTRIBUTION,
-  DISTRIBUTION,
-  SAY_GOODBYE,
-  WAIT,
-  UNEXPECTED_CARD_REMOVE
-};
+
 
 state STATE;
 state nextState;
@@ -276,11 +261,15 @@ int toInt(char c) {
   return (int)(c - 48);
 }
 
+void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved); // nécessaire car le compilateur réorganise l'ordre de déclaration 
+                                                              // de telle sorte que la déclaration de la fonction se retrouve
+                                                              // avant la déclaration de l'enum.
 void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved) {
   STATE = WAIT_FOR_CARD_REMOVE;
   nextState = stateToGOAfterCardRemoved;
 }
 
+void waitThenGo(unsigned long interval, state stateToGOAfterWait);
 void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
     delayInterval = interval;
     nextState = stateToGOAfterWait;
@@ -298,33 +287,6 @@ void log(const char* msg) {
 	  Serial.println(logMsg);  
 }
 
-
-/**
-  * Detecte l'insertion d'une carte.
-  
-boolean isCardInserted() {
-   if(CARD_DETECTED == digitalRead(CARD_DETECTOR_PIN) && NO_CARD_DETECTED == previousCardState) {
-     previousCardState = CARD_DETECTED;
-     return true;
-  }
-  
-  return false;
-}
-*/
-
-/**
-  * Detecte le retrait d'une carte.
-  
-boolean isCardRemoved() {
-   if(NO_CARD_DETECTED == digitalRead(CARD_DETECTOR_PIN) && CARD_DETECTED == previousCardState) {
-     previousCardState = NO_CARD_DETECTED;
-     Serial.println("Card Removed");
-     return true;
-  }
-  
-  return false;
-}
-*/
 
 /**
  * Capture les entrées saisies au clavier numérique 
@@ -376,7 +338,7 @@ void collectSmartcardData() {
   int length = data[0];
   code = toInt(data[1])*1000 + toInt(data[2])*100 + toInt(data[3])*10 + toInt(data[4]);
   pocketMoney = toInt(data[5])*100 + toInt(data[6])*10 + toInt(data[7]);
-  strncpy(name, data+8, length);
+  strncpy(name, (const char *)(data+8), length);
   name[length] = '\0';
 }
 
