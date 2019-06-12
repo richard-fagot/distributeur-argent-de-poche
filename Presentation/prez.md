@@ -1,8 +1,22 @@
 ---
-title: Distributeur Automatique d'Argent de Poche pour les enfants
-author: Richard Fagot
+pagetitle: DAAP
 lang: fr-FR
 ---
+
+
+# Distributeur Automatique d'Argent de Poche pour les enfants
+
+Richard Fagot
+
+:::notes
+1. Tiens-toi bien ;
+1. Pense à ta première phrase ;
+1. Prend une inspiration ;
+1. Embrasse la salle d'un regard et lance-toi.
+:::
+
+
+
 
 # L'argent de poche
 
@@ -10,25 +24,20 @@ lang: fr-FR
 
 
 ::: notes
-
 - Décision de donner des sous aux enfants ;
 - Règles de l'argent de poche ;
-- Quite à faire comme les grands autant pousser jusqu'au bout ;
+- Quitte à faire comme les grands autant aller jusqu'au bout ;
 - Projet fun pour les enfants ;
 - (et fun pour le papa).
-
 :::
 
-# Le projet
 
-:::::::::::::: {.columns}
-::: {.column width="40%"}
-contents...
-:::
-::: {.column width="60%"}
-contents...
-:::
-::::::::::::::
+
+
+# Le Distributeur
+
+![](assets/img/eclaté.png)
+
 
 ::: notes
 
