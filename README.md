@@ -53,3 +53,20 @@ Tant qu'à y être, ça me semble intéressant de partager tout ça, alors ce jo
 - SLE4442 datacheet : http://www.smartcardsupply.com/PDF/DS_sle4432_42_0795.pdf
 - SLE4442 sur docplayer : https://docplayer.fr/3533459-Carte-a-puce-sle-4432.html
 - SLE4442 Librairie de lecture/écriture pour arduino : https://sourceforge.net/p/arduinosclib/wiki/Home/
+
+# Changement de taille programme
+
+Passage de 61% à 57%
+1. sans optim 18740
+1. string name -> char name[21] 18674
+1. dans un case string -> char 18596
+1. un sprintf explose la taille 19246
+1. remplacé par {'0'+total} 17740
+1. sort la condition du if -> 17728
+
+
+Plus tard
+1. Aprés la création de la classe SamrtCard 12620/1046
+1. MyKeyPad                                 12700/1070
+1. Suppresion des Serial                    11522/821 (ce sont les string à la volée qui occupent la mémoire dynamique)
+1. MyTime                                   11522/821
