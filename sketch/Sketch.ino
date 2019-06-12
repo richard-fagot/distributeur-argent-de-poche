@@ -200,6 +200,7 @@ void loop() {
       STATE = WAIT;
       previousMillis = millis();
       break;
+      
     case WAIT:
       if(millis() - previousMillis > delayInterval) {
         STATE = nextState;
@@ -239,16 +240,6 @@ void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
     previousMillis = millis();
 }
 
-/**
-  * Fonction utilitaire pour le débogage.
-  */
-void log(const char* msg) {
-  	char logMsg[81] = "Log - ";
-    strncat(logMsg, msg, 80);
-  
-	  Serial.println(logMsg);  
-}
-
 
 /**
  * Capture les entrées saisies au clavier numérique 
@@ -272,21 +263,6 @@ void captureAndProcessUserEntries() {
     }  
   }
   
-}
-
-
-/**
- * Quand l'utilisateur a saisi un code faux
- * on l'invite à recommencer.
- */
-void returnToSayHelloState() {
-  //:TODO
-  userTypedCode = 0;
-  STATE = SAY_HELLO;
-}
-
-void returnToBegin() {
-  STATE = BEGIN;
 }
 
 
