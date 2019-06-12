@@ -10,7 +10,7 @@ void SmartCard::cardRemoved() {
 }
 
 void SmartCard::collectSmartcardData() {
-    if (sl44x2.cardReady()) {
+    if (sl44x2.cardReady()) { // appel bloquant
         uint8_t data[1 + 4 + 3 + 20];
         uint16_t i = sl44x2.readMainMemory(0x60, data, 28);
 

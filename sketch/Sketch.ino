@@ -1,17 +1,17 @@
 #include <Servo.h>  // Librairie par défaut
 #include <string.h>
-#include <Wire.h>
-#include <ds3231.h> //ds3231FS by Petre Rodan
 #include "PocketMoneyDistributor.h"
 #include "Displayer.h"
 #include "StateMachineEnum.h"
 #include "SmartCard.h"
 #include "MyKeypad.h"
-
-ts timeDetails;
+#include "MyTime.h"
 
 SmartCard sc;
-
+MyKeypad kp;
+PocketMoneyDistributor distributor;
+Displayer displayer;
+MyTime time;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -23,22 +23,12 @@ state nextState;
 unsigned long delayInterval;
 unsigned long previousMillis;
 
-///////////////////////////////////////////////////////////////////////////////
-//
-// Définition des paramètres du clavier.
-//
-///////////////////////////////////////////////////////////////////////////////
-MyKeypad kp;
-
 
 
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
 unsigned int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
-PocketMoneyDistributor distributor;
-
-Displayer displayer;
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,17 +37,17 @@ Displayer displayer;
 ///////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-  
-  Wire.begin(); //start i2c (required for connection)
-  DS3231_init(DS3231_INTCN); //register the ds3231 (DS3231_INTCN is the default address of ds3231, this is set by macro for no performance loss)
-  
-  displayer.initialize();
-  Serial.begin(9600);
+  time.setup();
 
-  // Crée un distributeur contenant deux types de pièces :
-  // - des pièces de 2€ dont le servo est relié à la broche 10 ;
-  // - des pièces de 1€ dont le servo est relié à la broche 11.
-  distributor.setup(3, 3, 200, 5, 100, 6, 50);
+  displayer.initialize();
+  displayer.addLine("Initialisation");
+  displayer.addLine("en cours...");
+
+  // Crée un distributeur contenant 3 types de pièces :
+  // - des pièces de 2€ dont le servo est relié à la broche 3 ;
+  // - des pièces de 1€ dont le servo est relié à la broche 5 ;
+  // - des pièces de 0.20€ dont le servo est relié à la broche 6 ;
+  distributor.setup(3, 3, 200, 5, 100, 6, 20);
   distributor.initialize();
 
   STATE = BEGIN;
@@ -70,16 +60,6 @@ void setup() {
 
 void loop() {
   
-  // Si la carte est retirée en dehors du process nominal,
-  // il est possible que les données n'aient pas été récupérées
-  // alors on dit simplement au revoir et on revient au début du process;
-  /*
-  if(!sl44x2.cardInserted() && WAIT_FOR_CARD_REMOVE != STATE) {
-    STATE = UNEXPECTED_CARD_REMOVE;
-    Serial.println("Unexpected card removed");
-  }
-  */
-
   switch(STATE) {
 
     case BEGIN:
@@ -95,9 +75,9 @@ void loop() {
     	break;
     
     case COLLECT_CARD_DATA:
-      sc.collectSmartcardData();
-      DS3231_get(&timeDetails);
-      if (timeDetails.wday != 9) {
+      sc.collectSmartcardData(); // appel bloquant.
+      
+      if (time.getWeekDay() != 9) {
         STATE = SAY_HELLO;
       }
       else {
@@ -156,12 +136,10 @@ void loop() {
     	break;
     
     case WAIT_FOR_CARD_REMOVE:
-      Serial.println("Wait for card remove");
     	if(!sc.cardInserted()) {
         sc.cardRemoved();
         String s = "go to ";
         s.concat(nextState==DISPLAY_DISTRIBUTION?"go to display distrib":"oups");
-          Serial.println( s);
           STATE = nextState;
     	}
     	break;
@@ -200,7 +178,7 @@ void loop() {
       STATE = WAIT;
       previousMillis = millis();
       break;
-      
+
     case WAIT:
       if(millis() - previousMillis > delayInterval) {
         STATE = nextState;
