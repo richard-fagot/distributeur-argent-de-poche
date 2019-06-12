@@ -1,4 +1,3 @@
-#include <Keypad.h> //Keypad by Mark Stanley, Alexander Brevig Version 3.1.1
 #include <Servo.h>  // Librairie par défaut
 #include <string.h>
 #include <Wire.h>
@@ -7,6 +6,7 @@
 #include "Displayer.h"
 #include "StateMachineEnum.h"
 #include "SmartCard.h"
+#include "MyKeypad.h"
 
 ts timeDetails;
 
@@ -18,9 +18,6 @@ SmartCard sc;
 // États de l'automate fini.
 //
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
 state STATE;
 state nextState;
 unsigned long delayInterval;
@@ -31,27 +28,14 @@ unsigned long previousMillis;
 // Définition des paramètres du clavier.
 //
 ///////////////////////////////////////////////////////////////////////////////
+MyKeypad kp;
 
-const byte ROWS = 4; 
-const byte COLS = 4; 
-
-char hexaKeys[ROWS][COLS] = {
-  {'1', '2', '3', 'A'},
-  {'4', '5', '6', 'B'},
-  {'7', '8', '9', 'C'},
-  {'*', '0', '#', 'D'}};
-  
-byte rowPins[ROWS] = {7, 4, 2, A3}; 
-byte colPins[COLS] = {12, 11, 10, 8}; 
-
-Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 
 
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
 unsigned int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
 
-//Distributor distributor;
 PocketMoneyDistributor distributor;
 
 Displayer displayer;
@@ -272,7 +256,7 @@ void log(const char* msg) {
  */
 void captureAndProcessUserEntries() {
 
-  char customKey = customKeypad.getKey();
+  char customKey = kp.getKey();
   
   if (customKey){
     if(customKey >= 48 && customKey <= 57) {
