@@ -5,34 +5,12 @@
 #include <ds3231.h> //ds3231FS by Petre Rodan
 #include "PocketMoneyDistributor.h"
 #include "Displayer.h"
-#include "SL44x2.h" //https://sourceforge.net/p/arduinosclib/wiki/Home/
 #include "StateMachineEnum.h"
+#include "SmartCard.h"
+
 ts timeDetails;
 
-
-///////////////////////////////////////////////////////////////////////////////
-//
-//  Paramètres du lecteur de carte à puce.
-//
-///////////////////////////////////////////////////////////////////////////////
-
-const uint8_t SC_C2_RST = A1;
-const uint8_t SC_C1_VCC = A0;
-const uint8_t SC_C7_IO = A2;
-const uint8_t SC_C2_CLK = 9;
-const uint8_t SC_SWITCH_CARD_PRESENT= 13;
-const boolean SC_SWITCH_CARD_PRESENT_INVERT = false;
-SL44x2 sl44x2(SC_C7_IO, SC_C2_RST, SC_C1_VCC, SC_SWITCH_CARD_PRESENT, SC_C2_CLK, SC_SWITCH_CARD_PRESENT_INVERT);
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Données de la carte à puce.
-//
-///////////////////////////////////////////////////////////////////////////////
-
-char name[20+1]; // 20 caractères max pour le prénom
-unsigned int code;
-unsigned int pocketMoney;
+SmartCard sc;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,28 +105,28 @@ void loop() {
     	break;
     
     case WAIT_FOR_CARD:
-     	if(sl44x2.cardInserted()) {
+     	if(sc.cardInserted()) {
         	STATE = COLLECT_CARD_DATA;
      	}
     	break;
     
     case COLLECT_CARD_DATA:
-      if (sl44x2.cardReady()) {
-        collectSmartcardData();
-        DS3231_get(&timeDetails);
-        if(timeDetails.wday != 9) {
-          STATE = SAY_HELLO;  
-        } else {
-          STATE = NOT_THE_GOOD_DAY;
-        } 
+      sc.collectSmartcardData();
+      DS3231_get(&timeDetails);
+      if (timeDetails.wday != 9) {
+        STATE = SAY_HELLO;
       }
-    	break;
+      else {
+        STATE = NOT_THE_GOOD_DAY;
+      }
+
+      break;
     
     case SAY_HELLO: 
     {
       displayer.clear();
       displayer.addLine("Bonjour");
-      displayer.addLine(name);
+      displayer.addLine(sc.getName());
       displayer.addLine("Entre ton code");
       userTypedCode = 0;
     	STATE = CAPTURE_USER_ENTRIES;
@@ -161,7 +139,7 @@ void loop() {
       displayer.addLine("Retire ta carte.");
       displayer.addLine("Ce n'est pas le bon");
       char msg[21] = "jour ";
-      strcat(msg, name);
+      strcat(msg, sc.getName());
       displayer.addLine(msg);
       displayer.addLine("Reviens samedi !");
       //waitForCardRemoveThenGo(BEGIN);
@@ -195,8 +173,8 @@ void loop() {
     
     case WAIT_FOR_CARD_REMOVE:
       Serial.println("Wait for card remove");
-    	if(!sl44x2.cardInserted()) {
-        sl44x2.cardRemoved();
+    	if(!sc.cardInserted()) {
+        sc.cardRemoved();
         String s = "go to ";
         s.concat(nextState==DISPLAY_DISTRIBUTION?"go to display distrib":"oups");
           Serial.println( s);
@@ -208,6 +186,8 @@ void loop() {
     {
       displayer.clear();
       displayer.addLine("Distribution de");
+      unsigned int pocketMoney = sc.getPocketMoney();
+
       char totalToDistribute = pocketMoney / 100;
       byte cents = (pocketMoney - totalToDistribute * 100) / 10;
       char msg[21] = {(char)('0' + totalToDistribute), ',', (char)('0' + cents), '0', '\0'};
@@ -219,7 +199,7 @@ void loop() {
     
     case DISTRIBUTION:
     {
-      distributor.distribute(pocketMoney);
+      distributor.distribute(sc.getPocketMoney());
       if(distributor.hasFinished()) {
         STATE = SAY_GOODBYE;  
       }
@@ -229,7 +209,7 @@ void loop() {
     case SAY_GOODBYE:
       displayer.clear();
       displayer.addLine("Au revoir");
-      displayer.addLine(name);
+      displayer.addLine(sc.getName());
       //waitThenGo(2000, BEGIN);
       delayInterval = 2000;
       nextState = BEGIN;
@@ -257,9 +237,7 @@ void loop() {
 
 }
 
-int toInt(char c) {
-  return (int)(c - 48);
-}
+
 
 void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved); // nécessaire car le compilateur réorganise l'ordre de déclaration 
                                                               // de telle sorte que la déclaration de la fonction se retrouve
@@ -302,7 +280,7 @@ void captureAndProcessUserEntries() {
     }
     
     if(customKey == 'D') {
-      if(userTypedCode == code) {
+      if(sc.checkCode(userTypedCode)) {
         STATE = GOOD_CODE;
       } else {
         STATE = WRONG_CODE;
@@ -327,35 +305,7 @@ void returnToBegin() {
   STATE = BEGIN;
 }
 
-/**
- * Récupère les informations stockées dans la carte à puce.
- * 
- */
-void collectSmartcardData() {
-  uint8_t  data[1+4+3+20];
-  uint16_t i = sl44x2.readMainMemory(0x60, data, 28);
-  
-  int length = data[0];
-  code = toInt(data[1])*1000 + toInt(data[2])*100 + toInt(data[3])*10 + toInt(data[4]);
-  pocketMoney = toInt(data[5])*100 + toInt(data[6])*10 + toInt(data[7]);
-  strncpy(name, (const char *)(data+8), length);
-  name[length] = '\0';
-}
 
-
-/*****************************************************************************/
-/********************************* MOCK **************************************/
-/*****************************************************************************/
-void mockCollectSmartcardData() {
-  strcpy(name, "Elsa");
-  code = 2436;
-  pocketMoney = 350;
-}
-
-void mockCaptureAndProcessUserEntries() {
-  userTypedCode = 2436;
-  STATE = GOOD_CODE;
-}
 /*****************************************************************************/
 /******************************* UNIT TESTS **********************************/
 /****************************************************************************

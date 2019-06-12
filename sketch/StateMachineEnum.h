@@ -1,3 +1,6 @@
+#ifndef state_machine_h
+#define state_machine_h
+
 enum state {
   BEGIN,
   WAIT_FOR_CARD,   
@@ -14,3 +17,5 @@ enum state {
   WAIT,
   UNEXPECTED_CARD_REMOVE
 };
+
+#endif
