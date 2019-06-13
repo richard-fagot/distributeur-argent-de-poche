@@ -15,8 +15,8 @@ void SmartCard::collectSmartcardData() {
         uint16_t i = sl44x2.readMainMemory(0x60, data, 28);
 
         int length = data[0];
-        this->secretCode = toInt(data[1]) * 1000 + toInt(data[2]) * 100 + toInt(data[3]) * 10 + toInt(data[4]);
-        this->pocketMoney = toInt(data[5]) * 100 + toInt(data[6]) * 10 + toInt(data[7]);
+        this->secretCode = Tools::toInt(data[1]) * 1000 + Tools::toInt(data[2]) * 100 + Tools::toInt(data[3]) * 10 + Tools::toInt(data[4]);
+        this->pocketMoney = Tools::toInt(data[5]) * 100 + Tools::toInt(data[6]) * 10 + Tools::toInt(data[7]);
         strncpy(this->name, (const char *)(data + 8), length);
         this->name[length] = '\0';
     }

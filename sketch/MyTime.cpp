@@ -1,4 +1,5 @@
 #include "Mytime.h"
+#include "tools.h"
 
 void MyTime::setup() {
     Wire.begin(); //start i2c (required for connection)
@@ -10,6 +11,30 @@ void MyTime::refreshDate() {
 }
 
 byte MyTime::getWeekDay() {
-    refreshDate();
     return timeDetails.wday;
+}
+
+byte MyTime::getMinute() {
+    return timeDetails.min;
+}
+
+/**
+ * LUN 03 MAR     11:43
+ */
+void MyTime::getStringTime(char* timeString) {
+    strcpy(timeString, wdays[timeDetails.wday]);
+    strcat(timeString, " ");
+    char mday[3];
+    Tools::toTwoChar(mday, timeDetails.mday);
+    strcat(timeString, mday);
+    strcat(timeString, " ");
+    strcat(timeString, months[timeDetails.mon - 1]);
+    strcat(timeString, "     ");
+    char hour[3];
+    Tools::toTwoChar(hour, timeDetails.hour);
+    strcat(timeString, hour);
+    strcat(timeString, ":");
+    char minute[3];
+    Tools::toTwoChar(minute, timeDetails.min);
+    strcat(timeString, minute);
 }

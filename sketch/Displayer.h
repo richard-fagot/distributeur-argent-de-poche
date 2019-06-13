@@ -18,6 +18,8 @@ class Displayer {
     Displayer();
     void clear();
     void addLine(const char* msg);
+    void addEmptyLine();
+    void print(byte line, char* msg);
 };
 
 #endif

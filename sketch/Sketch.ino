@@ -64,11 +64,14 @@ void loop() {
 
     case BEGIN:
       displayer.clear();
+      displayer.addEmptyLine();
+      displayer.addEmptyLine();
     	displayer.addLine("Insere ta carte");
     	STATE = WAIT_FOR_CARD;
     	break;
     
     case WAIT_FOR_CARD:
+      printTime();
      	if(sc.cardInserted()) {
         	STATE = COLLECT_CARD_DATA;
      	}
@@ -76,7 +79,7 @@ void loop() {
     
     case COLLECT_CARD_DATA:
       sc.collectSmartcardData(); // appel bloquant.
-      
+      time.refreshDate();
       if (time.getWeekDay() != 9) {
         STATE = SAY_HELLO;
       }
@@ -92,6 +95,7 @@ void loop() {
       displayer.addLine("Bonjour");
       displayer.addLine(sc.getName());
       displayer.addLine("Entre ton code");
+      displayer.addLine("____");
       userTypedCode = 0;
     	STATE = CAPTURE_USER_ENTRIES;
     }
@@ -129,7 +133,7 @@ void loop() {
       displayer.clear();
     	displayer.addLine("Code Faux");
       //waitThenGo(5000, SAY_HELLO);
-      delayInterval = 5000;
+      delayInterval = 3000;
       nextState = SAY_HELLO;
       STATE = WAIT;
       previousMillis = millis();
@@ -138,9 +142,7 @@ void loop() {
     case WAIT_FOR_CARD_REMOVE:
     	if(!sc.cardInserted()) {
         sc.cardRemoved();
-        String s = "go to ";
-        s.concat(nextState==DISPLAY_DISTRIBUTION?"go to display distrib":"oups");
-          STATE = nextState;
+        STATE = nextState;
     	}
     	break;
     
@@ -155,7 +157,11 @@ void loop() {
       char msg[21] = {(char)('0' + totalToDistribute), ',', (char)('0' + cents), '0', '\0'};
       strcat(msg, " euro(s)");
       displayer.addLine(msg);
-      STATE = DISTRIBUTION;
+
+      delayInterval = 3000;
+      nextState = DISTRIBUTION;;
+      STATE = WAIT;
+      previousMillis = millis();
     }
       break;
     
@@ -200,6 +206,17 @@ void loop() {
 
 }
 
+uint8_t previousMinute = 100;
+void printTime() {
+  time.refreshDate();
+  if(time.getMinute() != previousMinute) {
+    char timeString[21];
+    time.getStringTime(timeString);
+    displayer.print(0, timeString);
+    previousMinute = time.getMinute();
+  }
+}
+
 
 
 void waitForCardRemoveThenGo(state stateToGOAfterCardRemoved); // nécessaire car le compilateur réorganise l'ordre de déclaration 
@@ -219,6 +236,8 @@ void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
 }
 
 
+char star[5] = "____";
+byte keyCount = 0;
 /**
  * Capture les entrées saisies au clavier numérique 
  * et lance les actions correspondantes.
@@ -230,13 +249,20 @@ void captureAndProcessUserEntries() {
   if (customKey){
     if(customKey >= 48 && customKey <= 57) {
       userTypedCode = userTypedCode * BASE + (customKey - 48);
+      star[keyCount] = '*';
+      keyCount++;
+      displayer.print(3, star);
     }
     
     if(customKey == 'D') {
       if(sc.checkCode(userTypedCode)) {
         STATE = GOOD_CODE;
+        keyCount = 0;
+        strcpy(star, "____");
       } else {
         STATE = WRONG_CODE;
+        keyCount = 0;
+        strcpy(star, "____");
       }
     }  
   }

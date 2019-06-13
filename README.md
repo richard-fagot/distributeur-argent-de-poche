@@ -53,6 +53,7 @@ Tant qu'à y être, ça me semble intéressant de partager tout ça, alors ce jo
 - SLE4442 datacheet : http://www.smartcardsupply.com/PDF/DS_sle4432_42_0795.pdf
 - SLE4442 sur docplayer : https://docplayer.fr/3533459-Carte-a-puce-sle-4432.html
 - SLE4442 Librairie de lecture/écriture pour arduino : https://sourceforge.net/p/arduinosclib/wiki/Home/
+- LCD 2004 https://www.gotronic.fr/pj2-sbc-lcd20x4-fr-1440.pdf
 
 # Changement de taille programme
 

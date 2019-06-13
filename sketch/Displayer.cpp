@@ -28,6 +28,20 @@ void Displayer::addLine(const char* msg) {
   }
 }
 
+void Displayer::addEmptyLine() {
+  lineIndex++;
+  if(lineIndex > (NB_ROWS-1)) {
+    lineIndex = 0;
+  }
+}
+
+void Displayer::print(byte lineIndex, char* msg) {
+  lcd.setCursor(0, lineIndex);
+  char centeredMsg[NB_COLS+1];
+  centerText(msg, centeredMsg);
+  lcd.print(centeredMsg);
+}
+
 void Displayer::centerText(const char *msg, char centeredMsg[21]) {  
   for(int i = 0 ; i < NB_COLS ; i++) {
     centeredMsg[i] = ' ';
