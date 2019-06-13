@@ -6,7 +6,7 @@
 #include "SmartCard.h"
 #include "MyKeypad.h"
 #include "MyTime.h"
-
+void printTime(boolean = false);
 SmartCard sc;
 MyKeypad kp;
 PocketMoneyDistributor distributor;
@@ -67,6 +67,7 @@ void loop() {
       displayer.addEmptyLine();
       displayer.addEmptyLine();
     	displayer.addLine("Insere ta carte");
+      printTime(true);
     	STATE = WAIT_FOR_CARD;
     	break;
     
@@ -96,7 +97,7 @@ void loop() {
       displayer.addLine(sc.getName());
       displayer.addLine("Entre ton code");
       displayer.addLine("____");
-      userTypedCode = 0;
+      resetCode();
     	STATE = CAPTURE_USER_ENTRIES;
     }
       break;
@@ -145,7 +146,7 @@ void loop() {
         STATE = nextState;
     	}
     	break;
-    
+
     case DISPLAY_DISTRIBUTION:
     {
       displayer.clear();
@@ -207,9 +208,10 @@ void loop() {
 }
 
 uint8_t previousMinute = 100;
-void printTime() {
+
+void printTime(boolean force) {
   time.refreshDate();
-  if(time.getMinute() != previousMinute) {
+  if(force || (time.getMinute() != previousMinute)) {
     char timeString[21];
     time.getStringTime(timeString);
     displayer.print(0, timeString);
@@ -257,18 +259,23 @@ void captureAndProcessUserEntries() {
     if(customKey == 'D') {
       if(sc.checkCode(userTypedCode)) {
         STATE = GOOD_CODE;
-        keyCount = 0;
-        strcpy(star, "____");
       } else {
         STATE = WRONG_CODE;
-        keyCount = 0;
-        strcpy(star, "____");
       }
     }  
+
+    if(customKey == 'C') {
+      STATE = SAY_HELLO;    
+    }
   }
   
 }
 
+void resetCode() {
+  userTypedCode = 0;
+  keyCount = 0;
+  strcpy(star, "____");
+}
 
 /*****************************************************************************/
 /******************************* UNIT TESTS **********************************/
