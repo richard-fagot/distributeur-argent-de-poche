@@ -6,7 +6,8 @@
 - **Design 3D** pour la conception des éléments mécaniques et boîtes ;
 - **Impression 3D** pour la fabrication des éléments mécaniques et boîtes ;
 - **Programmation Arduino** pour le développement de la logique du système ;
-- **Electronique** pour les éléments autour de l'arduino.
+- **Electronique** pour les éléments autour de l'arduino ;
+- **Cartes à puce sécurisées** pour stocker les informations nécessaires sur l'argent de poche à distribuer.
 
 ## Design 3D
 Pour le design 3D j'utilise Fusion 360. ça marche bien et on peut même simuler les mouvements mécaniques.
@@ -19,6 +20,15 @@ Il faut toujours garder à l'esprit le mode de production des pièces, ici par F
 Au repos et à l'initialisation du distributeur, toutes les bielles-manivelles sont en retrait. Dans cette position la manivelle est totalement cachée sous la bielle et la vis de fixation sur le servo n'est pas accessible. Au début je fixais la manivelle sans insérer le système dans le rail et je jouais sur la flexibilité du plastique pour la rentrer de force.
 
 Et puis une petite ouverture de 5mm pratiquée dans la bielle, là où se trouve la vis dans la position de repos, c'est bien plus pratique.
+
+### tenir compte de la variabilité de la taille des pièces
+Après avoir grillé un servo j'ai du en acheter d'autres. Il se trouve que la visserie n'était pas identique, notamment au niveau du maintient de l'axe : la vis avait une tête plus large et plus haute qui ne rentrait plus dans l'espace aménagé dans la manivelle.
+
+Penser à cette variabilité lors de la conception des pièces. Heureusement, en utilisant les bons points de repère dans les sketch ça a été facile de corriger.
+
+### Eviter les pattes d'éléphant
+Au début de l'impression, les premières couches sont un peu plus écrasé sur la base ce qui fait qu'elles sont un peu plus large que par la suite.
+Pour minimiser le phénomène il faut faire la partie de la pièce qui sera en contact avec le plateau un peu plus étroite en pratiquant un chanfrein par exemple (de 0.6 ou 0.8). Dans tous les cas, si il doit y avoir un assemblage au niveau de ces endroits il y a peu de chance d'avoir un raccord aussi parfait qu'en haut d'une pièce.
 
 ## Impression 3D
 ### Laisser les pièces refroidir

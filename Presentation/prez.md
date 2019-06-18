@@ -83,3 +83,16 @@ void loop() {
 }
 
 ```
+
+
+# Évolution
+
+Transformer les distributeurs en petits robots autonomes.
+
+::: notes
+
+Transformer les distributeurs en petits robots automnomes (par exemple avec une tête de chat) placés dans une petite niche.
+Quand l'enfant insère sa carte ils se mettent à trépigner d'impatience.
+Une fois la carte retirée ils foncent vers un bol pour cracher par leur petite bouche les pièces qu'il faut.
+
+:::
