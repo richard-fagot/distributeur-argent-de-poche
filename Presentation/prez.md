@@ -63,6 +63,34 @@ Richard Fagot
  - Le poids des pièces ;
  - Le système bielle-manivelle.
 
+# Recherche d'une solution
+
+Image du trieur avec la roue qui tourne + image de ce que le système aurait pu être.
+
+::: note
+Pas assez ludique et visuel
+:::
+
+# Le système bielle-manivelle
+Image dans le moteur + capture fusion
+http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
+
+::: note
+- comment relier les pièces entre elles ?
+:::
+
+# Avec le porte-pièces
+Image dans fusion + Photo réélle
+
+# Fusion 360
+Demo !
+
+::: note
+- Extrusion et opérations booléénes
+- liaisons
+- les contraintes de l'impression 3D (porte à faux, résistance)
+:::
+
 # Le système de saisie
 - écran / clavier
 
