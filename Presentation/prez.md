@@ -4,7 +4,7 @@ lang: fr-FR
 ---
 
 
-# Distributeur Automatique d'Argent de Poche pour les enfants
+# Distributeur Automatique d'Argent de Poche pour les enfants{ data-background-image=assets/img/devfest-2019.png data-background-size=initial data-background-position='bottom rigth' }
 
 Richard Fagot
 
@@ -36,7 +36,7 @@ Richard Fagot
 
 # Le Distributeur
 
-![](assets/img/eclaté.png)
+![](assets/img/eclaté.png){ height=400px }
 
 
 ::: notes
@@ -62,6 +62,30 @@ Richard Fagot
 # Le mécanisme de distribution
  - Le poids des pièces ;
  - Le système bielle-manivelle.
+
+::: note
+- Recherche d'une solution (la roue en premier)
+:::
+
+# 
+![](assets/img/poussoir.png){ height=600px }
+
+::: note
+- Impression en une fois ;
+- Puis en plusieurs pièces pour pouvoir avoir plusieurs couleurs ;
+- Clipper les pièces ensembles ;
+- Raffinement à cause de la nouvelle visserie des servos
+:::
+
+#
+![](assets/img/porte-pieces.png){ height=600px }
+
+#
+![](assets/img/face-pieces.png){ height=600px }
+
+# 
+![](assets/img/distributeur.png){ height=600px }
+
 
 # Recherche d'une solution
 
@@ -107,7 +131,7 @@ void setup() {
 }
 
 void loop() {
-    
+
 }
 
 ```
@@ -119,7 +143,8 @@ Empêcher les enfants de hacker le système
 
 # Évolution
 
-Transformer les distributeurs en petits robots autonomes.
+- Transformer les distributeurs en petits robots autonomes.
+- Rust
 
 ::: notes
 

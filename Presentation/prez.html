@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 
-<section id="distributeur-automatique-dargent-de-poche-pour-les-enfants" class="slide level1">
+<section id="distributeur-automatique-dargent-de-poche-pour-les-enfants" class="slide level1" data-background-image="assets/img/devfest-2019.png" data-background-size="initial" data-background-position="bottom rigth">
 <h1>Distributeur Automatique d’Argent de Poche pour les enfants</h1>
 <p>Richard Fagot</p>
 <aside class="notes">
@@ -124,7 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="le-distributeur" class="slide level1">
 <h1>Le Distributeur</h1>
-<p><img data-src="assets/img/eclaté.png" /></p>
+<p><img data-src="assets/img/eclaté.png" height="400" /></p>
 <aside class="notes">
 <ul>
 <li>Utiliser la photo du distributeur pour expliquer le workflow :
@@ -153,6 +153,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Le poids des pièces ;</li>
 <li>Le système bielle-manivelle.</li>
 </ul>
+<div class="note">
+<ul>
+<li>Recherche d’une solution (la roue en premier)</li>
+</ul>
+</div>
+</section>
+<section id="section" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/poussoir.png" height="600" /></p>
+<div class="note">
+<ul>
+<li>Impression en une fois ;</li>
+<li>Puis en plusieurs pièces pour pouvoir avoir plusieurs couleurs ;</li>
+<li>Clipper les pièces ensembles ;</li>
+<li>Raffinement à cause de la nouvelle visserie des servos</li>
+</ul>
+</div>
+</section>
+<section id="section-1" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/porte-pieces.png" height="600" /></p>
+</section>
+<section id="section-2" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/face-pieces.png" height="600" /></p>
+</section>
+<section id="section-3" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/distributeur.png" height="600" /></p>
 </section>
 <section id="recherche-dune-solution" class="slide level1">
 <h1>Recherche d’une solution</h1>
@@ -163,11 +192,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="le-système-bielle-manivelle" class="slide level1">
 <h1>Le système bielle-manivelle</h1>
-<p>Image dans le moteur + capture fusion</p>
+<p>Image dans le moteur + capture fusion http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html</p>
+<div class="note">
+<ul>
+<li>comment relier les pièces entre elles ?</li>
+</ul>
+</div>
 </section>
 <section id="avec-le-porte-pièces" class="slide level1">
 <h1>Avec le porte-pièces</h1>
 <p>Image dans fusion + Photo réélle</p>
+</section>
+<section id="fusion-360" class="slide level1">
+<h1>Fusion 360</h1>
+<p>Demo !</p>
+<div class="note">
+<ul>
+<li>Extrusion et opérations booléénes</li>
+<li>liaisons</li>
+<li>les contraintes de l’impression 3D (porte à faux, résistance)</li>
+</ul>
+</div>
 </section>
 <section id="le-système-de-saisie" class="slide level1">
 <h1>Le système de saisie</h1>
@@ -190,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-3" title="3">}</a>
 <a class="sourceLine" id="cb1-4" title="4"></a>
 <a class="sourceLine" id="cb1-5" title="5"><span class="dt">void</span> loop() {</a>
-<a class="sourceLine" id="cb1-6" title="6">    </a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
 <a class="sourceLine" id="cb1-7" title="7">}</a></code></pre></div>
 </section>
 <section id="my-little-hackers" class="slide level1">
@@ -199,7 +244,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="évolution" class="slide level1">
 <h1>Évolution</h1>
-<p>Transformer les distributeurs en petits robots autonomes.</p>
+<ul>
+<li>Transformer les distributeurs en petits robots autonomes.</li>
+<li>Rust</li>
+</ul>
 <aside class="notes">
 <p>Transformer les distributeurs en petits robots automnomes (par exemple avec une tête de chat) placés dans une petite niche. Quand l’enfant insère sa carte ils se mettent à trépigner d’impatience. Une fois la carte retirée ils foncent vers un bol pour cracher par leur petite bouche les pièces qu’il faut.</p>
 </aside>
