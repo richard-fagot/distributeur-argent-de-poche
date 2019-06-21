@@ -14,8 +14,20 @@ byte MyTime::getWeekDay() {
     return timeDetails.wday;
 }
 
+byte MyTime::getDay() {
+    return timeDetails.mday;
+}
+
+byte MyTime::getMonth() {
+    return timeDetails.mon;
+}
+
 byte MyTime::getMinute() {
     return timeDetails.min;
+}
+
+int MyTime::getYear() {
+    return timeDetails.year;
 }
 
 /**

@@ -6,13 +6,15 @@
 #include "SmartCard.h"
 #include "MyKeypad.h"
 #include "MyTime.h"
+#include "DistributionAllower.h"
+
 void printTime(boolean = false);
 SmartCard sc;
 MyKeypad kp;
 PocketMoneyDistributor distributor;
 Displayer displayer;
 MyTime time;
-
+DistributionAllower allower;
 ///////////////////////////////////////////////////////////////////////////////
 //
 // États de l'automate fini.
@@ -81,7 +83,7 @@ void loop() {
     case COLLECT_CARD_DATA:
       sc.collectSmartcardData(); // appel bloquant.
       time.refreshDate();
-      if (time.getWeekDay() != 9) {
+      if (allower.isAllowed(sc.getName, time)) {
         STATE = SAY_HELLO;
       }
       else {
@@ -158,6 +160,9 @@ void loop() {
       char msg[21] = {(char)('0' + totalToDistribute), ',', (char)('0' + cents), '0', '\0'};
       strcat(msg, " euro(s)");
       displayer.addLine(msg);
+
+      LastDistribution ld;
+      ld.save(sc.getName(), time.getDay(), time.getMonth());
 
       delayInterval = 3000;
       nextState = DISTRIBUTION;;

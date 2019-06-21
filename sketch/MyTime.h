@@ -22,6 +22,9 @@ class MyTime {
     void setup();
     byte getWeekDay();
     byte getMinute();
+    byte getDay();
+    byte getMonth();
+    int getYear();
     void getStringTime(char* timeString);
     void refreshDate();
 };
