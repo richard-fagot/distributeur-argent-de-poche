@@ -4,7 +4,7 @@ lang: fr-FR
 ---
 
 
-# Distributeur Automatique d'Argent de Poche pour les enfants{ data-background-image=assets/img/devfest-2019.png data-background-size=initial data-background-position='bottom rigth' }
+# Distributeur Automatique d'Argent de Poche
 
 Richard Fagot
 
