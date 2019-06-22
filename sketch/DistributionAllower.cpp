@@ -1,14 +1,15 @@
 #include "DistributionAllower.h"
 #include <Arduino.h>
 #include "LastDistribution.h"
+#define DAAP_DEBUG 1
+
 
 boolean DistributionAllower::badDate(MyTime &time) {
     boolean isBadDate = true;
 
-    byte today= time.getWeekDay();
+    byte today = time.getWeekDay();
     if(today == ALLOWED_DAYS[0] || today == ALLOWED_DAYS[1]) {
         isBadDate = false;
-        break;
     }
 
     return isBadDate; 
@@ -17,20 +18,26 @@ boolean DistributionAllower::badDate(MyTime &time) {
 boolean DistributionAllower::yetDistributed(const char *name, MyTime &time) {
     boolean isYetDistributed = false;
     LastDistribution ld;
-    if( !ld.retrieveLastDistribution() ) {
-        isYetDistributed = true;
-    } else {
-        byte day = timee.getDay();
-        byte month = time.getMonth();
-        int year = time.getYear();
-        
-        byte pDay, pMonth;
-        getPreviousDay(day, month, year, pDay, pMonth);
 
-        if( (day == ld.getDay() && month == ld.getMonth())
-           || (pDay == ld.getDay() && pMont == ld.getMonth()) ) {
-               isYetDistributed = true;
-        }
+    #ifdef DAAP_DEBUG
+      Serial.print("Found ");
+      Serial.print(name);
+      Serial.print(" in EEPROM ? : ");
+      Serial.println(ld.retrieveLastDistribution(name));
+    #endif
+    
+    if( ld.retrieveLastDistribution(name) ) {    
+      byte day = time.getDay();
+      byte month = time.getMonth();
+      int year = time.getYear();
+        
+      byte pDay, pMonth;
+      getPreviousDay(day, month, year, pDay, pMonth);
+
+      if( (day == ld.getDay() && month == ld.getMonth())
+         || (pDay == ld.getDay() && pMonth == ld.getMonth()) ) {
+             isYetDistributed = true;
+      }
     }
 
     return isYetDistributed;
@@ -38,7 +45,15 @@ boolean DistributionAllower::yetDistributed(const char *name, MyTime &time) {
 
 boolean DistributionAllower::isAllowed(const char *name, MyTime &time) {
     boolean isAllowed = true;
-    if(badDate(name) || yetDistributed(name)) {
+    
+    #ifdef DAAP_DEBUG
+      Serial.print("Bad date (");
+      Serial.print(time.getWeekDay());
+      Serial.print(") : ");
+      Serial.println(badDate(time));
+    #endif
+    
+    if(badDate(time) || yetDistributed(name, time)) {
         isAllowed = false;
     }
 

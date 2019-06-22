@@ -1,3 +1,5 @@
+#define DAAP_DEBUG 1
+
 #include <Servo.h>  // Librairie par défaut
 #include <string.h>
 #include "PocketMoneyDistributor.h"
@@ -7,6 +9,8 @@
 #include "MyKeypad.h"
 #include "MyTime.h"
 #include "DistributionAllower.h"
+#include "LastDistribution.h"
+
 
 void printTime(boolean = false);
 SmartCard sc;
@@ -39,6 +43,11 @@ unsigned int userTypedCode = 0; // variable contenant le code saisi par l'utilis
 ///////////////////////////////////////////////////////////////////////////////
 
 void setup() {
+  #ifdef DAAP_DEBUG
+  Serial.begin(9600);
+  Serial.println("Debug Mode");
+  #endif
+  
   time.setup();
 
   displayer.initialize();
@@ -61,6 +70,10 @@ void setup() {
 
 
 void loop() {
+
+  #ifdef DAAP_DEBUG
+  captureAndProcessUserEntries();
+  #endif
   
   switch(STATE) {
 
@@ -83,7 +96,7 @@ void loop() {
     case COLLECT_CARD_DATA:
       sc.collectSmartcardData(); // appel bloquant.
       time.refreshDate();
-      if (allower.isAllowed(sc.getName, time)) {
+      if (allower.isAllowed(sc.getName(), time)) {
         STATE = SAY_HELLO;
       }
       else {
@@ -272,6 +285,21 @@ void captureAndProcessUserEntries() {
     if(customKey == 'C') {
       STATE = SAY_HELLO;    
     }
+
+    #ifdef DAAP_DEBUG
+    if(customKey == 'A') {
+      LastDistribution ld;
+      switch(userTypedCode) {
+        case 1:
+          ld.showEEPROMContent();
+          break;
+       case 2:
+          ld.eraseEEPROMContent();
+          break;
+      }
+      userTypedCode=0;
+    }
+    #endif
   }
   
 }

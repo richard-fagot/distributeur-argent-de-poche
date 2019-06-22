@@ -1,4 +1,5 @@
 #include "LastDistribution.h"
+#include <EEPROM.h>
 
 void LastDistribution::create(char* name, byte day, byte month) {
   byte lastSavedNameIndex = EEPROM.read(0);
@@ -33,14 +34,13 @@ boolean LastDistribution::retrieveLastDistribution(const char* name) {
   if(!(lastSavedNameIndex == 255)) {
     for(int i = 0 ; i <= lastSavedNameIndex ; i++) {
       	int a = sizeof(DistributionDate);
-		EEPROM.get(1 + i*a, distributionDate);
+		    EEPROM.get(1 + i*a, distributionDate);
       	if(strcmp(name, distributionDate.name) == 0) {
           hasFound = true;
           break;
       	}
     }
   }
-  
   
   return hasFound;
   
@@ -61,3 +61,26 @@ byte LastDistribution::getDay() {
 byte LastDistribution::getMonth() {
     return distributionDate.month;
 }
+
+#ifdef DAAP_DEBUG
+void LastDistribution::eraseEEPROMContent() {
+  for(int i =0 ; i < 70 ; i++) {
+    EEPROM.write(i,255);
+  }
+  showEEPROMContent();
+}
+
+void LastDistribution::showEEPROMContent() {
+  Serial.print('#');
+  for(int i =0 ; i < 70 ; i++) {
+    byte t = EEPROM.read(i);
+    if((t >= 'A' && t <= 'Z') || (t >= 'a' && t <= 'z') ) {
+      Serial.print((char)t); 
+    } else {
+      Serial.print(t, HEX);
+    }
+  }
+  Serial.println('#');
+}
+
+#endif

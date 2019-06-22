@@ -4,6 +4,16 @@
 #include <Wire.h>
 #include <ds3231.h> //ds3231FS by Petre Rodan
 
+enum DAYS {
+    MONDAY = 0,
+    TUESDAY = 1,
+    WEDNESDAY = 2,
+    THIRSDAY = 3,
+    FRIDAY = 4,
+    SATURDAY = 5,
+    SUNDAY = 6
+};
+    
 class MyTime {
     const char wdays [7][3+1] = 
     {
