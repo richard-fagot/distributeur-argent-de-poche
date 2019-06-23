@@ -18,93 +18,75 @@ Richard Fagot
 
 
 
-# L'argent de poche
-
-![Calvin et l'argent de poche](assets/img/calvin.jpg)
-
+# 
+![](assets/img/calvin.png)
 
 ::: notes
+Passer rapidement.
+:::
+
+
+#
+::: notes
+
 - Décision de donner des sous aux enfants ;
 - Règles de l'argent de poche ;
 - Quitte à faire comme les grands autant aller jusqu'au bout ;
 - Projet fun pour les enfants ;
 - (et fun pour le papa).
+- Présenter le workflow.
+    
 :::
 
-
-
-
-# Le Distributeur
-
-![](assets/img/eclaté.png){ height=400px }
-
-
+# Roue trieuse
 ::: notes
-
-- Utiliser la photo du distributeur pour expliquer le workflow :
-    - Insertion d'une carte à puce,
-    - Saisie du code secret,
-    - Distribution de l'argent,
-    - Uniquement le week-end ;
-
-- Présenter chaque partie par un éclaté progressif :
-    - le poussoir,
-    - la carte à puce,
-    - le clavier,
-    - l'écran,
-    - le module RTC,
-    - le boitier,
-    - l'arduino pour les contrôler tous.
-
-:::
-
-
-# Le mécanisme de distribution
- - Le poids des pièces ;
- - Le système bielle-manivelle.
-
-::: note
-- Recherche d'une solution (la roue en premier)
+- Roue trieuse ;
+- ==> pas assez sexy.
 :::
 
 # 
 ![](assets/img/poussoir.png){ height=600px }
 
-::: note
+::: notes
+- http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
+- conception 3D fusion 360 ;
 - Impression en une fois ;
 - Puis en plusieurs pièces pour pouvoir avoir plusieurs couleurs ;
-- Clipper les pièces ensembles ;
 - Raffinement à cause de la nouvelle visserie des servos
+- Clipper les pièces ensembles ;
+- ==> mécanisme retenu.
+:::
+
+#
+![](assets/img/poussoir-eclate.png){ height=600px }
+
+::: notes
+- Sens d'impression ;
+- ==> Liaison ???
 :::
 
 #
 ![](assets/img/porte-pieces.png){ height=600px }
 
+::: notes
+
+:::
+
 #
 ![](assets/img/face-pieces.png){ height=600px }
+
+
+::: notes
+
+:::
+
 
 # 
 ![](assets/img/distributeur.png){ height=600px }
 
+::: notes
 
-# Recherche d'une solution
-
-Image du trieur avec la roue qui tourne + image de ce que le système aurait pu être.
-
-::: note
-Pas assez ludique et visuel
 :::
-
-# Le système bielle-manivelle
-Image dans le moteur + capture fusion
-http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
-
-::: note
-- comment relier les pièces entre elles ?
-:::
-
-# Avec le porte-pièces
-Image dans fusion + Photo réélle
 
 # Fusion 360
 Demo !
@@ -114,6 +96,9 @@ Demo !
 - liaisons
 - les contraintes de l'impression 3D (porte à faux, résistance)
 :::
+
+# Slicing
+Demo !
 
 # Le système de saisie
 - écran / clavier
