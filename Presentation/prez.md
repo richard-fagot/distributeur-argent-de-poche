@@ -130,7 +130,7 @@ Empêcher les enfants de hacker le système
 
 - Transformer les distributeurs en petits robots autonomes.
 - DAAP Reloaded : Coder en arduino avec **Rust**
-- Ajouter un configurateur (nombre de distributeurs, valeur faciale, actualiser l'heure)
+- Ajouter un configurateur (nombre de distributeurs, valeur faciale, actualiser l'heure **/!\ à la qté de String**)
 
 ::: notes
 
