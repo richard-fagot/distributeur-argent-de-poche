@@ -129,7 +129,8 @@ Empêcher les enfants de hacker le système
 # Évolution
 
 - Transformer les distributeurs en petits robots autonomes.
-- Rust
+- DAAP Reloaded : Coder en arduino avec **Rust**
+- Ajouter un configurateur (nombre de distributeurs, valeur faciale, actualiser l'heure)
 
 ::: notes
 
