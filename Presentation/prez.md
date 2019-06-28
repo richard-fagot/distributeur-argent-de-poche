@@ -26,8 +26,11 @@ Passer rapidement.
 :::
 
 
+
+
 #
 ::: notes
+Histoire du projet
 
 - Décision de donner des sous aux enfants ;
 - Règles de l'argent de poche ;
@@ -38,16 +41,24 @@ Passer rapidement.
     
 :::
 
+
+
+
 # Roue trieuse
 ::: notes
 - Roue trieuse ;
 - ==> pas assez sexy.
 :::
 
+
+
+
 # 
 ![](assets/img/poussoir.png){ height=600px }
 
 ::: notes
+**Le poussoir **
+
 - http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
 - conception 3D fusion 360 ;
 - Impression en une fois ;
@@ -57,20 +68,44 @@ Passer rapidement.
 - ==> mécanisme retenu.
 :::
 
+
+
+
 #
 ![](assets/img/poussoir-eclate.png){ height=600px }
 
 ::: notes
+**Assemblage des axes**
+
 - Sens d'impression ;
 - ==> Liaison ???
 :::
+
+
+
 
 #
 ![](assets/img/porte-pieces.png){ height=600px }
 
 ::: notes
-
+- colonne de pièces ;
+- guidage du poussoir ;
+- ==> Support du servo
 :::
+
+
+
+#
+
+::: notes
+**Servomoteur**
+
+- force ;
+- bruit du maintient en position.
+:::
+
+
+
 
 #
 ![](assets/img/face-pieces.png){ height=600px }
@@ -131,6 +166,7 @@ Empêcher les enfants de hacker le système
 - Transformer les distributeurs en petits robots autonomes.
 - DAAP Reloaded : Coder en arduino avec **Rust**
 - Ajouter un configurateur (nombre de distributeurs, valeur faciale, actualiser l'heure **/!\ à la qté de String**)
+- Editer une carte à puce directement via le DAAP.
 
 ::: notes
 

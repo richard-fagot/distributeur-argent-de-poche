@@ -43,9 +43,11 @@ Diantre que c'est compliqué.
 
 
 ### Tinkercad
-    Après avoir malencontreusement grillé une carte, j'ai cherché une solution qui permette de tester son code dans un environnement virtuel, et donc sans risques pour la carte le temps de la première mise au point.
 
-    Pour cela j'ai utilisé *Tinkercad* qui offre, entre autre, un environnement de simulation Arduino.
+Après avoir malencontreusement grillé une carte, j'ai cherché une solution qui permette de tester son code dans un environnement virtuel, et donc sans risques pour la carte le temps de la première mise au point.
+
+Pour cela j'ai utilisé *Tinkercad* qui offre, entre autre, un environnement de simulation Arduino.
+
 #### Avantages
 - offre un environnement virtuel sans risque pour les cartes physiques ;
 - permet de commencer à travailler sur du matériel qu'on n'a pas encore reçu (écran LCD, calvier...) ;
