@@ -41,7 +41,7 @@ Histoire du projet
 :::
 
 Nous avons fait ce choix pour qu'elles puissent commencer à apprendre à gérer leur argent, à découvrir la valeur de l'argent.
-Avant de se lancer j'ai quand même regardé dans la littérature ce qu'il s'en disait et j'ai découvert un certains concensus en 5 "règles" :
+Avant de se lancer j'ai quand même regardé dans la littérature ce qu'il s'en disait et j'ai découvert un certains concensus autour 5 "règles" :
 1. 1 fois par semaine car une fois par mois c'est trop long pour eux, 1 fois par semaine est plus en accord avec leur échelle de temps et encore, au début elles oubliaient assez vite ;
 2. On le donne tout le temps, même si elles ont fait un bêtise, une grosse bêtise voire même une trés trés grosse bêtise ;
 3. Ce n'est pas une rémunération, en échange de tâches ménagères par exemple, elles touchent leur argent de poche de manière inconditionnelle (cela vient plus tard la notion de rémunération) ;
@@ -82,7 +82,7 @@ L'ouverture pratiquée à la sortie vaut environ 1.5 la hauteur d'une pièce de 
 
 - diamètre plus grand que diagonale 2€ qui marche pour toutes les autres pièces
 
-Dans cette colonne j'ai pratiqué une rainure pour pouvoir récupérer facilement les pièces (notamment quand on par en vacance, quand le distributeur est plein il y a plus de **XX€**). L'ouverture par laquelle les pièces vont s'échapper est large d'un diamètre de  la plus grande pièce (2€) sinon elle serait piégée un peu comme dans une pince. En hauteur, on est à un petit peu plus d'une hauteur de pièce, ça permet de prendre en compte les imprecisions d'impression et des jeux dans les mouvement tout en bloquant la pièce en contact direct avec celle qu'on pousse et qui pourrait être entraînée par frottement.
+Dans cette colonne j'ai pratiqué une rainure pour pouvoir récupérer facilement les pièces (notamment quand on par en vacance, quand le distributeur est plein il y a plus de **XX€** en plus de pouvoir visualiser la quantité de pièces restantes). L'ouverture par laquelle les pièces vont s'échapper est large d'un diamètre de  la plus grande pièce (2€) sinon elle serait piégée un peu comme dans une pince. En hauteur, on est à un petit peu plus d'une hauteur de pièce, ça permet de prendre en compte les imprecisions d'impression et des jeux dans les mouvement tout en bloquant la pièce en contact direct avec celle qu'on pousse et qui pourrait être entraînée par frottement.
 
 **Montrer le mécanisme complet**
 On a donc un mécanisme complet qui permet de distribuer des pièces de monnaies : un distributeur par valeur faciale.
@@ -96,12 +96,16 @@ J'ai choisi d'utiliser un arduino nano parce que d'une part parce qu'il est vrai
 Pour commander un servo avec un arduino c'est simple si on a un servo qui se contrôle avec une commande PWM.
 Le PWM sert à générer une tension continue à partir d'un signal carré. La valeur de la tension varie en fonction du rapport entre la durée d'une impulsion et la période du signal.
 
+**/!\ alimentation**
+
 Pour un servo commandable en PWM, un niveau de signal correspond soit à une position soit à une vitesse de rotation. Moi j'ai un contrôle de position et en fonction du signal PWM le servo va à la position demandée et essaie d'y rester.
 Si on lui envoi 0 il va à la position 0 et essai d'y rester (ce sont des servos de modélisme qui sont asservi en position). Si on lui envoi du 180 il fait une demi-rotation et cherche à y rester (attention, j'ai des servo qui ont une amplitude de 180°, d'autres sont plus large et d'autre plus ressérés. Dans ce cas, il faut bien connaître les propriétés de son servo car si on lui envoi une commande qui va au-delà de ses capacités il risque de forcé, le courant va augmenter fortement et l'arduino et le servo risque de mourir).
 
 Il existe une librairie de base Servo.h qui permet de manipuler des servo. 
 
 **présentation du code**
+
+__**description code broche pwm**__
 
 Au départ, j'ai utilisé ce code comme ça. Mais j'ai eu un problème d'ordre sonnore : tant qu'on écrit un signal sur le servo, lui, il essai de maintenir sa position. Et comme ce sont des servo à pas cher ils ont tendance à osciller autour de leur position de référence et ça fait du bruit. Vu que le DAAP va se trouver dans le salon, c'est pas top. Au début je me suis dit que j'allais commander l'alimentation des servos via l'arduino mais dans mon cas ça fait prendre 3 pattes supplémentaires et trois transistors supplémentaires. Et puis j'ai fait un truc incroyable : j'ai lu la doc !
 
@@ -143,9 +147,9 @@ Donc ça c'est une partie de ce qu'il se passe lorsque l'enfant insère la carte
 
 
 <!-- Présentation de L'écran LCD -->
-C'est un écran à fond bleu conçu pour bousiller la rétine des enfants, il faut les habituer tôt. Mais surtout il permet d'afficher 4 lignes de 20 caractères (les fameux 20 caractères max du prénom que l'on stocke dans la carte à puce, si vous vous souvenez bien), je voulais un gros écran parce qu'en général les écrans LCD sont assez petits surtout si on se laisse tenter par les magniques écrans OLED polychrome, qui eux, sont franchement rikikis.
+C'est un écran à fond bleu conçu pour bousiller la rétine des enfants, il faut les habituer tôt. Mais surtout il permet d'afficher 4 lignes de 20 caractères (les fameux 20 caractères max du prénom que l'on stocke dans la carte à puce, si vous vous souvenez bien), je voulais un gros écran parce qu'en général les écrans LCD sont assez petits surtout si on se laisse tenter par les magniques écrans OLED polychromes, qui eux, sont franchement rikikis.
 
-À la base, pour commander cet écran, il faut prévoir 6 broches sur l'arduino avec les librairies à disposition. Ça fait beaucoup, chaque broche de l'arduino est précieuse et donc il faut toujours passer un peu de temps à chercher si il y a un moyen de diminuer ce nombre de broches. Il se trouve que pour ce type d'écran il existe un petit qui permet de communiquer avec lui en utilisant le protocole I2C qui, lui, n'utilise que deuxx broches de l'arduino. Et non seulement, l'implémentation de ce protocole est fournie par défaut avec l'arduino (c'est la librairie Wire) mais en plus, l'arduino possède (pour le nano) deux broches dédiées à cette fonction. Ce sont les broches SDA et SCL qu'on retrouve sur les diagrammes de *pinout*.
+À la base, pour commander cet écran, il faut prévoir 6 broches sur l'arduino avec les librairies à disposition. Ça fait beaucoup, chaque broche de l'arduino est précieuse et donc il faut toujours passer un peu de temps à chercher si il y a un moyen de diminuer ce nombre de broches. Il se trouve que pour ce type d'écran il existe un petit modeil qui permet de communiquer avec lui en utilisant le protocole I2C qui, lui, n'utilise que deuxx broches de l'arduino. Et non seulement, l'implémentation de ce protocole est fournie par défaut avec l'arduino (c'est la librairie Wire) mais en plus, l'arduino possède (pour le nano) deux broches dédiées à cette fonction. Ce sont les broches SDA et SCL qu'on retrouve sur les diagrammes de *pinout*.
 <!-- FIN -- Présentation de L'écran LCD -->
 
 <!-- Introduction au protocole I2C -->
@@ -158,7 +162,20 @@ Autant dire que je suis bien content de ne pas avoir à l'implémenter. Maiiiiis
 <!-- Librairie LCD -->
 On a trouvé un composant qui réduit le nombre de broches, mais ça ne ne signifie pas pour autant qu'il existe une librairie qui va bien. On a de la chance, la communauté arduino est plutôt riche, et il se trouve qu'il en existe plusieurs. Par contre, il faut tester parce que toutes ne se valent pas. J'ai dû en essayer plusieurs, entre celles qui vendent du rêve, celles qui sont obsolettes et celles qui ne remplissent pas toutes les fonctions j'ai quand même fini par trouver la perle rare faite par un certain **Mathias Hertel**. 
 
-Elle marche et en plus elle est simple d'utilisation : après avoir déclarer l'include qui va bien (pensez à donner des indices sur comment retrouver la livrairies, l'auteur, le nom dans la bibliothèque ou encore la version) il suffit de créer une instance de l'écran en précisant l'adresse I2C où le trouver puis d'écrire le texte qu'on veut là où on lui indique. Il y a également des fonctions utilisaires pour effacer l'écran par exemple.
+Elle marche et en plus elle est simple d'utilisation : après avoir déclarer l'include qui va bien (pensez à donner des indices sur comment retrouver la livrairies, l'auteur, le nom dans la bibliothèque ou encore la version) il suffit de créer une instance de l'écran en précisant l'adresse I2C où le trouver puis d'écrire le texte qu'on veut là où on lui indique. Il y a également des fonctions utilisaires pour effacer l'écran par exemple. 
+C'est le genre de fonction qu'on va utiliser pour changer le message à l'écran, pour, par exemple, inviter l'enfant à saisir son code une fois qu'il a inséré sa carte...
 <!-- FIN -- Librairie LCD -->
 
+<!-- Clavier matriciel -->
+...La saisie du code se fait grace à un petit clavier matriciel de ce type, à 16 touche, 4x4. Là, niveau broche c'est du lourd parce qu'il en faut 8 : 1 pour chacune des 4 lignes et 1 pour chacune des 4 colonnes.
+Ce genre de clavier fonctionne ainsi :
+<!-- FIN -- Clavier matriciel -->
 
+<!-- Clavier matriciel fonctionnement-->
+C'est un ensemble d'interrupteurs. L'arduino va allumer tour à tour chaque colonne par exemple. Et dans le même il va scanner chaque ligne. Lorsqu'il allume la colonne 2 et que il détecte un signal sur la ligne 3 c'est que la touche 8 a été préssée. Il peut même détecter plusieurs touche en même temps.
+Et il répète cette opération trés rapidement tout en prenant en compte le rebond des touches. 
+<!-- FIN -- Clavier matriciel fonctionnement-->
+
+<!-- Le rebond -->
+Le rebond, c'est un phénomène qui se produit sur les composants mécaniques généralement, et souvant sur les interupteurs/bouton poussoir. Le contact n'est jamais franc, les pièces ont tendances à rebondir les unes sur les autres provoquant une signal aléatoir interprété comme une série de 0 et de 1 consécutifs (dont d'appui et de relachement du bouton) pendant un temps très court. Mais à 16 MHz, ce qui est court pour un humain est long pour un arduino qui les détecte tous. On peut implémenter un antirebond de manière électronique en insérant des filtres de type RC ou en l'implémentant de manière logicielle comme dans la librairie keypad.
+<!-- FIN - Le rebond -->

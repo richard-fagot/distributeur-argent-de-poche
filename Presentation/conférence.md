@@ -107,4 +107,20 @@ LiquidCrystal_PCF8574 lcd = LiquidCrystal_PCF8574(0x27);
 lcd.setCursor(col, row);
 lcd.print(message);
 ```
-<!-- Librairie LCD -->
+
+<!-- Clavier matriciel -->
+#
+![](assets/img/keypad.png){height="600px"}
+
+
+<!-- Clavier matriciel fonctionnement-->
+#
+![](assets/img/clavier_4x4_schema_interne.gif){height="600px"}
+
+
+<!-- anti-rebond -->
+#
+![](assets/img/rebond.png){height="400px"}
+
+#
+![](assets/img/anti-rebond.png){height="400px"}
