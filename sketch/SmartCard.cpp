@@ -11,8 +11,13 @@ void SmartCard::cardRemoved() {
 
 void SmartCard::collectSmartcardData() {
     if (sl44x2.cardReady()) { // appel bloquant
-        uint8_t data[1 + 4 + 3 + 20];
-        uint16_t i = sl44x2.readMainMemory(0x60, data, 28);
+        uint8_t data[1 + 4 + 3 + 20]; // 1 octet pour le nombre de caractères dans le prénom de l'enfant
+                                      // 4 octets pour le code secret (écrit en string)
+                                      // 3 octets pour le montant à distribuer (écrit en string)
+                                      // 20 octets pour le prénom de l'enfant
+                                      //
+                                      // ==> = 28 octets
+        uint16_t i = sl44x2.readMainMemory(0x60, data, 28); 
 
         int length = data[0];
         this->secretCode = Tools::toInt(data[1]) * 1000 + Tools::toInt(data[2]) * 100 + Tools::toInt(data[3]) * 10 + Tools::toInt(data[4]);

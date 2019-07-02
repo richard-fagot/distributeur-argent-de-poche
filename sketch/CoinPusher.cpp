@@ -11,7 +11,7 @@ CoinPusher::CoinPusher(byte servoPin, int coinValue) {
 void CoinPusher::initialize() {
     servo.attach(pin);
     servo.write(180);
-    delay(2000); // on veut vraiment bloquer les actions de l'arduino en attendant que les servo ait fini son mouvement.
+    delay(2000); // on veut vraiment bloquer les actions de l'arduino en attendant que le servo ait fini son mouvement.
     servo.detach();
     STATE = READY_TO_MOVE;
 }
