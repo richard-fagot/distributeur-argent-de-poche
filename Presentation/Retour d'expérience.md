@@ -146,3 +146,36 @@ Cela m'a permis de résoudre des problèmes de répétitions non nécessaires d'
 
 ### Les pièces de monnaie pour tester
 Ne les laissez pas trop près de l'arduino. Les pièces sont en métal, le métal est conducteur et les arduino n'aiment pas les courts-circuits.
+
+# VSCode
+## Configuration c++
+Il a du mal à trouver les includes. Il faut les ajouter dans includePath et peut-être dans browse.path.
+```
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**"
+
+            ],
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "browse": {
+                "path": [
+                    "C:\\Users\\richa\\Documents\\Arduino\\libraries",
+                    "C:\\Program Files\\arduino-1.8.9\\libraries",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}
+```
