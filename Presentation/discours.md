@@ -23,17 +23,21 @@ L'idée générale étant de pouvoir faire "comme les grands". Mais quitte à fa
 C'est comme ça qu'est née l'idée d'un distributeur automatique d'argent de poche : fabriquer une machine dans laquelle elle inséreraient leur "carte bleue", saisiraient leur code secret en suivant les instructions à l'écran et regarderaient la machine se mettre en action pour distribuer les pièces une à une à l'aide d'un petit mécanisme...
 
 ## Le poussoir
-...que je me suis empressé de concevoir. C'est la première chose à laquelle je me suis intéressé parce que c'est la partie la plus concrète, on peut la voir, la toucher, la regarder bouger toute seule.
+
+### Version longue
+...que je me suis empressé de concevoir.
+
+C'est la première chose à laquelle je me suis intéressé parce que c'est la partie la plus concrète, on peut la voir, la toucher, la regarder bouger toute seule.
 
 Au début, je m'étais inspiré d'une trieuse à pièce sur laquelle il y avait une sorte de corbeille remplie de pièces en vrac et une roue dans laquelle étaient aménagés des espaces pour accueillir une pièce à la fois. La roue, en tournant, capture une pièce et la dépose dans la trieuse. Je la voyait bien à l'horizontale sous une colonne de pièce. En tournant elle prendrait une pièce et la déposerait à l'endroit de la distribution. Mais ça manquait un peut de vie et la conception mécanique m'embêtait un peu : soit il fallait utiliser une vis sans fin avec une mauvaise maîtrise des mouvements à cause des jeux entre les différents éléments, ou alors en prise directe sur un moteur pas à pas mais je craignais de ne pas avoir suffisamment de puissance ou que cela consomme trop.
 
 Et puis j'ai pensé au mouvement bielle-manivelle qu'on retrouve dans les moteurs à explosion et qui permet de transformer un mouvement de rotation en mouvement de translation (le piston dans le moteur). Le mouvement est sympas, presque hypnotique, les pièces sont faciles à concevoir et fabriquer et on peut connecter le tout à un servo moteur, de ceux qu'on utilise dans le modélisme, et qui sont commandables par un signal PWM facilement générale par l'*arduino*.
 
-Mon premier essai a été de réaliser une impression en une seule "pièce" inspirée de ces impressions de dragons, serpents et autres robots articulés qu'on imprime en un seul bloc sans assemblage. Après quelques tatonnements (et il y en a beaucoup en impression 3D, il ne faut pas hésiter à concevoir puis imprimer pour voir ce que cela donne) j'ai obtenu ce magnifique spécimen de bielle-manivelle en une seule impression.
+Mon premier essai a été de réaliser une impression en une seule "pièce" inspirée de ces impressions de dragons, serpents et autres robots articulés qu'on imprime en un seul bloc sans assemblage. Après quelques tâtonnements (et il y en a beaucoup en impression 3D, il ne faut pas hésiter à concevoir puis imprimer pour voir ce que cela donne) j'ai obtenu ce magnifique spécimen de bielle-manivelle en une seule impression.
 
 Donc, j'ai réussi à imprimer le poussoir en une seule pièce et en plus, sans résistance au niveau des axes ce qui m'a permis de valider la puissance des servos de 9g et dun peu plus d'un kg de couple. J'ai assemblé un système rudimentaire et tenté de pousser une pièce de 2€ en bas d'une colonne de 25 pièces et ça a marché du premier coup.
 
-J'ain un système qui marche très bien, c'est cool mais ça manque de couleurs et mes filles sont très exigeantes en matière de couleurs flashy qui font saigner des yeux et en plus, une seule couleur ne permet pas de bien visualiser le mouvement des différentes pièces. Alors j'ai repris ma conception pour avoir des pièces indépendantes et pouvoir les imprimer chacune dans une couleur différente (je n'ai qu'une seule tête d'impression sur mon imprimante 3D). L'exercice est assez facile avec un outil comme fusion 360 mais la question la plus délicate était de savoir comment assembler ces éléments. 
+J'ai un un système qui marche très bien, c'est cool mais ça manque de couleurs et mes filles sont très exigeantes en matière de couleurs flashy qui font saigner des yeux et en plus, une seule couleur ne permet pas de bien visualiser le mouvement des différentes pièces. Alors j'ai repris ma conception pour avoir des pièces indépendantes et pouvoir les imprimer chacune dans une couleur différente (je n'ai qu'une seule tête d'impression sur mon imprimante 3D). L'exercice est assez facile avec un outil comme fusion 360 mais la question la plus délicate était de savoir comment assembler ces éléments. 
 
 La première idée est d'utiliser des écrous et des boulons pour maintenir les pièces entre elles et jouer le rôle des axes de rotations. Mais, d'abord, je trouve ça assez moche et je voulais au maximum utiliser du PLA en quantité la plus petite possible (le plastique c'est fantastique mais ça fait pas du bien à la planète bien que celui-ci soit biodégradable assez rapidement). Alors je me suis inspiré des légos techniques : ils des petites pièces qui permettent d'assembles les élements entre eux et même servir d'axe de rotation. Elles ont la particularité d'être fendues sur un diamètre ce qui leur donne de la flexibilité pour les enfoncer dans les trous et à leur extrémité un bourelet permer de s'accrocher à la pièce lorsque cette attache se détend en sortant du trou.
 
@@ -47,6 +51,14 @@ Là aussi on travaille par tatonnement. Par exemple, sur cet ensemble le mouveme
 C'est important de garder à l'esprit la méthode que l'on va employer pour imprimer en 3D au moment où on fait la conception dans le logiciel 3D ET au moment du slicing. Par exemple, si on observe le premier poussoir en une seule fois on remarquera que l'extrémité inférieur du poussoir arrive au ras du disque de maintient, qui est lui-même d'un diamètre égal à la largeur de la bielle : parce qu'en fait, **cette pièce s'imprime comme ça**.
 
 **Montrer la pièce physique, en l'assemblant devant l'assistance**
+
+### Version courte
+...que je me suis empressé de concevoir.
+
+
+
+
+
 
 Pour que le poussoir ait un mouvement rectiligne il faut le contraindre dans cette direction. Et puis, il faut aussi lui ajouter le servo qui va engager le mouvement de rotation de la manivelle et puisqu'on y est, il faut aussi ajouter la réserve de pièces à distribuer grâce au poussoir. Alors je vous présente le support sur lequel le servo vient se fixer, qui présente un guide rectiligne pour le poussoir au bout duquel on retrouve la colonne de pièces.
 
