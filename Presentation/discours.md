@@ -1,44 +1,15 @@
----
-pagetitle: DAAP
-lang: fr-FR
----
-
-
 # Distributeur Automatique d'Argent de Poche
 
-Richard Fagot
+## Phrase d'introduction
 
-:::notes
-1. Tiens-toi bien ;
-1. Pense à ta première phrase ;
-1. Prend une inspiration ;
-1. Embrasse la salle d'un regard et lance-toi.
-:::
-
-Il y a quelques mois, avec mon épouse, nous avons décidé de donner de l'argent de poche à nos enfants et, ce, malgré les terribles risques encourus.
+Il y a quelques mois, avec mon épouse, nous avons décidé de donner de l'argent de poche à nos enfants et, ce, malgré les terribles risques encourus...
  
 
-# 
+# Pause blagounette
 ![](assets/img/calvin.png)
 
-::: notes
-Passer rapidement.
-:::
 
-
-
-
-#
-::: notes
-Histoire du projet
-
-- Décision de donner des sous aux enfants ;
-- Règles de l'argent de poche ;
-- Quitte à faire comme les grands autant aller jusqu'au bout ;
-
-==> C'est comme ça qu'est née l'idée du DAAP : les enfants insèrent leur CB, tapent leur code en suivant les instructions à l'écran et la machine distribue l'argent de poche, la pièce étant éjectée par un petit mécanisme.
-    
-:::
+## Courte introduction à l'argent de poche et genèse du projet
 
 Nous avons fait ce choix pour qu'elles puissent commencer à apprendre à gérer leur argent, à découvrir la valeur de l'argent.
 Avant de se lancer j'ai quand même regardé dans la littérature ce qu'il s'en disait et j'ai découvert un certains concensus autour 5 "règles" :
@@ -47,15 +18,16 @@ Avant de se lancer j'ai quand même regardé dans la littérature ce qu'il s'en 
 3. Ce n'est pas une rémunération, en échange de tâches ménagères par exemple, elles touchent leur argent de poche de manière inconditionnelle (cela vient plus tard la notion de rémunération) ;
 4. Elles dépensent leur argent comme elles l'entendent, exception faite de la drogue, des armes et autres produit récréatifs du même acabit. Personnellement, vu qu'elles ont des chambres déjà bien saturée, lorsqu'on fait un cide-grenier par exemple, je les invite à en faire le tour et à s'acheter 1 ou 2 objets maximum.
 
-L'idée générale étant de pouvoir faire "comme les grands". Mais quite à faire comme les grands, est-ce qu'on ne pourrait pas aller un peu plus loin avec un projet qui serait fun pour elles et fun pour leur papounet ?
+L'idée générale étant de pouvoir faire "comme les grands". Mais quitte à faire comme les grands, est-ce qu'on ne pourrait pas aller un peu plus loin avec un projet qui serait fun pour elles et fun pour leur papounet ?
 
-C'est comme ça qu'est née l'idée d'un distributeur automatique d'argent de poche : fabriquer une machine dans laquelle elle inséreraient leur "carte bleue", saisiraient leur code secret en suivant les instructions à l'écran et regarderaient la machine se mettre en action pour distribuer l'argent de poche en poussant les pièces une à une.
+C'est comme ça qu'est née l'idée d'un distributeur automatique d'argent de poche : fabriquer une machine dans laquelle elle inséreraient leur "carte bleue", saisiraient leur code secret en suivant les instructions à l'écran et regarderaient la machine se mettre en action pour distribuer les pièces une à une à l'aide d'un petit mécanisme...
 
-Ce mécanisme du poussoir est la première chose à laquelle je me suis intéressé parce que c'est la partie la plus concrête, on peut la voir, la toucher, la regarder bouger toute seule.
+## Le poussoir
+...que je me suis empressé de concevoir. C'est la première chose à laquelle je me suis intéressé parce que c'est la partie la plus concrète, on peut la voir, la toucher, la regarder bouger toute seule.
 
-Au début, je m'étais inspiré d'une trieuse à pièce sur laquelle il y avait une sorte de corbeille remplie de pièces en vrac et une roue dans laquelle étaient aménagés des espaces pour accueillir une pièce à la fois. La roue, en tournant, capture une pièce et la dépose dans la trieuse. Je la voyait bien à l'horizontale sous une colonne de pièce. En tournant elle prendrait une pièce et la déposerait à l'endroit de la distribution. Mais ça manquait un peut de vie et la conception mécanique m'embetait un peu : soit il fallait utiliser une vis sans fin avec une mauvaise maîtrise des mouvements à cause des jeux entre les différents éléments, ou alors en prise directe sur un moteur pas à pas mais je craignais de ne pas avoir suffisamment de puissance ou que cela consomme trop.
+Au début, je m'étais inspiré d'une trieuse à pièce sur laquelle il y avait une sorte de corbeille remplie de pièces en vrac et une roue dans laquelle étaient aménagés des espaces pour accueillir une pièce à la fois. La roue, en tournant, capture une pièce et la dépose dans la trieuse. Je la voyait bien à l'horizontale sous une colonne de pièce. En tournant elle prendrait une pièce et la déposerait à l'endroit de la distribution. Mais ça manquait un peut de vie et la conception mécanique m'embêtait un peu : soit il fallait utiliser une vis sans fin avec une mauvaise maîtrise des mouvements à cause des jeux entre les différents éléments, ou alors en prise directe sur un moteur pas à pas mais je craignais de ne pas avoir suffisamment de puissance ou que cela consomme trop.
 
-Et puis j'ai pensé au mouvement bielle-manivelle qu'on retrouve dans les moteurs à explosion et qui permet de transformer un mouvement de rotation en mouvement de translation (le piston dans le moteur). Le mouvement est sympas, presque hypnotique, les pièces sont faciles à concevoir et fabriquer et on peut connecter le tout à un servo moteur, de ceux qu'on utilise dans le modélisme, et qui sont commandable par un signal PWM facilement générable par l'arduino.
+Et puis j'ai pensé au mouvement bielle-manivelle qu'on retrouve dans les moteurs à explosion et qui permet de transformer un mouvement de rotation en mouvement de translation (le piston dans le moteur). Le mouvement est sympas, presque hypnotique, les pièces sont faciles à concevoir et fabriquer et on peut connecter le tout à un servo moteur, de ceux qu'on utilise dans le modélisme, et qui sont commandables par un signal PWM facilement générale par l'*arduino*.
 
 Mon premier essai a été de réaliser une impression en une seule "pièce" inspirée de ces impressions de dragons, serpents et autres robots articulés qu'on imprime en un seul bloc sans assemblage. Après quelques tatonnements (et il y en a beaucoup en impression 3D, il ne faut pas hésiter à concevoir puis imprimer pour voir ce que cela donne) j'ai obtenu ce magnifique spécimen de bielle-manivelle en une seule impression.
 

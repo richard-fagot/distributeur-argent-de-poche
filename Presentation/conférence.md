@@ -3,10 +3,60 @@ pagetitle: DAAP Conf
 lang: fr-FR
 ---
 
+<!-- Phrase d'introduction -->
+# Distributeur Automatique d'Argent de Poche
+
+Richard Fagot
+
+:::notes
+1. Tiens-toi bien ;
+1. Pense à ta première phrase ;
+1. Prend une inspiration ;
+1. Embrasse la salle d'un regard et lance-toi.
+:::
+
+
+<!-- Pause blagounette -->
+# 
+![](assets/img/calvin.png)
+
+::: notes
+Passer rapidement.
+:::
+
+<!-- Courte introduction à l'argent de poche et genèse du projet -->
+#
+
+:::notes
+Intro + genèse du projet :
+
+- règles de l'argent de poche ;
+- quitte à faire comme les grands, est-ce qu'on peu aller plus loin ?
+:::
+
+
+<!-- Le poussoir -->
+# 
+![](assets/img/poussoir.png){ height=600px }
+
+::: notes
+**Le poussoir **
+
+- http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
+- conception 3D fusion 360 ;
+- Impression en une fois ;
+- Puis en plusieurs pièces pour pouvoir avoir plusieurs couleurs ;
+- Raffinement à cause de la nouvelle visserie des servos
+- Clipper les pièces ensembles ;
+- ==> mécanisme retenu.
+:::
+
 # PWM
 ![](assets/img/PWM.png)
 
-# <!-- Contrôler le servo -->
+
+<!-- Contrôler le servo -->
+#
 ```c++
 #include <Servo.h>
 
