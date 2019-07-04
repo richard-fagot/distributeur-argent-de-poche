@@ -99,12 +99,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 
+<section class="slide level1">
+
+<!-- Phrase d'introduction -->
+</section>
+<section id="distributeur-automatique-dargent-de-poche" class="slide level1">
+<h1>Distributeur Automatique d’Argent de Poche</h1>
+<p>Richard Fagot</p>
+<aside class="notes">
+<ol type="1">
+<li>Tiens-toi bien ;</li>
+<li>Pense à ta première phrase ;</li>
+<li>Prend une inspiration ;</li>
+<li>Embrasse la salle d’un regard et lance-toi.</li>
+</ol>
+</aside>
+<!-- Pause blagounette -->
+</section>
+<section id="section" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/calvin.png" /></p>
+<aside class="notes">
+<p>Passer rapidement.</p>
+</aside>
+<!-- Courte introduction à l'argent de poche et genèse du projet -->
+</section>
+<section id="section-1" class="slide level1">
+<h1></h1>
+<aside class="notes">
+<p>Intro + genèse du projet :</p>
+<ul>
+<li>règles de l’argent de poche ;</li>
+<li>quitte à faire comme les grands, est-ce qu’on peu aller plus loin ?</li>
+</ul>
+</aside>
+<!-- Le poussoir -->
+</section>
+<section id="section-2" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/poussoir.png" height="600" /></p>
+<aside class="notes">
+<p><strong>Le poussoir</strong> - mouvement bielle-manivelle</p>
+</aside>
+</section>
+<section id="section-3" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/mouvement.gif" height="600" /></p>
+<aside class="notes">
+<p>Passez rapidement pour ne pas perdre l’attention de l’auditoire.</p>
+</aside>
+</section>
+<section id="section-4" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/poussoir.png" height="600" /></p>
+<aside class="notes">
+<p><strong>Le poussoir</strong></p>
+<ul>
+<li>description</li>
+<li>en parler pendant des heures</li>
+</ul>
+</aside>
+<!-- Clip -->
+</section>
+<section id="section-5" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/poussoir-eclate.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>Description du clip ;</li>
+<li>Pièce complexe : penser à l’impression 3D</li>
+</ul>
+</aside>
+</section>
+<section id="section-6" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/Impression%20clip.png" width="1000" /></p>
+<aside class="notes">
+<ul>
+<li>Pros’n Cons des 3 impressions ;</li>
+<li>insertion manivelle/poussoir ;</li>
+<li>mouvement rectiligne, support servo, réservoir pièce.</li>
+</ul>
+<p>==&gt; Je vous présente le support.</p>
+</aside>
+<!-- Le support -->
+</section>
+<section id="section-7" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/porte-pieces.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>support servo ;</li>
+<li>guide poussoir ;</li>
+<li>Diamètre réservoir</li>
+<li>ouverture réservoir ;</li>
+<li>rainure réservoir.</li>
+</ul>
+<p>==&gt; système complet, y’ plus qu’à le commander</p>
+</aside>
+<!-- Arduino -->
+</section>
+<section id="section-8" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/arduino_nano.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>Facile à programmer, communauté ;</li>
+<li>compact ;</li>
+<li>HE14 à un rang ;</li>
+<li>nombre de broches ;</li>
+<li>µC quesako ?</li>
+</ul>
+<p>==&gt; librairie servo ==&gt; PWM</p>
+</aside>
+<!-- PWM -->
+</section>
 <section id="pwm" class="slide level1">
 <h1>PWM</h1>
 <p><img data-src="assets/img/PWM.png" /></p>
+<!-- Contrôler le servo -->
 </section>
-<section id="section" class="slide level1">
-<h1><!-- Contrôler le servo --></h1>
+<section id="section-9" class="slide level1">
+<h1></h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>Servo myServo;</span>
@@ -121,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </aside>
 </section>
-<section id="section-1" class="slide level1">
+<section id="section-10" class="slide level1">
 <h1><!-- Detach --></h1>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
@@ -137,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12"></a></span>
 <span id="cb2-13"><a href="#cb2-13"></a><span class="dt">void</span> loop() {...}</span></code></pre></div>
 </section>
-<section id="section-2" class="slide level1">
+<section id="section-11" class="slide level1">
 <h1><!-- Séquenceur --></h1>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>CoinPusher *coinPushers[MAX_PUSHER_COUNT];</span>
 <span id="cb3-2"><a href="#cb3-2"></a>CoinPusher *sequence[MAX_SEQUENCE_COUNT];</span>
@@ -154,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-13"><a href="#cb3-13"></a>}</span></code></pre></div>
 <!-- Discours -->
 </section>
-<section id="section-3" class="slide level1">
+<section id="section-12" class="slide level1">
 <h1></h1>
 <!-- SLE 4442 -->
 </section>
@@ -163,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img data-src="assets/img/carte+connecteur.png" height="400" /></p>
 <!-- Structure carte -->
 </section>
-<section id="section-4" class="slide level1">
+<section id="section-13" class="slide level1">
 <h1></h1>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">struct</span> {</span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">char</span> name[<span class="dv">20</span>+<span class="dv">1</span>];</span>
@@ -174,26 +290,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="#cb4-7"></a>};</span></code></pre></div>
 <!-- Discours trouver la librairie SClib-->
 </section>
-<section id="section-5" class="slide level1">
+<section id="section-14" class="slide level1">
 <h1></h1>
 <!-- Protocole SLE4442 -->
 </section>
-<section id="section-6" class="slide level1">
+<section id="section-15" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/protocole2.png" height="400" /></p>
 <!-- Présentation de L'écran LCD -->
 </section>
-<section id="section-7" class="slide level1">
+<section id="section-16" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/LCD.png" height="400" /></p>
 <!-- Introduction au protocole I2C -->
 </section>
-<section id="section-8" class="slide level1">
+<section id="section-17" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/I2C.png" height="600" /></p>
 <!-- Librairie LCD -->
 </section>
-<section id="section-9" class="slide level1">
+<section id="section-18" class="slide level1">
 <h1></h1>
 <div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_PCF8574.h&gt;</span><span class="pp"> </span><span class="co">// by Mathias Hertel</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
@@ -203,23 +319,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="#cb5-6"></a>lcd.print(message);</span></code></pre></div>
 <!-- Clavier matriciel -->
 </section>
-<section id="section-10" class="slide level1">
+<section id="section-19" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/keypad.png" height="600" /></p>
 <!-- Clavier matriciel fonctionnement-->
 </section>
-<section id="section-11" class="slide level1">
+<section id="section-20" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/clavier_4x4_schema_interne.gif" height="600" /></p>
 <!-- anti-rebond -->
 </section>
-<section id="section-12" class="slide level1">
+<section id="section-21" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/rebond.png" height="400" /></p>
 </section>
-<section id="section-13" class="slide level1">
+<section id="section-22" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/anti-rebond.png" height="400" /></p>
+</section>
+<section id="section-23" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/pinout.png" height="600" /> :::notes :::</p>
 </section>
     </div>
   </div>

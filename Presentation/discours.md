@@ -1,27 +1,36 @@
 # Distributeur Automatique d'Argent de Poche
 
+<!-- Phrase d'introduction -->
 ## Phrase d'introduction
 
 Il y a quelques mois, avec mon épouse, nous avons décidé de donner de l'argent de poche à nos enfants et, ce, malgré les terribles risques encourus...
- 
+ <!-- FIN -- Phrase d'introduction -->
 
+<!-- Pause blagounette -->
 # Pause blagounette
+
 ![](assets/img/calvin.png)
+<!-- FIN -- Pause blagounette -->
 
-
+<!-- Courte introduction à l'argent de poche et genèse du projet -->
 ## Courte introduction à l'argent de poche et genèse du projet
 
-Nous avons fait ce choix pour qu'elles puissent commencer à apprendre à gérer leur argent, à découvrir la valeur de l'argent.
-Avant de se lancer j'ai quand même regardé dans la littérature ce qu'il s'en disait et j'ai découvert un certains concensus autour 5 "règles" :
-1. 1 fois par semaine car une fois par mois c'est trop long pour eux, 1 fois par semaine est plus en accord avec leur échelle de temps et encore, au début elles oubliaient assez vite ;
-2. On le donne tout le temps, même si elles ont fait un bêtise, une grosse bêtise voire même une trés trés grosse bêtise ;
-3. Ce n'est pas une rémunération, en échange de tâches ménagères par exemple, elles touchent leur argent de poche de manière inconditionnelle (cela vient plus tard la notion de rémunération) ;
-4. Elles dépensent leur argent comme elles l'entendent, exception faite de la drogue, des armes et autres produit récréatifs du même acabit. Personnellement, vu qu'elles ont des chambres déjà bien saturée, lorsqu'on fait un cide-grenier par exemple, je les invite à en faire le tour et à s'acheter 1 ou 2 objets maximum.
+Nous avons fait comme beaucoup de parents pour qu'elles puissent commencer à apprendre à gérer leur argent, à en découvrir la valeur : qu'on peut l'économiser si on n'achète rien, que quand on en dépense on en a moins...
+
+Néanmoins, même si c'est assez courant, j'ai quand même regardé dans la littérature ce qu'il s'en disait et j'ai découvert un certain concensus autour 5 "règles" :
+
+1. La quantité est libre ;
+2. 1 fois par semaine car une fois par mois c'est trop long pour eux, 1 fois par semaine est plus en accord avec leur échelle de temps et encore, au début elles oubliaient assez vite ;
+3. On le donne tout le temps, même si elles ont fait un bêtise, une grosse bêtise voire même une trés trés grosse bêtise ;
+4. Ce n'est pas une rémunération, en échange de tâches ménagères par exemple, elles touchent leur argent de poche de manière inconditionnelle (cela vient plus tard la notion de rémunération) ;
+5. Elles dépensent leur argent comme elles l'entendent, exception faite de la drogue, des armes et autres produit récréatifs du même acabit. Personnellement, vu qu'elles ont des chambres déjà bien saturée, lorsqu'on fait un cide-grenier par exemple, je les invite à en faire le tour et à s'acheter 1 ou 2 objets maximum.
 
 L'idée générale étant de pouvoir faire "comme les grands". Mais quitte à faire comme les grands, est-ce qu'on ne pourrait pas aller un peu plus loin avec un projet qui serait fun pour elles et fun pour leur papounet ?
 
 C'est comme ça qu'est née l'idée d'un distributeur automatique d'argent de poche : fabriquer une machine dans laquelle elle inséreraient leur "carte bleue", saisiraient leur code secret en suivant les instructions à l'écran et regarderaient la machine se mettre en action pour distribuer les pièces une à une à l'aide d'un petit mécanisme...
+<!-- FIN -- Courte introduction à l'argent de poche et genèse du projet -->
 
+<!-- Le poussoir -->
 ## Le poussoir
 
 ### Version longue
@@ -55,18 +64,62 @@ C'est important de garder à l'esprit la méthode que l'on va employer pour impr
 ### Version courte
 ...que je me suis empressé de concevoir.
 
+C'est un mécanisme bielle-manivelle qui transforme un mouvement de rotation en mouvement de translation (ou rotation) alternatif, le même qu'on retrouve dans nos moteus à explosison pour activer le piston. 
+
+==> Slide du mouvement (passer rapidement)
+
+J'ai choisi ce mécanisme parce que j'aime bien le mouvement, je le trouve assez hyptnotique et il est facile à concevoir.
+
+==> Slide du mécanisme fixe
+
+Le mécanisme est constitué de plusieurs éléments : on retrouve la manivelle qui transmet le mouvement et qui est reliée à un servo-moteur, la bielle qui permet de transformer le mouvement et le poussoir qui va effectuer le mouvement (éjecter les pièces).
+Je pourrais voue parler de ce mécanisme pendant une heure tellement il y a de chose à en dire mais je vais passer rapidement sur les éléments essentiels.
+
+Par exemple, ici c'est l'emplacement de la vis qui permet de relier la manivelle au servo moteur, pour que la tête de vis ne gêne pas le mouvement j'ai fait un petit alésage. Là, c'est pour accèder à cette vis quand on pose ou dépose le mécanisme. Au début, je ne l'avais pas fait et j'installais les pièce en "forçant". Et enfin, il y a les axes qui jouent à la fois le rôle d'axe de rotation mais également de maintient des pièces entre elles.
+
+Pour les réaliser, je me suis inspiré des lego techniques. Une brique ressemble à ça, elle est percée de trous, dans lesquels vient s'insérer ce genre d'axe, fendu en son milieu pour lui donner plus de flexibilité et flanqué d'un petit bourelet pour qu'il reste bien en place.
+
+Après quelques essais pour trouver les bons paramètres pour avoir assez de jeu mais pas trop, assez de flexibilité etc. Je suis arrivé à cette pièce là.
+<!-- FIN -- Le poussoir -->
+
+<!-- Clip -->
+## Clip
+==> Slide poussoir éclaté
+
+On retrouve un plateau supérieur ainsi qu'un petit bourelet inférieur pour maintenir les pièces ensemble et la fente pour avoir suffisamment de flexibilité.
+
+Quand on fait un design 3D en vu d'une impression en 3D il faut toujours garder à l'esprit comment on va imprimer la pièce.
+
+*Détacher le poussoir et monter les différentes façon d'imprimer et les conséquences.* 
+
+==> Slide impression clip
+*Expliquer pour l'axe.*
+
+Une fois imprimé comme ça on retire les supports, il peu y avoir un peu de travail à faire au niveau des pates d'éléphants et ça s'insère très bien dans les différentes pièces bielle/manivelle et manivelle/poussoir.
+
+Pour que le poussoir ait un mouvement rectiligne il faut le contraindre dans cette direction. Et puis, il faut aussi lui ajouter le servo qui va engager le mouvement de rotation de la manivelle et puisqu'on y est, il faut aussi ajouter la réserve de pièces à distribuer grâce au poussoir. 
+<!-- FIN -- Clip -->
 
 
+<!-- Le support -->
+## Le support
+==> Slide support
 
+Alors je vous présente le support sur lequel le servo vient se fixer, qui présente un guide rectiligne pour le poussoir au bout duquel on retrouve le réservoir à pièces.
 
+Ici on retrouve l'espace dans lequel va se placer le servo-moteur avec les trous des vis de fixation qui vont bien. Pour avoir les bonnes mesure je me suis servi de la datasheet du servo et d'un pied à coulisse. Ça a marché du premier coup sauf sur le diamètre des trous qui était trop petit.
 
-Pour que le poussoir ait un mouvement rectiligne il faut le contraindre dans cette direction. Et puis, il faut aussi lui ajouter le servo qui va engager le mouvement de rotation de la manivelle et puisqu'on y est, il faut aussi ajouter la réserve de pièces à distribuer grâce au poussoir. Alors je vous présente le support sur lequel le servo vient se fixer, qui présente un guide rectiligne pour le poussoir au bout duquel on retrouve la colonne de pièces.
+Là le rail pour guider le mouvement du poussoir et enfin le réservoir à pièces. Même cette partie n'est pas si triviale que ça.
 
-L'ouverture pratiquée à la sortie vaut environ 1.5 la hauteur d'une pièce de 2€ pour être sûr, à caus des imprecision d'impression que la pièce va pouvoir sortir sans contrainte tout en assurant que la pièce du dessus ne soit pas emportée à cause des frottement ni au moment de l'extraction de la pièce inférieur ni au moment du retour du poussoir à sa position initiale.
+D'abord, je voulais que le chargement des pièces se fasse bien, que les pièces ne restent pas coincées. Pour cela, il faut prendre non pas le diamètre de la pièce mais la diagonale entre ses deux faces plus une petite marge. Bon, en fait la hauteur de la pièce est tellement petite devant son diamètre que c'est un peut *kifkif bourrico* et au final, pour une pièce qui fait 25.75, on compte 26mm et on rajoute 0.5 de chaque côté.
 
-- diamètre plus grand que diagonale 2€ qui marche pour toutes les autres pièces
+Ce 0.5 mm de marge c'est ce qu'on recommande de prendre comme jeu pour les différents types d'assemblage. Mais il faut tester.
 
-Dans cette colonne j'ai pratiqué une rainure pour pouvoir récupérer facilement les pièces (notamment quand on par en vacance, quand le distributeur est plein il y a plus de **XX€** en plus de pouvoir visualiser la quantité de pièces restantes). L'ouverture par laquelle les pièces vont s'échapper est large d'un diamètre de  la plus grande pièce (2€) sinon elle serait piégée un peu comme dans une pince. En hauteur, on est à un petit peu plus d'une hauteur de pièce, ça permet de prendre en compte les imprecisions d'impression et des jeux dans les mouvement tout en bloquant la pièce en contact direct avec celle qu'on pousse et qui pourrait être entraînée par frottement.
+L'ouverture pratiquée à la sortie fait 3 mm, la hauteur d'une pièce de 2€ fait 2.2mm, à caus des imprecisions d'impression que la pièce va pouvoir sortir sans contrainte tout en assurant que la pièce du dessus ne soit pas emportée à cause des frottement ni au moment de l'extraction de la pièce inférieur ni au moment du retour du poussoir à sa position initiale.
+
+ça c'est pour des pièces de 2€ et ça fonctionne bien jusqu'au pièces de 10 centimes. Mais la colonne de pièce est un peu en vrac, c'est trop large. Du coup je ferais une conception paramétrique pour généré un support sur-mesure.
+
+Dans cette colonne j'ai pratiqué une rainure pour pouvoir récupérer facilement les pièces (notamment quand on par en vacance, quand le distributeur est plein il y a plus de **75€**, en plus de pouvoir visualiser la quantité de pièces restantes). 
 
 **Montrer le mécanisme complet**
 On a donc un mécanisme complet qui permet de distribuer des pièces de monnaies : un distributeur par valeur faciale.
@@ -74,18 +127,36 @@ On a donc un mécanisme complet qui permet de distribuer des pièces de monnaies
 Il ne reste plus qu'à le commander.
 
 Et on va faire ça grâce à un arduino.
+<!-- FIN -- Le support -->
 
-J'ai choisi d'utiliser un arduino nano parce que d'une part parce qu'il est vraiment compact, ce qui permet de l'intégrer facilement sur un PCB proprement et d'autre part, par un coup de bol incroyable, car il contient tout juste suffisament d'entrées/sorties pour le projet dans son ensemble.
+<!-- Arduino -->
+## Arduino 
+J'ai choisi d'utiliser un arduino nano d'une part parce que c'est très facile à programmer, il y a une grosse communauté derrière, il est vraiment compact, ce qui permet de l'intégrer facilement sur un PCB soit en le soudant directement (mais je ne le recommande pas) soit en utilisant des connecteurs HE14 à un rang qui permettent de récupérer l'arduino pour le mettre à jour ou s'en servir sur un autre projet. 
 
-Pour commander un servo avec un arduino c'est simple si on a un servo qui se contrôle avec une commande PWM.
+Et, d'autre part, parce que par un coup de bol incroyable, il contient tout juste suffisament d'entrées/sorties pour le projet dans son ensemble.
+
+Un arduino c'est basé sur un microcontrolleur. 
+
+Un microcontrolleur, en gros c'est un petit processeur comme celui qu'on a dans nos machines, avec de la RAM, de la ROM, des controlleurs en tout genre et tout ça sur une seule puce. Il y en a de plusieurs types, les plus connus sont les PIC et les AVR.
+
+Avant, c'était assez compliqué et chez de programmer un microcontrolleur parce que si le composant en lui-même est trés bon marché, le programmateur, lui était plustôt assez cher et en plus pas compatible avec tous les modèles. Le programme lui devait être écrit en C bas niveau ou en ASM au pire.
+
+Avec les arduino, plus besoin de programmateur, on branche l'arduino sur un port usb, on code en C++ avec des librairies de haut niveau et en cliquant sur un bouton le programme se téléverse dans l'AVR (oui parce que sur les arduino ce sont des µC de type AVR).
+
+Avec ces librairies on peut par exemple commander un servo. Et c'est simple si on a un servomoteur qui se contrôle avec une commande PWM. Ici c'est le cas.
+<!-- FIN -- Arduino -->
+
+<!-- PWM -->
+## PWM
 Le PWM sert à générer une tension continue à partir d'un signal carré. La valeur de la tension varie en fonction du rapport entre la durée d'une impulsion et la période du signal.
+<!-- FIN -- PWM -->
 
 **/!\ alimentation**
 
-Pour un servo commandable en PWM, un niveau de signal correspond soit à une position soit à une vitesse de rotation. Moi j'ai un contrôle de position et en fonction du signal PWM le servo va à la position demandée et essaie d'y rester.
+Pour un servo commandable en PWM, un niveau de signal correspond à une position angulaire. 
+
 Si on lui envoi 0 il va à la position 0 et essai d'y rester (ce sont des servos de modélisme qui sont asservi en position). Si on lui envoi du 180 il fait une demi-rotation et cherche à y rester (attention, j'ai des servo qui ont une amplitude de 180°, d'autres sont plus large et d'autre plus ressérés. Dans ce cas, il faut bien connaître les propriétés de son servo car si on lui envoi une commande qui va au-delà de ses capacités il risque de forcé, le courant va augmenter fortement et l'arduino et le servo risque de mourir).
 
-Il existe une librairie de base Servo.h qui permet de manipuler des servo. 
 
 **présentation du code**
 

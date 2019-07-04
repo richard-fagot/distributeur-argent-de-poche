@@ -40,17 +40,92 @@ Intro + genèse du projet :
 ![](assets/img/poussoir.png){ height=600px }
 
 ::: notes
-**Le poussoir **
-
-- http://subaru.univ-lemans.fr/AccesLibre/UM/Pedago/physique/02/meca/bielle.html
-- conception 3D fusion 360 ;
-- Impression en une fois ;
-- Puis en plusieurs pièces pour pouvoir avoir plusieurs couleurs ;
-- Raffinement à cause de la nouvelle visserie des servos
-- Clipper les pièces ensembles ;
-- ==> mécanisme retenu.
+**Le poussoir**
+- mouvement bielle-manivelle
 :::
 
+
+
+
+#
+![](assets/img/mouvement.gif){ height=600px }
+
+:::notes
+Passez rapidement pour ne pas perdre l'attention de l'auditoire.
+:::
+
+
+
+
+# 
+![](assets/img/poussoir.png){ height=600px }
+
+:::notes
+**Le poussoir**
+
+- description
+- en parler pendant des heures
+:::
+
+
+
+<!-- Clip -->
+#
+![](assets/img/poussoir-eclate.png){ height=600px }
+
+:::notes
+- Description du clip ;
+- Pièce complexe : penser à l'impression 3D
+:::
+
+
+
+
+#
+![](assets/img/Impression clip.png){ width=1000px }
+
+:::notes
+  - Pros'n Cons des 3 impressions ;
+  - insertion manivelle/poussoir ;
+  - mouvement rectiligne, support servo, réservoir pièce.
+
+  ==> Je vous présente le support.
+:::
+
+
+
+<!-- Le support -->
+#
+![](assets/img/porte-pieces.png){ height=600px }
+
+::: notes
+  - support servo ;
+  - guide poussoir ;
+  - Diamètre réservoir
+  - ouverture réservoir ;
+  - rainure réservoir.
+
+  ==> système complet, y' plus qu'à le commander
+:::
+
+
+<!-- Arduino -->
+#
+![](assets/img/arduino_nano.png){ height=600px }
+
+:::notes
+  - Facile à programmer, communauté ;
+  - compact ;
+  - HE14 à un rang ;
+  - nombre de broches ;
+  - µC quesako ?
+
+  ==> librairie servo ==> PWM
+:::
+
+
+
+<!-- PWM -->
 # PWM
 ![](assets/img/PWM.png)
 
@@ -174,3 +249,9 @@ lcd.print(message);
 
 #
 ![](assets/img/anti-rebond.png){height="400px"}
+
+
+#
+![](assets/img/pinout.png){ height=600px }
+:::notes
+:::
