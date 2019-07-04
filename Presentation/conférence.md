@@ -129,6 +129,12 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 # PWM
 ![](assets/img/PWM.png)
 
+:::notes
+  - rapport cyclique pour générer signaux pseudo analogique ;
+  - Pulse Width Modulation
+:::
+
+
 
 <!-- Contrôler le servo -->
 #
