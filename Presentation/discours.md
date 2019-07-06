@@ -72,7 +72,7 @@ J'ai choisi ce mécanisme parce que j'aime bien le mouvement, je le trouve assez
 
 ==> Slide du mécanisme fixe
 
-Le mécanisme est constitué de plusieurs éléments : on retrouve la manivelle qui transmet le mouvement et qui est reliée à un servo-moteur, la bielle qui permet de transformer le mouvement et le poussoir qui va effectuer le mouvement (éjecter les pièces).
+Le mécanisme est constitué de plusieurs éléments : on retrouve la manivelle qui transmet le mouvement et qui est reliée à un servo-moteur (un servo-moteur c'est un moteur qui est asservi, en position ici), la bielle qui permet de transformer le mouvement et le poussoir qui va effectuer le mouvement (éjecter les pièces).
 Je pourrais voue parler de ce mécanisme pendant une heure tellement il y a de chose à en dire mais je vais passer rapidement sur les éléments essentiels.
 
 Par exemple, ici c'est l'emplacement de la vis qui permet de relier la manivelle au servo moteur, pour que la tête de vis ne gêne pas le mouvement j'ai fait un petit alésage. Là, c'est pour accèder à cette vis quand on pose ou dépose le mécanisme. Au début, je ne l'avais pas fait et j'installais les pièce en "forçant". Et enfin, il y a les axes qui jouent à la fois le rôle d'axe de rotation mais également de maintient des pièces entre elles.
@@ -151,11 +151,10 @@ Avec ces librairies on peut par exemple commander un servo. Et c'est simple si o
 Le PWM sert à générer une tension continue à partir d'un signal carré. La valeur de la tension varie en fonction du rapport entre la durée d'une impulsion et la période du signal.
 <!-- FIN -- PWM -->
 
-**/!\ alimentation**
 
 Pour un servo commandable en PWM, un niveau de signal correspond à une position angulaire. 
 
-Si on lui envoi 0 il va à la position 0 et essai d'y rester (ce sont des servos de modélisme qui sont asservi en position). Si on lui envoi du 180 il fait une demi-rotation et cherche à y rester (attention, j'ai des servo qui ont une amplitude de 180°, d'autres sont plus large et d'autre plus ressérés. Dans ce cas, il faut bien connaître les propriétés de son servo car si on lui envoi une commande qui va au-delà de ses capacités il risque de forcé, le courant va augmenter fortement et l'arduino et le servo risque de mourir).
+Si on lui envoi 0 il va à la position 0 et essai d'y rester (ce sont des servos de modélisme qui sont asservi en position). Si on lui envoi du 180 il fait une demi-rotation et cherche à y rester (attention, j'ai des servo qui ont une amplitude de 180°, d'autres sont plus large et d'autre plus ressérés. Dans ce cas, il faut bien connaître les propriétés de son servo car si on lui envoi une commande qui va au-delà de ses capacités il risque de forcer, le courant va augmenter fortement et l'arduino et le servo risquent de griller).
 
 
 **présentation du code**
@@ -166,10 +165,11 @@ Au départ, j'ai utilisé ce code comme ça. Mais j'ai eu un problème d'ordre s
 
 Et on découvre qu'il y a une méthode qui s'appelle `Servo::detach()` et qui permet de "déconnecter" le servo de la patte à laquelle il est attaché. Et c'est magique, plus de bruit.
 
+==> Slide blanc
 
-On a donc trois petits distributeurs qui attendent qu'on leur disent combien de pièces chacun doit distribuer.  La somme d'argent est libre du moment que c'est une combinaison des pièces disponibles. Mais on ne va pas stocker la combinaison des pièce mais la somme d'argent à distribuer. C'est à partir de ce nombre qu'il faut reconstituer la séquence de distribution.
+On a donc trois petits distributeurs qui attendent qu'on leur disent combien de pièces chacun doit distribuer.  La somme d'argent est libre du moment que c'est une combinaison des pièces disponibles. Mais on ne va pas stocker la combinaison des pièces mais la somme d'argent à distribuer. C'est à partir de ce nombre qu'il faut reconstituer la séquence de distribution.
 
-Dans mon code, j'ai une liste de pousseur de monnaie, chacun associé à une valeur faciale. Pour reconstituer la séquence de distribution je compte combien de fois on peut trouver la valeur faciale du distributeur courant dans le montant qu'il reste à distribuer et je place dans la séquence ce pousseur autant de fois. Ensuite je le montant restant et je recommence avec la valeur faciale du pousseur suivant jusqu'à ce que je ne puisse plus.
+Dans mon code, j'ai une liste de pousseurs de monnaie, chacun associé à une valeur faciale. Pour reconstituer la séquence de distribution je compte combien de fois on peut trouver la valeur faciale du distributeur courant dans le montant qu'il reste à distribuer et je place dans la séquence ce pousseur autant de fois. Ensuite je le montant restant et je recommence avec la valeur faciale du pousseur suivant jusqu'à ce que je ne puisse plus.
 
 La distribution consiste à parcourir la liste sequence en appelant à chaque fois la méthode `CoinPusher::pushCoin()`. Ça permet de reconstituer le montant à distribuer.
 
@@ -224,13 +224,46 @@ C'est le genre de fonction qu'on va utiliser pour changer le message à l'écran
 <!-- Clavier matriciel -->
 ...La saisie du code se fait grace à un petit clavier matriciel de ce type, à 16 touche, 4x4. Là, niveau broche c'est du lourd parce qu'il en faut 8 : 1 pour chacune des 4 lignes et 1 pour chacune des 4 colonnes.
 Ce genre de clavier fonctionne ainsi :
+
+C'est un ensemble d'interrupteurs. L'arduino va allumer tour à tour chaque colonne par exemple. Et dans le même il va scanner chaque ligne. Lorsqu'il allume la colonne 2 et que il détecte un signal sur la ligne 3 c'est que la touche 8 a été préssée. Il peut même détecter plusieurs touche en même temps.
+Et il répète cette opération trés rapidement <!--tout en prenant en compte le rebond des touches. -->
+
+On commence à avoir un système plutôt complet : un distributeur, une IHM, une carte avec toutes les infos pour la distribution et un arduino pour contrôler tout ça.
+
+Mais, si vous vous souvenez, il y a une règle qui dit qu'on doit distribuer l'argent de poche qu'une seule fois par semaine. Alors il faut pouvoir connaître la date et pour ça il y a l'horloge temps réél.
 <!-- FIN -- Clavier matriciel -->
 
-<!-- Clavier matriciel fonctionnement-->
-C'est un ensemble d'interrupteurs. L'arduino va allumer tour à tour chaque colonne par exemple. Et dans le même il va scanner chaque ligne. Lorsqu'il allume la colonne 2 et que il détecte un signal sur la ligne 3 c'est que la touche 8 a été préssée. Il peut même détecter plusieurs touche en même temps.
-Et il répète cette opération trés rapidement tout en prenant en compte le rebond des touches. 
-<!-- FIN -- Clavier matriciel fonctionnement-->
-
-<!-- Le rebond -->
+<!-- Le rebond 
 Le rebond, c'est un phénomène qui se produit sur les composants mécaniques généralement, et souvant sur les interupteurs/bouton poussoir. Le contact n'est jamais franc, les pièces ont tendances à rebondir les unes sur les autres provoquant une signal aléatoir interprété comme une série de 0 et de 1 consécutifs (dont d'appui et de relachement du bouton) pendant un temps très court. Mais à 16 MHz, ce qui est court pour un humain est long pour un arduino qui les détecte tous. On peut implémenter un antirebond de manière électronique en insérant des filtres de type RC ou en l'implémentant de manière logicielle comme dans la librairie keypad.
 <!-- FIN - Le rebond -->
+
+<!-- RTC -->
+## RTC
+C'est un DS3231 embarqué sur un petit module qui permet de le relier à l'arduino en I2C, pour une fois on a du bol.
+
+On pourrait se demander si il n'y a pas déjà une fonction qui permet d'obtenir un timestamp sur arduino. En fait même sur les PCs c'est un composant à part. Il y a bien une fonction getMillis() qui compte le temps qui s'est écoulé depuis le démarrage de l'arduino et on pourrait imaginer fournir un timestamp à l'arduino via le clavier mais ce n'est pas très joli et en plus ce temps est stocké dans un registre de 32 bits et tous les 50J environs il y a un overflow et le compteur revient à zéro.
+
+Donc on utilise une horloge temps réélle. Sur ce modèle il y a une pile et aussi une fonction de recharge, c'est une pile bouton rechargeable (LIR2032), je ne savais même pas que ça existait.
+
+On aurait pu utiliser un RTC un peut moins cher, le DS1307 mais il est moins précis, il perd plus d'une seconde par jour.
+
+Alors que le DS3231 ne perd pour ainsi dire rien car il est accompagné d'un capteur de température qui corrige la dérive due aux changements de température. Ce capteur est même intérrogeable et il y a également une petite EEPROM. Tous ces composants sont visible quand on utilise le I2C scanner dans les programmes d'exemples.
+
+Que ce soit le DS1307 ou le DS3231 il existe des librairies pour communiquer avec. Et, on a l'habitude maintenant, c'est très facile à utiliser. 
+
+==> Slide du code
+
+On notera qu'ici, point d'orienté objet, c'est une bon vieux `struct`.
+
+On a maintenant un système complet. Mais, il ne faut pas oublier qu'on va mettre ça entre les mains de petits hackers en herbe et que ces brigands vont probablement prendre un malin plaisir à tenter de contourner le système.
+
+En vrai, j'ai plutôt confiance mais c'était une occasion en or de pouvoir utiliser l'EEPROM.
+<!-- FIN -- RTC -->
+
+
+
+
+<!-- EEPROM -->
+## EEPROM
+Pour le coup, si l'api est simple d'utilisation il faut gérer soit même la mémoire.
+<!-- FIN -- EEPROM -->

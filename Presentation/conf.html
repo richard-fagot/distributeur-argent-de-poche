@@ -7,7 +7,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="reveal.js/css/reset.css">
   <link rel="stylesheet" href="reveal.js/css/reveal.css">
   <style>
       code{white-space: pre-wrap;}
@@ -16,9 +15,9 @@
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <style>
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -28,16 +27,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -46,9 +43,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -99,13 +96,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="slides">
 
 
-<section class="slide level1">
+<section class="slide level2">
 
 <!-- Phrase d'introduction -->
 </section>
-<section id="distributeur-automatique-dargent-de-poche" class="slide level1">
-<h1>Distributeur Automatique d’Argent de Poche</h1>
-<p>Richard Fagot</p>
+<section id="distributeur-automatique-dargent-de-poche" class="title-slide slide level1"><h1>Distributeur Automatique d’Argent de Poche</h1><p>Richard Fagot</p>
 <aside class="notes">
 <ol type="1">
 <li>Tiens-toi bien ;</li>
@@ -114,66 +109,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Embrasse la salle d’un regard et lance-toi.</li>
 </ol>
 </aside>
-<!-- Pause blagounette -->
-</section>
-<section id="section" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/calvin.png" /></p>
+<!-- Pause blagounette --></section>
+<section id="section" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/calvin.png" /></p>
 <aside class="notes">
 <p>Passer rapidement.</p>
 </aside>
-<!-- Courte introduction à l'argent de poche et genèse du projet -->
-</section>
-<section id="section-1" class="slide level1">
-<h1></h1>
-<aside class="notes">
+<!-- Courte introduction à l'argent de poche et genèse du projet --></section>
+<section id="section-1" class="title-slide slide level1"><h1></h1><aside class="notes">
 <p>Intro + genèse du projet :</p>
 <ul>
-<li>règles de l’argent de poche ;</li>
+<li>règles de l’argent de poche (qté libre, 1x/sem, Chq sem, not(rémunération), libre) ;</li>
 <li>quitte à faire comme les grands, est-ce qu’on peu aller plus loin ?</li>
 </ul>
 </aside>
-<!-- Le poussoir -->
-</section>
-<section id="section-2" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/poussoir.png" height="600" /></p>
-<aside class="notes">
-<p><strong>Le poussoir</strong> - mouvement bielle-manivelle</p>
-</aside>
-</section>
-<section id="section-3" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/mouvement.gif" height="600" /></p>
-<aside class="notes">
-<p>Passez rapidement pour ne pas perdre l’attention de l’auditoire.</p>
-</aside>
-</section>
-<section id="section-4" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/poussoir.png" height="600" /></p>
+<!-- Le poussoir --></section>
+<section id="section-2" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir.png" height="600" /></p>
 <aside class="notes">
 <p><strong>Le poussoir</strong></p>
 <ul>
-<li>description</li>
-<li>en parler pendant des heures</li>
+<li>mouvement bielle-manivelle</li>
+<li>rotation -&gt; translation ==&gt; parce que j’aime bien le mouvement</li>
+</ul>
+</aside></section>
+<section id="section-3" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/mouvement.gif" height="600" /></p>
+<aside class="notes">
+<p>Passez rapidement pour ne pas perdre l’attention de l’auditoire.</p>
+<ul>
+<li>joli</li>
+<li>hypnotique</li>
+<li>facile à concevoir ==&gt; il est constitué de != éléments</li>
+</ul>
+</aside></section>
+<section id="section-4" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir.png" height="600" /></p>
+<aside class="notes">
+<p><strong>Le poussoir</strong></p>
+<ul>
+<li>description + servo;</li>
+<li>axes qui maintiennent les pièces ensembles lego ==&gt; essai paramètre fexibilité, jeu je suis arrivé à ça.</li>
 </ul>
 </aside>
-<!-- Clip -->
-</section>
-<section id="section-5" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/poussoir-eclate.png" height="600" /></p>
+<!-- Clip --></section>
+<section id="section-5" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir-eclate.png" height="600" /></p>
 <aside class="notes">
 <ul>
 <li>Description du clip ;</li>
 <li>Pièce complexe : penser à l’impression 3D</li>
 </ul>
-</aside>
-</section>
-<section id="section-6" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/Impression%20clip.png" width="1000" /></p>
+</aside></section>
+<section id="section-6" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/Impression%20clip.png" width="1000" /></p>
 <aside class="notes">
 <ul>
 <li>Pros’n Cons des 3 impressions ;</li>
@@ -182,11 +165,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>==&gt; Je vous présente le support.</p>
 </aside>
-<!-- Le support -->
-</section>
-<section id="section-7" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/porte-pieces.png" height="600" /></p>
+<!-- Le support --></section>
+<section id="section-7" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/porte-pieces.png" height="600" /></p>
 <aside class="notes">
 <ul>
 <li>support servo ;</li>
@@ -197,11 +177,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>==&gt; système complet, y’ plus qu’à le commander</p>
 </aside>
-<!-- Arduino -->
-</section>
-<section id="section-8" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/arduino_nano.png" height="600" /></p>
+<!-- Arduino --></section>
+<section><section id="section-8" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/arduino_nano.png" height="600" /></p>
 <aside class="notes">
 <ul>
 <li>Facile à programmer, communauté ;</li>
@@ -210,140 +187,174 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>nombre de broches ;</li>
 <li>µC quesako ?</li>
 </ul>
-<p>==&gt; librairie servo ==&gt; PWM</p>
+<p>==&gt; arduino fourni pleins de librairies : servo (PWM?)</p>
 </aside>
-<!-- PWM -->
-</section>
-<section id="pwm" class="slide level1">
-<h1>PWM</h1>
+<!-- PWM --></section><section id="pwm" class="slide level2">
+<h2>PWM</h2>
 <p><img data-src="assets/img/PWM.png" /></p>
-<!-- Contrôler le servo -->
-</section>
-<section id="section-9" class="slide level1">
-<h1></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>Servo myServo;</span>
-<span id="cb1-4"><a href="#cb1-4"></a>byte position;</span>
-<span id="cb1-5"><a href="#cb1-5"></a>byte servoPin;</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="dt">void</span> setup() {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    myServo.attach(servoPin);</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    myServo.write(position);</span>
-<span id="cb1-10"><a href="#cb1-10"></a>}</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">void</span> loop() {...}</span></code></pre></div>
 <aside class="notes">
-
+<ul>
+<li>rapport cyclique pour générer signaux pseudo-analogiques ;</li>
+<li>Pulse Width Modulation ==&gt; en terme d’api c’est très facile à utiliser</li>
+</ul>
 </aside>
-</section>
-<section id="section-10" class="slide level1">
-<h1><!-- Detach --></h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>Servo myServo;</span>
-<span id="cb2-4"><a href="#cb2-4"></a>byte position;</span>
-<span id="cb2-5"><a href="#cb2-5"></a>byte servoPin;</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="dt">void</span> setup() {</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    myServo.attach(servoPin);</span>
-<span id="cb2-9"><a href="#cb2-9"></a>    myServo.write(position);</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    myServo.detach();</span>
-<span id="cb2-11"><a href="#cb2-11"></a>}</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="dt">void</span> loop() {...}</span></code></pre></div>
-</section>
-<section id="section-11" class="slide level1">
-<h1><!-- Séquenceur --></h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a>CoinPusher *coinPushers[MAX_PUSHER_COUNT];</span>
-<span id="cb3-2"><a href="#cb3-2"></a>CoinPusher *sequence[MAX_SEQUENCE_COUNT];</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="cf">while</span>(remaining != <span class="dv">0</span>) {</span>
-<span id="cb3-5"><a href="#cb3-5"></a>  <span class="dt">int</span> actualCoinValue = </span>
-<span id="cb3-6"><a href="#cb3-6"></a>     coinPushers[pusherIndex]-&gt;getFacialValue();</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  byte pushCount = remaining / actualFacialValue;</span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span> ; i &lt; pushCount ; i++) {</span>
-<span id="cb3-9"><a href="#cb3-9"></a>      sequence[sequenceIndex] = coinPushers[pusherIndex];</span>
-<span id="cb3-10"><a href="#cb3-10"></a>      sequenceIndex++;</span>
-<span id="cb3-11"><a href="#cb3-11"></a>  }</span>
-<span id="cb3-12"><a href="#cb3-12"></a>  remaining -= actualFacialValue * pushCount;</span>
-<span id="cb3-13"><a href="#cb3-13"></a>}</span></code></pre></div>
-<!-- Discours -->
-</section>
-<section id="section-12" class="slide level1">
-<h1></h1>
-<!-- SLE 4442 -->
-</section>
-<section id="sle-4442" class="slide level1">
-<h1>SLE 4442</h1>
-<p><img data-src="assets/img/carte+connecteur.png" height="400" /></p>
-<!-- Structure carte -->
-</section>
-<section id="section-13" class="slide level1">
-<h1></h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">struct</span> {</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="dt">char</span> name[<span class="dv">20</span>+<span class="dv">1</span>];</span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="dt">int</span> pocketMoney;</span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="dt">int</span> secret;</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  byte nameLength;</span>
-<span id="cb4-7"><a href="#cb4-7"></a>};</span></code></pre></div>
-<!-- Discours trouver la librairie SClib-->
-</section>
-<section id="section-14" class="slide level1">
-<h1></h1>
-<!-- Protocole SLE4442 -->
-</section>
-<section id="section-15" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/protocole2.png" height="400" /></p>
-<!-- Présentation de L'écran LCD -->
-</section>
-<section id="section-16" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/LCD.png" height="400" /></p>
-<!-- Introduction au protocole I2C -->
-</section>
-<section id="section-17" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/I2C.png" height="600" /></p>
-<!-- Librairie LCD -->
-</section>
-<section id="section-18" class="slide level1">
-<h1></h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_PCF8574.h&gt;</span><span class="pp"> </span><span class="co">// by Mathias Hertel</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>LiquidCrystal_PCF8574 lcd = LiquidCrystal_PCF8574(<span class="bn">0x27</span>);</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>lcd.setCursor(col, row);</span>
-<span id="cb5-6"><a href="#cb5-6"></a>lcd.print(message);</span></code></pre></div>
-<!-- Clavier matriciel -->
-</section>
-<section id="section-19" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/keypad.png" height="600" /></p>
-<!-- Clavier matriciel fonctionnement-->
-</section>
-<section id="section-20" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/clavier_4x4_schema_interne.gif" height="600" /></p>
-<!-- anti-rebond -->
-</section>
-<section id="section-21" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/rebond.png" height="400" /></p>
-</section>
-<section id="section-22" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/anti-rebond.png" height="400" /></p>
-</section>
-<section id="section-23" class="slide level1">
-<h1></h1>
-<p><img data-src="assets/img/pinout.png" height="600" /> :::notes :::</p>
-</section>
+<!-- Contrôler le servo -->
+</section></section>
+<section id="section-9" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3">Servo myServo;</a>
+<a class="sourceLine" id="cb1-4" title="4">byte position;</a>
+<a class="sourceLine" id="cb1-5" title="5">byte servoPin;</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="dt">void</span> setup() {</a>
+<a class="sourceLine" id="cb1-8" title="8">    myServo.attach(servoPin);</a>
+<a class="sourceLine" id="cb1-9" title="9">    myServo.write(position);</a>
+<a class="sourceLine" id="cb1-10" title="10">    delay(<span class="dv">1000</span>);</a>
+<a class="sourceLine" id="cb1-11" title="11">    myServo.detach();</a>
+<a class="sourceLine" id="cb1-12" title="12">}</a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="dt">void</span> loop() {...}</a></code></pre></div>
+<aside class="notes">
+<p>==&gt; système de distribution, combien à distribuer ?</p>
+</aside>
+<!-- Séquenceur 
+## 
+```cpp
+CoinPusher *coinPushers[MAX_PUSHER_COUNT];
+CoinPusher *sequence[MAX_SEQUENCE_COUNT];
+
+while(remaining != 0) {
+  int actualCoinValue = 
+     coinPushers[pusherIndex]->getFacialValue();
+  byte pushCount = remaining / actualFacialValue;
+  for(int i = 0 ; i < pushCount ; i++) {
+      sequence[sequenceIndex] = coinPushers[pusherIndex];
+      sequenceIndex++;
+  }
+  remaining -= actualFacialValue * pushCount;
+}
+```
+-->
+<!-- Stockage quantité --></section>
+<section id="section-10" class="title-slide slide level1"><h1></h1><aside class="notes">
+<ul>
+<li>dans le code :
+<ul>
+<li>pas sexy,</li>
+<li>flasher arduino si changement</li>
+</ul></li>
+<li>dans une mémoire extérieur : la carte à puce</li>
+</ul>
+</aside>
+<!-- SLE 4442 --></section>
+<section id="sle-4442" class="title-slide slide level1"><h1>SLE 4442</h1><p><img data-src="assets/img/carte+connecteur.png" height="400" /></p>
+<aside class="notes">
+<ul>
+<li>carte sécurisée ;</li>
+<li>connecteur ; ==&gt; on y stocke</li>
+</ul>
+</aside>
+<!-- Structure carte --></section>
+<section id="section-11" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">char</span> name[<span class="dv">20</span>+<span class="dv">1</span>];</a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">int</span> pocketMoney;</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">int</span> secret;</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6">  byte nameLength;</a>
+<a class="sourceLine" id="cb2-7" title="7">};</a></code></pre></div>
+<aside class="notes">
+<p>==&gt; ça a l’air facile comme ça mais lib dure à trouver.</p>
+</aside>
+<!-- Discours trouver la librairie SClib--></section>
+<section id="section-12" class="title-slide slide level1"><h1></h1><aside class="notes">
+<ul>
+<li>faillit abandonner ==&gt; lib implémente SLE4442, par exemple</li>
+</ul>
+</aside>
+<!-- Protocole SLE4442 --></section>
+<section id="section-13" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/protocole2.png" height="400" /></p>
+<aside class="notes">
+<p>==&gt; c’est ce qu’il se passe quand l’enfant insère la carte dans la machine, qui, par ailleur l’y invitait via LCD.</p>
+</aside>
+<!-- Présentation de L'écran LCD --></section>
+<section id="section-14" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/LCD.png" height="400" /></p>
+<aside class="notes">
+<ul>
+<li>20x4</li>
+<li>plein de lib</li>
+<li>mais 6 broches ==&gt; toujours chercher un peu pour diminuer le nombre de broches, I2C très répandu et par défaut dans arduino+pattes</li>
+</ul>
+</aside>
+<!-- Introduction au protocole I2C --></section>
+<section id="section-15" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/I2C.png" height="600" /></p>
+<aside class="notes">
+<p>==&gt; implémenté dans la lib Wire.h qui est utilisée dans la lib de l’écran qui est aussi simple d’utilisation.</p>
+</aside>
+<!-- Librairie LCD --></section>
+<section id="section-16" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_PCF8574.h&gt;</span><span class="pp"> </span><span class="co">// by Mathias Hertel</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3">LiquidCrystal_PCF8574 lcd = LiquidCrystal_PCF8574(<span class="bn">0x27</span>);</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5">lcd.setCursor(col, row);</a>
+<a class="sourceLine" id="cb3-6" title="6">lcd.print(message);</a></code></pre></div>
+<aside class="notes">
+<p>==&gt; fonctions utilitaire, effacer pour afficher d’autres messages comme demander de saisir le code.</p>
+</aside>
+<!-- Clavier matriciel --></section>
+<section id="section-17" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/clavier.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>clavier 4x4 rigide ;</li>
+<li>principe de fonctionnement ;</li>
+<li>8 broches !!!!! I2C possible mais faut le faire soi-même. ==&gt; On a un système qui commence à être pas mal, mais il y a une règle : 1 fois par semaine.</li>
+</ul>
+</aside>
+<!-- anti-rebond 
+#
+![](assets/img/rebond.png){height="400px"}
+
+:::note
+:::
+
+#
+![](assets/img/anti-rebond.png){height="400px"}
+
+:::note
+:::
+
+-->
+<!-- RTC --></section>
+<section id="section-18" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/DS3231.png" height="400" /></p>
+<aside class="notes">
+<ul>
+<li>horloge temps réél (DS3231)</li>
+<li>getMillis() 50J (u_long 32 bit)</li>
+<li>très peu de dérive (voire pas), temperature</li>
+<li>DS1307 +1s/jour</li>
+</ul>
+</aside></section>
+<section id="section-19" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include </span><span class="im">&lt;ds3231.h&gt;</span><span class="pp"> </span><span class="co">//ds3231FS by Petre Rodan</span></a>
+<a class="sourceLine" id="cb4-2" title="2">ts timeDetails;</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">DS3231_get(&amp;timeDetails);</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">timeDetails.wday;</a></code></pre></div>
+<aside class="notes">
+<ul>
+<li>mise à l’heure se fait avec un des programmes d’exemple ;</li>
+<li>système plutôt complet ;</li>
+<li>mais il va être mis entre les de hackers en herbe. ==&gt; j’ai confiance mais c’est une occasion de programmer l’EEPROM de l’arduino.</li>
+</ul>
+</aside></section>
+<section id="section-20" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/pinout.png" height="600" /> :::notes :::</p></section>
+<section id="section-21" class="title-slide slide level1"><h1></h1><ul>
+<li><a href="https://www.3dhubs.com/knowledge-base/how-design-snap-fit-joints-3d-printing">Design de connections en 3D</a></li>
+<li><a href="https://playground.arduino.cc/Main/I2CPortExpanderAndKeypads/">Keypad I2C</a></li>
+</ul></section>
     </div>
   </div>
 
+  <script src="reveal.js/lib/js/head.min.js"></script>
   <script src="reveal.js/js/reveal.js"></script>
 
   <script>
