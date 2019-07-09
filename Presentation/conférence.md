@@ -367,6 +367,7 @@ timeDetails.wday;
 :::notes
 - ... filous, il va être mis entre les de hackers en herbe ;
 - certain qu'il vont tenter de hacker le système ;
+- en fonction de la dernière date de retrait (années bisextile div/4 not(100) OU div/400)
 - il faut retenir la date et pour ça y'a l'EEPROM.
 
 ==> j'ai confiance mais c'est une occasion de programmer l'EEPROM de l'arduino.
