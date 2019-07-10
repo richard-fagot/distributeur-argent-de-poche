@@ -401,10 +401,18 @@ EEPROM.get(address, lastDistributionDate);
 #
 ![](assets/img/typon.png){height="400px"}
 
+:::notes
+Démo time ? 
+
+**OU**
+
+Fabrication ?
+
+:::
 
 
 <!-- Fabication -->
-# Fabrication
+## Fabrication
   - Un prospectus en papier glacé ;
   - Une imprimante laser ;
   - Un marqueur indélébile ;
@@ -413,8 +421,11 @@ EEPROM.get(address, lastDistributionDate);
   - Récipents en verre ou plastique ;
   - et...
 
-#
+##
 ![](assets/img/dissolvant.jpg){height="400px"}
+
+# DEMO TIME
+
 
 #
 
