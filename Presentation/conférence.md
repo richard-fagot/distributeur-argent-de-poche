@@ -135,11 +135,11 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
   - nombre de broches ;
   - µC quesako ?
 
-==> chaque carte a son schéma d'entrée-sortie
+==> Code librairie **OU** chaque carte a son schéma d'entrée-sortie
   
 :::
 
-#
+##
 ![](assets/img/pinout.png){ height=600px }
 
 :::notes
@@ -424,10 +424,38 @@ Fabrication ?
 ##
 ![](assets/img/dissolvant.jpg){height="400px"}
 
+
+
+
 # DEMO TIME
+:::notes
+Aujourd'hui, je suis plutôt satisfait du résultat et mes enfants adorent venir y retirer leur argent de poche.
+:::
 
 
-#
 
+# Améliorations
+  - Bug à corriger ;
+  - Fabriquer le boitier ;
+  - Menu (éditer une carte, heure, conf.) ;
+  - Remplacer les distributeurs par des robots.
+
+
+
+
+# Questions ?
+  - Quels thèmes (pas) intéressants ? ;
+  - Optimisation code arduino ;
+  - Démo des logiciels ?
+  - Plus d'astuces ;
+  - ...
+
+# Quelques liens
+
+  - [Github du projet](https://github.com/richard-fagot/distributeur-argent-de-poche)
   - [Design de connections en 3D](https://www.3dhubs.com/knowledge-base/how-design-snap-fit-joints-3d-printing)
   - [Keypad I2C](https://playground.arduino.cc/Main/I2CPortExpanderAndKeypads/)
+  - [Fusion 360](https://www.autodesk.com/products/fusion-360/free-trial)
+  - [Cura](https://ultimaker.com/software/ultimaker-cura)
+  - [EasyEDA](https://easyeda.com/)
+  - [Tinkercad](https://www.tinkercad.com/)
