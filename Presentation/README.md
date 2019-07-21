@@ -1,2 +1,3 @@
 # Comment compiler
-pandoc -t revealjs -V theme=white -s prez.md -o prez.html --css=style.css
+## Conférence
+pandoc -t revealjs -V theme=white -s conférence.md -o conf.html --css=style.css --slide-level=2

@@ -22,16 +22,17 @@ Richard Fagot
 
 ::: notes
 Passer rapidement.
+
+==> littérature sur le sujet
 :::
 
 <!-- Courte introduction à l'argent de poche et genèse du projet -->
 #
 
 :::notes
-Intro + genèse du projet :
+- règles de l'argent de poche (qté libre, 1x/sem, Chq sem, not(rémunération), libre).
 
-- règles de l'argent de poche (qté libre, 1x/sem, Chq sem, not(rémunération), libre) ;
-- quitte à faire comme les grands, est-ce qu'on peu aller plus loin ?
+==> quitte à faire comme les grands, est-ce qu'on peu aller plus loin ?
 :::
 
 
@@ -42,8 +43,9 @@ Intro + genèse du projet :
 ::: notes
 **Le poussoir**
 
-- mouvement bielle-manivelle
-- rotation -> translation
+- mouvement bielle-manivelle ;
+- rotation -> translation.
+
 ==> parce que j'aime bien le mouvement
 :::
 
@@ -56,9 +58,10 @@ Intro + genèse du projet :
 :::notes
 Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 
-- joli
-- hypnotique
-- facile à concevoir
+- joli ;
+- hypnotique ;
+- facile à concevoir.
+
 ==> il est constitué de != éléments
 :::
 
@@ -71,9 +74,11 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 :::notes
 **Le poussoir**
 
-- description + servo;
-- axes qui maintiennent les pièces ensembles lego
-==> essai paramètre fexibilité, jeu je suis arrivé à ça.
+- description + servo ;
+- conception dans fusion360 ;
+- axes qui maintiennent les pièces ensembles lego.
+
+==> essai paramètre fexibilité, jeu, je suis arrivé à ça.
 :::
 
 
@@ -94,6 +99,7 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 ![](assets/img/Impression clip.png){ width=1000px }
 
 :::notes
+  - paramètres d'impression dans Cura (Simplify3D) ;
   - Pros'n Cons des 3 impressions ;
   - insertion manivelle/poussoir ;
   - mouvement rectiligne, support servo, réservoir pièce.
@@ -129,10 +135,18 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
   - nombre de broches ;
   - µC quesako ?
 
-  ==> arduino fourni pleins de librairies : servo (PWM?)
+==> Code librairie **OU** chaque carte a son schéma d'entrée-sortie
+  
 :::
 
+##
+![](assets/img/pinout.png){ height=600px }
 
+:::notes
+- détail des broches (22 nano).
+
+==> arduino fourni pleins de librairies : servo (PWM? ou code?)
+:::
 
 <!-- PWM -->
 ## PWM
@@ -196,7 +210,7 @@ while(remaining != 0) {
   - dans le code :
     - pas sexy,
     - flasher arduino si changement
-  - dans une mémoire extérieur : la carte à puce
+  - dans une mémoire extérieure : la carte à puce
 :::
 
 
@@ -241,6 +255,7 @@ struct {
 ![](assets/img/protocole2.png){height="400px"}
 
 :::notes
+- similaire aux télécartes (les aquariums dans lesquels on s'enfermait pour appeler avec un téléphone avec un gros fil relié à une boite obscure) ;
 ==> c'est ce qu'il se passe quand l'enfant insère la carte dans la machine, qui, par ailleur l'y invitait via LCD.
 :::
 
@@ -255,7 +270,7 @@ struct {
   - 20x4
   - plein de lib
   - mais 6 broches
-==> toujours chercher un peu pour diminuer le nombre de broches, I2C très répandu et par défaut dans arduino+pattes
+==> toujours chercher un peu pour diminuer le nombre de broches, I2C très répandu gros standard industriel grosse quantité d'équipements et par défaut dans arduino+pattes SDA/SCL
 :::
 
 
@@ -340,20 +355,106 @@ timeDetails.wday;
 
 :::notes
   - mise à l'heure se fait avec un des programmes d'exemple ;
-  - système plutôt complet ;
-  - mais il va être mis entre les de hackers en herbe.
+  - système plutôt complet.
+
+==> mais... (my little hacker) il va être mis entre les de hackers en herbe.
+:::
+
+
+
+
+# My Little Hackers
+:::notes
+- ... filous, il va être mis entre les de hackers en herbe ;
+- certain qu'il vont tenter de hacker le système ;
+- en fonction de la dernière date de retrait (années bisextile div/4 not(100) OU div/400)
+- il faut retenir la date et pour ça y'a l'EEPROM.
+
 ==> j'ai confiance mais c'est une occasion de programmer l'EEPROM de l'arduino.
 :::
 
 
 <!-- EEPROM -->
 #
-![](assets/img/pinout.png){ height=600px }
+```cpp
+#include <EEPROM.h>
+
+EEPROM.write(address, childCount);
+
+struct DistributionDate lastDistributionDate;
+EEPROM.get(address, lastDistributionDate);
+```
+
 :::notes
+   
+:::
+
+<!-- Circuit électronique -->
+#
+![](assets/img/circuit.png){height="400px"}
+
+<!-- PCB -->
+#
+![](assets/img/PCB.png){height="400px"}
+
+#
+![](assets/img/typon.png){height="400px"}
+
+:::notes
+Démo time ? 
+
+**OU**
+
+Fabrication ?
+
 :::
 
 
-#
+<!-- Fabication -->
+## Fabrication
+  - Un prospectus en papier glacé ;
+  - Une imprimante laser ;
+  - Un marqueur indélébile ;
+  - Perchlorure de fer ;
+  - Étain chimique à froid ;
+  - Récipents en verre ou plastique ;
+  - et...
 
+##
+![](assets/img/dissolvant.jpg){height="400px"}
+
+
+
+
+# DEMO TIME
+:::notes
+Aujourd'hui, je suis plutôt satisfait du résultat et mes enfants adorent venir y retirer leur argent de poche.
+:::
+
+
+
+# Améliorations
+  - Bug à corriger ;
+  - Fabriquer le boitier ;
+  - Menu (éditer une carte, heure, conf.) ;
+  - Remplacer les distributeurs par des robots.
+
+
+
+
+# Questions ?
+  - Quels thèmes (pas) intéressants ? ;
+  - Optimisation code arduino ;
+  - Démo des logiciels ?
+  - Plus d'astuces ;
+  - ...
+
+# Quelques liens
+
+  - [Github du projet](https://github.com/richard-fagot/distributeur-argent-de-poche)
   - [Design de connections en 3D](https://www.3dhubs.com/knowledge-base/how-design-snap-fit-joints-3d-printing)
   - [Keypad I2C](https://playground.arduino.cc/Main/I2CPortExpanderAndKeypads/)
+  - [Fusion 360](https://www.autodesk.com/products/fusion-360/free-trial)
+  - [Cura](https://ultimaker.com/software/ultimaker-cura)
+  - [EasyEDA](https://easyeda.com/)
+  - [Tinkercad](https://www.tinkercad.com/)

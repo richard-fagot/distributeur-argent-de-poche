@@ -113,40 +113,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="section" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/calvin.png" /></p>
 <aside class="notes">
 <p>Passer rapidement.</p>
+<p>==&gt; littérature sur le sujet</p>
 </aside>
 <!-- Courte introduction à l'argent de poche et genèse du projet --></section>
 <section id="section-1" class="title-slide slide level1"><h1></h1><aside class="notes">
-<p>Intro + genèse du projet :</p>
 <ul>
-<li>règles de l’argent de poche (qté libre, 1x/sem, Chq sem, not(rémunération), libre) ;</li>
-<li>quitte à faire comme les grands, est-ce qu’on peu aller plus loin ?</li>
+<li>règles de l’argent de poche (qté libre, 1x/sem, Chq sem, not(rémunération), libre).</li>
 </ul>
+<p>==&gt; quitte à faire comme les grands, est-ce qu’on peu aller plus loin ?</p>
 </aside>
 <!-- Le poussoir --></section>
 <section id="section-2" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir.png" height="600" /></p>
 <aside class="notes">
 <p><strong>Le poussoir</strong></p>
 <ul>
-<li>mouvement bielle-manivelle</li>
-<li>rotation -&gt; translation ==&gt; parce que j’aime bien le mouvement</li>
+<li>mouvement bielle-manivelle ;</li>
+<li>rotation -&gt; translation.</li>
 </ul>
+<p>==&gt; parce que j’aime bien le mouvement</p>
 </aside></section>
 <section id="section-3" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/mouvement.gif" height="600" /></p>
 <aside class="notes">
 <p>Passez rapidement pour ne pas perdre l’attention de l’auditoire.</p>
 <ul>
-<li>joli</li>
-<li>hypnotique</li>
-<li>facile à concevoir ==&gt; il est constitué de != éléments</li>
+<li>joli ;</li>
+<li>hypnotique ;</li>
+<li>facile à concevoir.</li>
 </ul>
+<p>==&gt; il est constitué de != éléments</p>
 </aside></section>
 <section id="section-4" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir.png" height="600" /></p>
 <aside class="notes">
 <p><strong>Le poussoir</strong></p>
 <ul>
-<li>description + servo;</li>
-<li>axes qui maintiennent les pièces ensembles lego ==&gt; essai paramètre fexibilité, jeu je suis arrivé à ça.</li>
+<li>description + servo ;</li>
+<li>conception dans fusion360 ;</li>
+<li>axes qui maintiennent les pièces ensembles lego.</li>
 </ul>
+<p>==&gt; essai paramètre fexibilité, jeu, je suis arrivé à ça.</p>
 </aside>
 <!-- Clip --></section>
 <section id="section-5" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/poussoir-eclate.png" height="600" /></p>
@@ -159,6 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="section-6" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/Impression%20clip.png" width="1000" /></p>
 <aside class="notes">
 <ul>
+<li>paramètres d’impression dans Cura (Simplify3D) ;</li>
 <li>Pros’n Cons des 3 impressions ;</li>
 <li>insertion manivelle/poussoir ;</li>
 <li>mouvement rectiligne, support servo, réservoir pièce.</li>
@@ -187,9 +192,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>nombre de broches ;</li>
 <li>µC quesako ?</li>
 </ul>
-<p>==&gt; arduino fourni pleins de librairies : servo (PWM?)</p>
+<p>==&gt; Code librairie <strong>OU</strong> chaque carte a son schéma d’entrée-sortie</p>
+</aside></section><section id="section-9" class="slide level2">
+<h2></h2>
+<p><img data-src="assets/img/pinout.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>détail des broches (22 nano).</li>
+</ul>
+<p>==&gt; arduino fourni pleins de librairies : servo (PWM? ou code?)</p>
 </aside>
-<!-- PWM --></section><section id="pwm" class="slide level2">
+<!-- PWM -->
+</section><section id="pwm" class="slide level2">
 <h2>PWM</h2>
 <p><img data-src="assets/img/PWM.png" /></p>
 <aside class="notes">
@@ -200,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </aside>
 <!-- Contrôler le servo -->
 </section></section>
-<section id="section-9" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></a>
+<section id="section-10" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="pp">#include </span><span class="im">&lt;Servo.h&gt;</span></a>
 <a class="sourceLine" id="cb1-2" title="2"></a>
 <a class="sourceLine" id="cb1-3" title="3">Servo myServo;</a>
 <a class="sourceLine" id="cb1-4" title="4">byte position;</a>
@@ -236,14 +250,14 @@ while(remaining != 0) {
 ```
 -->
 <!-- Stockage quantité --></section>
-<section id="section-10" class="title-slide slide level1"><h1></h1><aside class="notes">
+<section id="section-11" class="title-slide slide level1"><h1></h1><aside class="notes">
 <ul>
 <li>dans le code :
 <ul>
 <li>pas sexy,</li>
 <li>flasher arduino si changement</li>
 </ul></li>
-<li>dans une mémoire extérieur : la carte à puce</li>
+<li>dans une mémoire extérieure : la carte à puce</li>
 </ul>
 </aside>
 <!-- SLE 4442 --></section>
@@ -255,7 +269,7 @@ while(remaining != 0) {
 </ul>
 </aside>
 <!-- Structure carte --></section>
-<section id="section-11" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">struct</span> {</a>
+<section id="section-12" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">struct</span> {</a>
 <a class="sourceLine" id="cb2-2" title="2">  <span class="dt">char</span> name[<span class="dv">20</span>+<span class="dv">1</span>];</a>
 <a class="sourceLine" id="cb2-3" title="3">  <span class="dt">int</span> pocketMoney;</a>
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">int</span> secret;</a>
@@ -266,32 +280,34 @@ while(remaining != 0) {
 <p>==&gt; ça a l’air facile comme ça mais lib dure à trouver.</p>
 </aside>
 <!-- Discours trouver la librairie SClib--></section>
-<section id="section-12" class="title-slide slide level1"><h1></h1><aside class="notes">
+<section id="section-13" class="title-slide slide level1"><h1></h1><aside class="notes">
 <ul>
 <li>faillit abandonner ==&gt; lib implémente SLE4442, par exemple</li>
 </ul>
 </aside>
 <!-- Protocole SLE4442 --></section>
-<section id="section-13" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/protocole2.png" height="400" /></p>
+<section id="section-14" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/protocole2.png" height="400" /></p>
 <aside class="notes">
-<p>==&gt; c’est ce qu’il se passe quand l’enfant insère la carte dans la machine, qui, par ailleur l’y invitait via LCD.</p>
+<ul>
+<li>similaire aux télécartes (les aquariums dans lesquels on s’enfermait pour appeler avec un téléphone avec un gros fil relié à une boite obscure) ; ==&gt; c’est ce qu’il se passe quand l’enfant insère la carte dans la machine, qui, par ailleur l’y invitait via LCD.</li>
+</ul>
 </aside>
 <!-- Présentation de L'écran LCD --></section>
-<section id="section-14" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/LCD.png" height="400" /></p>
+<section id="section-15" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/LCD.png" height="400" /></p>
 <aside class="notes">
 <ul>
 <li>20x4</li>
 <li>plein de lib</li>
-<li>mais 6 broches ==&gt; toujours chercher un peu pour diminuer le nombre de broches, I2C très répandu et par défaut dans arduino+pattes</li>
+<li>mais 6 broches ==&gt; toujours chercher un peu pour diminuer le nombre de broches, I2C très répandu gros standard industriel grosse quantité d’équipements et par défaut dans arduino+pattes SDA/SCL</li>
 </ul>
 </aside>
 <!-- Introduction au protocole I2C --></section>
-<section id="section-15" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/I2C.png" height="600" /></p>
+<section id="section-16" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/I2C.png" height="600" /></p>
 <aside class="notes">
 <p>==&gt; implémenté dans la lib Wire.h qui est utilisée dans la lib de l’écran qui est aussi simple d’utilisation.</p>
 </aside>
 <!-- Librairie LCD --></section>
-<section id="section-16" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_PCF8574.h&gt;</span><span class="pp"> </span><span class="co">// by Mathias Hertel</span></a>
+<section id="section-17" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;LiquidCrystal_PCF8574.h&gt;</span><span class="pp"> </span><span class="co">// by Mathias Hertel</span></a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3">LiquidCrystal_PCF8574 lcd = LiquidCrystal_PCF8574(<span class="bn">0x27</span>);</a>
 <a class="sourceLine" id="cb3-4" title="4"></a>
@@ -301,7 +317,7 @@ while(remaining != 0) {
 <p>==&gt; fonctions utilitaire, effacer pour afficher d’autres messages comme demander de saisir le code.</p>
 </aside>
 <!-- Clavier matriciel --></section>
-<section id="section-17" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/clavier.png" height="600" /></p>
+<section id="section-18" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/clavier.png" height="600" /></p>
 <aside class="notes">
 <ul>
 <li>clavier 4x4 rigide ;</li>
@@ -324,7 +340,7 @@ while(remaining != 0) {
 
 -->
 <!-- RTC --></section>
-<section id="section-18" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/DS3231.png" height="400" /></p>
+<section id="section-19" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/DS3231.png" height="400" /></p>
 <aside class="notes">
 <ul>
 <li>horloge temps réél (DS3231)</li>
@@ -333,7 +349,7 @@ while(remaining != 0) {
 <li>DS1307 +1s/jour</li>
 </ul>
 </aside></section>
-<section id="section-19" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include </span><span class="im">&lt;ds3231.h&gt;</span><span class="pp"> </span><span class="co">//ds3231FS by Petre Rodan</span></a>
+<section id="section-20" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include </span><span class="im">&lt;ds3231.h&gt;</span><span class="pp"> </span><span class="co">//ds3231FS by Petre Rodan</span></a>
 <a class="sourceLine" id="cb4-2" title="2">ts timeDetails;</a>
 <a class="sourceLine" id="cb4-3" title="3"></a>
 <a class="sourceLine" id="cb4-4" title="4">DS3231_get(&amp;timeDetails);</a>
@@ -342,14 +358,77 @@ while(remaining != 0) {
 <aside class="notes">
 <ul>
 <li>mise à l’heure se fait avec un des programmes d’exemple ;</li>
-<li>système plutôt complet ;</li>
-<li>mais il va être mis entre les de hackers en herbe. ==&gt; j’ai confiance mais c’est une occasion de programmer l’EEPROM de l’arduino.</li>
+<li>système plutôt complet.</li>
 </ul>
+<p>==&gt; mais… (my little hacker) il va être mis entre les de hackers en herbe.</p>
 </aside></section>
-<section id="section-20" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/pinout.png" height="600" /> :::notes :::</p></section>
-<section id="section-21" class="title-slide slide level1"><h1></h1><ul>
+<section id="my-little-hackers" class="title-slide slide level1"><h1>My Little Hackers</h1><aside class="notes">
+<ul>
+<li>… filous, il va être mis entre les de hackers en herbe ;</li>
+<li>certain qu’il vont tenter de hacker le système ;</li>
+<li>en fonction de la dernière date de retrait (années bisextile div/4 not(100) OU div/400)</li>
+<li>il faut retenir la date et pour ça y’a l’EEPROM.</li>
+</ul>
+<p>==&gt; j’ai confiance mais c’est une occasion de programmer l’EEPROM de l’arduino.</p>
+</aside></section>
+<section id="section-21" class="title-slide slide level1"><h1></h1><div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb5-1" title="1"><span class="pp">#include </span><span class="im">&lt;EEPROM.h&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3">EEPROM.write(address, childCount);</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">struct</span> DistributionDate lastDistributionDate;</a>
+<a class="sourceLine" id="cb5-6" title="6">EEPROM.get(address, lastDistributionDate);</a></code></pre></div>
+<aside class="notes">
+
+</aside>
+<!-- Circuit électronique --></section>
+<section id="section-22" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/circuit.png" height="400" /></p>
+<!-- PCB --></section>
+<section id="section-23" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/PCB.png" height="400" /></p></section>
+<section><section id="section-24" class="title-slide slide level1"><h1></h1><p><img data-src="assets/img/typon.png" height="400" /></p>
+<aside class="notes">
+<p>Démo time ?</p>
+<p><strong>OU</strong></p>
+<p>Fabrication ?</p>
+</aside>
+<!-- Fabication --></section><section id="fabrication" class="slide level2">
+<h2>Fabrication</h2>
+<ul>
+<li>Un prospectus en papier glacé ;</li>
+<li>Une imprimante laser ;</li>
+<li>Un marqueur indélébile ;</li>
+<li>Perchlorure de fer ;</li>
+<li>Étain chimique à froid ;</li>
+<li>Récipents en verre ou plastique ;</li>
+<li>et…</li>
+</ul>
+</section><section id="section-25" class="slide level2">
+<h2></h2>
+<p><img data-src="assets/img/dissolvant.jpg" height="400" /></p>
+</section></section>
+<section id="demo-time" class="title-slide slide level1"><h1>DEMO TIME</h1><aside class="notes">
+<p>Aujourd’hui, je suis plutôt satisfait du résultat et mes enfants adorent venir y retirer leur argent de poche.</p>
+</aside></section>
+<section id="améliorations" class="title-slide slide level1"><h1>Améliorations</h1><ul>
+<li>Bug à corriger ;</li>
+<li>Fabriquer le boitier ;</li>
+<li>Menu (éditer une carte, heure, conf.) ;</li>
+<li>Remplacer les distributeurs par des robots.</li>
+</ul></section>
+<section id="questions" class="title-slide slide level1"><h1>Questions ?</h1><ul>
+<li>Quels thèmes (pas) intéressants ? ;</li>
+<li>Optimisation code arduino ;</li>
+<li>Démo des logiciels ?</li>
+<li>Plus d’astuces ;</li>
+<li>…</li>
+</ul></section>
+<section id="quelques-liens" class="title-slide slide level1"><h1>Quelques liens</h1><ul>
+<li><a href="https://github.com/richard-fagot/distributeur-argent-de-poche">Github du projet</a></li>
 <li><a href="https://www.3dhubs.com/knowledge-base/how-design-snap-fit-joints-3d-printing">Design de connections en 3D</a></li>
 <li><a href="https://playground.arduino.cc/Main/I2CPortExpanderAndKeypads/">Keypad I2C</a></li>
+<li><a href="https://www.autodesk.com/products/fusion-360/free-trial">Fusion 360</a></li>
+<li><a href="https://ultimaker.com/software/ultimaker-cura">Cura</a></li>
+<li><a href="https://easyeda.com/">EasyEDA</a></li>
+<li><a href="https://www.tinkercad.com/">Tinkercad</a></li>
 </ul></section>
     </div>
   </div>
