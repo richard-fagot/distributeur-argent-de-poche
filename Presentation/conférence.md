@@ -346,6 +346,7 @@ timeDetails.wday;
 :::
 
 
+<!-- EEPROM -->
 #
 ![](assets/img/pinout.png){ height=600px }
 :::notes
