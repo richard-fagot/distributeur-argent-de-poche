@@ -30,6 +30,17 @@ Penser à cette variabilité lors de la conception des pièces. Heureusement, en
 Au début de l'impression, les premières couches sont un peu plus écrasé sur la base ce qui fait qu'elles sont un peu plus large que par la suite.
 Pour minimiser le phénomène il faut faire la partie de la pièce qui sera en contact avec le plateau un peu plus étroite en pratiquant un chanfrein par exemple (de 0.6 ou 0.8). Dans tous les cas, si il doit y avoir un assemblage au niveau de ces endroits il y a peu de chance d'avoir un raccord aussi parfait qu'en haut d'une pièce.
 
+
+### Platines d'assemblage du connecteur de carte à puce
+La conception de ces éléments en forme de haricot s'est déroulée en plusieurs étapes :
+
+1. Modélisation du connecteur de carte à puce avec les éléments importants pour la conception des supports (emplacement des taquets, broche, encombrement général) ;
+1. Design d'une platine rectangulaire plus grande que le connecteur sur laquelle on place avec précision les trous pour les taquets du connecteur et ceux pour les vis de maintient dans le boitier ;
+1. On passe dans l'espace de travail *simulation*, en appliquant des *contraintes structurelles* à l'emplacement des vis et des charges orientées vers l'arrière sur les trous des taquets pour simuler l'insertion de la carte à puce. La résolution, en conservant 30% de matière environ (dépend de la surface du support initial), conduit à une forme en haricot sans lien entre les deux. Ici ce n'est pas génant, ajouter une liaison rigide entre les deux haricots n'apporte rien au niveau maintient en place ;
+1. Retour dans l'espace modélisation pour concevoir les platines de maintient ;
+1. La première impression permet de montrer que si les trous sont tous bien de la bonne taille, l'effet patte d'éléphant empêche le bon assemblage des éléments ;
+1. Modification du design pour ajouter un chanfrein au niveau des trous au contact du plateau d'impression.
+
 ## Impression 3D
 ### Laisser les pièces refroidir
 A la fin d'une impression les pièces sont encore chaudes. Si on tente de les décoller à ce moment là elles risque de se déformer irrémédiablement.
