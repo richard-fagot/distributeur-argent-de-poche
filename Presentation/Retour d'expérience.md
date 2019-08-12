@@ -129,6 +129,35 @@ Le switch est sur la broche D13 mais il faut faire attention à ne pas activer l
  - Penser à la taille des plaques de cuivres qu'on a, pour être sûr que ce qu'on fait à l'écran rentre bien ;
  - Utiliser des straps : placer des pads aux endroits où l'on veut strapper et passer sur le calque haut pour les relier (pas obligatoire mais cela permet de visualiser le trajet du strap).
 
+### Gravure du PCB
+
+
+1. Découpe du PCB : au cuter fort entailler la plaque des deux côté, la pincer entre deux plats et appuyer pour casser la plaque au niveau des coupes de cuter, un peu comme pour du verre. Puis poncer les bords ;
+
+1. Imprimer le côté composant sur une feuille de papier glacé (la plus fine possible) du genre qu'on trouve dans certain magazine ou prospectus. La fixer sur une feuille d'imprimante avec du scotch bleu par exemple mais surtout pas avec du scotch plastique car il risque de fondre dans l'imprimante laser ;
+
+1. Découper précisément au cuter sans toucher la surface imprimée avec ses gros doigts gras ;
+
+1. Faire un test de positionnement sur le pcb ;
+
+1. **A vérifier** Polir le côté cuivre très finement (au contraire de ce que l'on voit dans les tutos car lorsque j'ai fait l'impression du côté composant ça a bien mieux marché alors que la surface de l'époxy est très lisse).
+
+1. Nettoyer la surface du cuivre avec de l'alcool isopropylique (ou ménager à défaut) jusqu'à ce que le chiffon reste propre. à partir de là ne plus toucher la surface du cuivre avec ses gros doigts gras ;
+
+1. Verser du dissolvant Gemey Maybelline à la surface du cuivre en penchant légérement la plaque d'un côté puis de l'autre pour répartir le liquide à la surface. S'aider de son doigt PROPRE ou d'un ustensile propre pour s'aider ;
+
+1. Positionner précisément le typon sans le faire gliser à la surface de la plaque ;
+
+1. Tapoter légérement pour assurer le contact du typon partout. Il va foncer en s'imbibant. Si il reste des zones claire ajouter un peu de dissolvant mais cela ne devrait pas être nécessaire ;
+
+1. Poser un morceau de sopalin ou un mouchoir en papier, une plaque rigide et un poids par dessus. Maintenir une pression avec la main pendant 20s puis laisser reposer 10 min ;
+
+1. Récupérer la plaque avec le typon qui est collé dessus, s'il est sec le laisser dans un bac d'eau pendant 10 min.
+
+1. Peller le typon, il devrait s'enlever d'un seul tenant.
+
+1. On peut nettoyer la surface légérement avec un peu d'alcool (surtout par d'acétone) sans appuyer ni incister pour avoir des pistes bien noires.
+
 ## Arduino
 ### La broche 13
 La broche 13 est souvent reliée à une led soudée sur l'arduino. La LED est reliée à la masse et pour l'allumer il suffit de configurer la broche 13 en sortie et d'y envoyer un niveau HAUT.
