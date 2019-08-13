@@ -159,7 +159,7 @@ Le switch est sur la broche D13 mais il faut faire attention à ne pas activer l
 
 1. Positionner précisément le typon sans le faire gliser à la surface de la plaque ;
 
-1. Tapoter légérement pour assurer le contact du typon partout. Il va foncer en s'imbibant. Si il reste des zones claire ajouter un peu de dissolvant mais cela ne devrait pas être nécessaire ;
+1. Tapoter légérement pour assurer le contact du typon partout. Il va foncer en s'imbibant. Si il reste des zones claire ajouter un peu de dissolvant mais cela ne devrait pas être nécessaire **(à vérifier)** ;
 
 1. Poser un morceau de sopalin ou un mouchoir en papier, une plaque rigide et un poids par dessus. Maintenir une pression avec la main pendant 20s puis laisser reposer 10 min ;
 
