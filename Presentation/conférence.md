@@ -119,7 +119,7 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
   - Diamètre réservoir
   - ouverture réservoir ;
   - rainure réservoir.
-
+git
   ==> système complet, y' plus qu'à le commander
 :::
 
@@ -209,7 +209,7 @@ while(remaining != 0) {
 :::notes
   - dans le code :
     - pas sexy,
-    - flasher arduino si changement
+    - flasher arduino si changement ;
   - dans une mémoire extérieure : la carte à puce
 :::
 
