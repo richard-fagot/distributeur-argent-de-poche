@@ -1,7 +1,8 @@
 #ifndef LAST_DISTRIBUTION_H
 #define LAST_DISTRIBUTION_H
 #include <Arduino.h>
-#define DAAP_DEBUG 1
+//#define DAAP_DEBUG 1
+
 struct DistributionDate {
   char name[21];
   byte day;
@@ -25,6 +26,9 @@ class LastDistribution {
     void showEEPROMContent();
     void eraseEEPROMContent();
     #endif
+
+    private:
+      void clearDistributionDate();
 };
 
 #endif

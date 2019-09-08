@@ -30,12 +30,11 @@ void PocketMoneyDistributor::distribute(int pocketMoneyAmount){
         break;
 
     case NEXT:
-
         pusherSequence[sequenceIndex]->pushCoin();
         if (pusherSequence[sequenceIndex]->hasFinished()){
             sequenceIndex++;
 
-            if (MAX_SEQUENCE_STEPS < sequenceIndex || STOP_SEQUENCE == pusherSequence[sequenceIndex]){
+            if (MAX_SEQUENCE_STEPS <= sequenceIndex || STOP_SEQUENCE == pusherSequence[sequenceIndex]){
                 STATE = READY_TO_DISTRIBUTE;
                 break;
             }
@@ -72,6 +71,7 @@ void PocketMoneyDistributor::initialize() {
   }
 }
 void PocketMoneyDistributor::computeDistributionSequence(int pocketMoneyAmount) {
+  
     byte sequenceIndex = 0;
   	int remainingValueToDistribute = pocketMoneyAmount;
   	byte coinValueIndex = 0;
@@ -95,19 +95,18 @@ void PocketMoneyDistributor::computeDistributionSequence(int pocketMoneyAmount) 
 	    coinsCount = remainingValueToDistribute / coinPusher[coinValueIndex]->getCoinValue();
 	      
 	    for(byte i = 0 ; i < coinsCount ; i++) {
+	      if(sequenceIndex >= MAX_SEQUENCE_STEPS) {
+          emptySequence();
+          return;
+        }
+        
 	      pusherSequence[sequenceIndex] = coinPusher[coinValueIndex];
 	      sequenceIndex++;
-	      
-	      if(sequenceIndex >= MAX_SEQUENCE_STEPS) {
-	        emptySequence();
-	        return;
-	      }
 	    }
 	
 	    remainingValueToDistribute -= coinPusher[coinValueIndex]->getCoinValue()*coinsCount;
 	    coinValueIndex++;      
   	}
-    
   }//
 
   void PocketMoneyDistributor::emptySequence() {

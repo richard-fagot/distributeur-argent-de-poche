@@ -2,6 +2,7 @@
 #include <EEPROM.h>
 
 void LastDistribution::create(char* name, byte day, byte month) {
+  Serial.print("Create in EEPROM ");Serial.println(name);
   byte lastSavedNameIndex = EEPROM.read(0);
   if(lastSavedNameIndex == 0xFF) {
     lastSavedNameIndex = 0;
@@ -9,13 +10,14 @@ void LastDistribution::create(char* name, byte day, byte month) {
     lastSavedNameIndex++;
   }
   
-  
   set(name, day, month, lastSavedNameIndex);
   persist();
   
 }
 
 void LastDistribution::set(char* name, byte day, byte month, int index) {
+  clearDistributionDate();
+  
   strcpy(distributionDate.name, name);
   distributionDate.day = day;
   distributionDate.month = month;
@@ -48,6 +50,7 @@ boolean LastDistribution::retrieveLastDistribution(const char* name) {
 
 void LastDistribution::save(char* name, byte day, byte month) {
   if(retrieveLastDistribution(name)) {
+    set(name, day, month, EEPROM.read(0));
     persist();
   } else {
     create(name, day, month);
@@ -61,6 +64,15 @@ byte LastDistribution::getDay() {
 byte LastDistribution::getMonth() {
     return distributionDate.month;
 }
+
+void LastDistribution::clearDistributionDate() {
+  for(int i = 0 ; i < 21 ; i++) {
+    distributionDate.name[i] = 0xFF;
+    distributionDate.day = 0xFF;
+    distributionDate.month = 0xFF;
+  }
+}
+
 
 #ifdef DAAP_DEBUG
 void LastDistribution::eraseEEPROMContent() {

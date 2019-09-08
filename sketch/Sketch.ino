@@ -1,4 +1,4 @@
-#define DAAP_DEBUG 1
+//#define DAAP_DEBUG 1
 
 #include <Servo.h>  // Librairie par défaut
 #include <string.h>
@@ -34,7 +34,7 @@ unsigned long previousMillis;
 static const int BASE = 10; // Le code tapé au clavier est en base 10.
 unsigned int userTypedCode = 0; // variable contenant le code saisi par l'utilisateur.
 
-
+void(* resetFunc) (void) = 0;//declare reset function at address 0
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ void setup() {
   // - des pièces de 2€ dont le servo est relié à la broche 3 ;
   // - des pièces de 1€ dont le servo est relié à la broche 5 ;
   // - des pièces de 0.20€ dont le servo est relié à la broche 6 ;
-  distributor.setup(3, 3, 200, 5, 100, 6, 20);
+  distributor.setup(3, 3, 200, 5, 100, 6, 10);
   distributor.initialize();
 
   STATE = BEGIN;
@@ -89,6 +89,7 @@ void loop() {
     case WAIT_FOR_CARD:
       printTime();
      	if(sc.cardInserted()) {
+          delay(500);
         	STATE = COLLECT_CARD_DATA;
      	}
     	break;
@@ -177,7 +178,7 @@ void loop() {
       LastDistribution ld;
       ld.save(sc.getName(), time.getDay(), time.getMonth());
 
-      delayInterval = 3000;
+      delayInterval = 1500;
       nextState = DISTRIBUTION;;
       STATE = WAIT;
       previousMillis = millis();
@@ -256,7 +257,7 @@ void waitThenGo(unsigned long interval, state stateToGOAfterWait) {
 }
 
 
-char star[5] = "____";
+char star[5] = "____";// chaîne de caractère représentant à l'écran l'endroit ou vont apparaître les étoiles à chaque saisie d'une touche pour le code.
 byte keyCount = 0;
 /**
  * Capture les entrées saisies au clavier numérique 
@@ -267,14 +268,15 @@ void captureAndProcessUserEntries() {
   char customKey = kp.getKey();
   
   if (customKey){
-    if(customKey >= 48 && customKey <= 57) {
+    if(customKey >= 48 && customKey <= 57 && keyCount < 4) { // Saisie du code.
       userTypedCode = userTypedCode * BASE + (customKey - 48);
       star[keyCount] = '*';
       keyCount++;
-      displayer.print(3, star);
+      
+      if(STATE == CAPTURE_USER_ENTRIES) displayer.print(3, star);// on affiche unniquement lorsqu'on est en train de faire la saisie du code.
     }
     
-    if(customKey == 'D') {
+    if(customKey == 'D') { //Validation du code.
       if(sc.checkCode(userTypedCode)) {
         STATE = GOOD_CODE;
       } else {
@@ -282,6 +284,10 @@ void captureAndProcessUserEntries() {
       }
     }  
 
+    if(customKey == 'B') {
+      resetFunc();
+    }
+    
     if(customKey == 'C') {
       STATE = SAY_HELLO;    
     }

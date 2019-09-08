@@ -1,7 +1,7 @@
 #include "DistributionAllower.h"
 #include <Arduino.h>
 #include "LastDistribution.h"
-#define DAAP_DEBUG 1
+//#define DAAP_DEBUG 1
 
 
 boolean DistributionAllower::badDate(MyTime &time) {
@@ -52,8 +52,9 @@ boolean DistributionAllower::isAllowed(const char *name, MyTime &time) {
       Serial.print(") : ");
       Serial.println(badDate(time));
     #endif
+
     
-    if(/*badDate(time) ||*/ yetDistributed(name, time)) {
+    if(badDate(time) || yetDistributed(name, time)) {
         isAllowed = false;
     }
 

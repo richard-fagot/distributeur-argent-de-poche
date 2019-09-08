@@ -9,7 +9,7 @@
 
 class PocketMoneyDistributor {
   
-  static const byte MAX_COIN_PUSHERS = 3;
+  static const byte MAX_COIN_PUSHERS = 3; //Nombre de distributeurs
   static const byte MAX_SEQUENCE_STEPS = 5;
   //static const CoinPusher *STOP_SEQUENCE = NULL; // voir le #define
   
