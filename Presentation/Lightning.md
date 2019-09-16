@@ -43,6 +43,10 @@ Passer rapidement.
 
 # Mécanisme de distribution
 
+::: notes
+
+* Toujours penser le design 3D en fonction de la technique de production
+:::
 
 # Pilotage par arduino
 
