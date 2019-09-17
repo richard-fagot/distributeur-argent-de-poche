@@ -34,7 +34,7 @@ int MyTime::getYear() {
  * LUN 03 MAR     11:43
  */
 void MyTime::getStringTime(char* timeString) {
-    strcpy(timeString, wdays[timeDetails.wday]);
+    strcpy(timeString, wdays[timeDetails.wday -1]);
     strcat(timeString, " ");
     char mday[3];
     Tools::toTwoChar(mday, timeDetails.mday);

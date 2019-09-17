@@ -3,7 +3,7 @@
 
 #include <Wire.h>
 #include <ds3231.h> //ds3231FS by Petre Rodan
-
+/*
 enum DAYS {
     MONDAY = 0,
     TUESDAY = 1,
@@ -13,7 +13,7 @@ enum DAYS {
     SATURDAY = 5,
     SUNDAY = 6
 };
-    
+    */
 class MyTime {
     const char wdays [7][3+1] = 
     {
@@ -21,9 +21,9 @@ class MyTime {
     };
 
     const char months[12][3+1] =
-        {
-         "JAN", "FEV", "MAR", "AVR", "MAI", "JUN", "JUI", "AOU", "SEP", "OCT", "NOV", "DEC"
-        };
+    {
+       "JAN", "FEV", "MAR", "AVR", "MAI", "JUN", "JUI", "AOU", "SEP", "OCT", "NOV", "DEC"
+    };
 
     ts timeDetails;
     
