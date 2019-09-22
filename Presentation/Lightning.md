@@ -47,23 +47,18 @@ Passer rapidement.
 :::notes
 Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 
-- joli ;
-- hypnotique ;
-- facile à concevoir.
+Transforme mvt de rotation en translation alternatif, idem moteur.
 
-==> il est constitué de != éléments
+
 :::
 
 # 
 ![](assets/img/poussoir.png){ height=600px }
 
 ::: notes
-**Le poussoir**
-
-- mouvement bielle-manivelle ;
-- rotation -> translation.
-
-==> parce que j'aime bien le mouvement
+  - sujet en soi ;
+  - explication des différentes pièces ;
+  - penser à la méthode de production.
 :::
 
 
@@ -71,20 +66,14 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 ![](assets/img/Impression clip.png){ width=1000px }
 
 :::notes
-  - Toujours penser le design 3D en fonction de la technique de production
-  - paramètres d'impression dans Cura (Simplify3D) ;
-  - Pros'n Cons des 3 impressions ;
-  - insertion manivelle/poussoir ;
-  - mouvement rectiligne, support servo, réservoir pièce.
-
-  ==> Je vous présente le support.
+  => pour maintenir tout ça en place il faut un support.
 :::
 
 # 
 ![](assets/img/support.png){ height=600px }
 
 ::: notes
-
+  => on peut distribuer, oui, mais combien ? il faut stocker la somme quelque part.
 :::
 
 
@@ -94,40 +83,89 @@ Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 :::notes
   - carte sécurisée ;
   - connecteur ;
-==> on y stocke
+  - on y stocke : code, prénom et somme.
+
+  => il faut interagir avec l'utilisateur.
 :::
 
 # 
 ![](assets/img/LCD.png){height="250px"}
 ![](assets/img/clavier.png){height="250px"}
 
+::: notes
+  ==> Il faut contrôler tout ça.
+:::
+
 # 
 ![](assets/img/arduino_nano.png){ height=600px }
 
 :::notes
+  - peu de broches => I2C ;
+  - Retour aux bases de l'info : pointeurs, références, gestion de la mémoire (fragmentation).
+
+  ==> Tous ces éléments il faut les connecter pendant le prototypage.
 :::
 
 # 
-![](assets/img/breadboard.jpg){ width=500px }
+![](assets/img/breadboard.jpg){ height=600px }
 
+::: notes
 
+  ==> Ce n'est pas utilisable pour le produit final, il faut un PCB.
+:::
 
 # 
 ![](assets/img/circuit.png){ height=600px }
 
+::: notes
+  - fait avec EasyEDA ;
+  - Pas de fils de connection, mais des étiquettes qui permettent de tout ordonner par fonction.
+
+  ==> Cette description logique permet de passer au routage.
+:::
+
 # 
 ![](assets/img/PCB2.png){ height=600px }
+
+::: notes
+  - automatique ne marche pas trop ;
+  - on fait des aller-retour avec le schéma électronique pour affiner le routage.
+
+  ==> ensuite on imprime et après un peu de chimie et avoir piqué le gemey-maybelline de ma chère moitié.
+:::
+
+
+# 
+![](assets/img/dissolvant.jpg){height="400px"}
+
+::: notes
+  ==> c'est bien le flacon rose qu'il faut, on obtient ça.
+:::
 
 # 
 ![](assets/img/PCB étamé.jpg){ width=400px }
 
+::: notes
+  ==> après perçage et soudage on obtient un résultat bien plus propre que le tas de nouille.
+:::
+
 # 
 ![](assets/img/Circuit imprimé.jpg){ width=500px }
 
-# 
-![](assets/img/boitier.png){ width=500px }
+::: notes
+  ==> Tout ça c'est beau mais il faudrait un beau boitier pour ranger le tout.
+:::
 
 # 
-Sans cahnger les branchements mais uniquement le programme on peut se servir du DAAP comme programmateur de càp, d'éditer l'heure et de daap
+![](assets/img/boitier.png){ width=600px }
 
-# Démonstration
+# 
+![](assets/img/boitier vrai.jpg){ width=600px }
+
+# Démo
+[![](assets/img/boitier vrai.jpg){ width=500px }](assets/video/demo.mp4 "Démo")
+
+# 
+* 2 mois de travail++ ;
+* Mécanique, Conception/Impression 3D, Électronique, Arduino, PCB, soudure... ;
+* Office Hour.

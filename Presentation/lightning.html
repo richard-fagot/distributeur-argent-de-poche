@@ -81,45 +81,32 @@
 <p><img data-src="assets/img/mouvement.gif" height="600" /></p>
 <aside class="notes">
 <p>Passez rapidement pour ne pas perdre l’attention de l’auditoire.</p>
-<ul>
-<li>joli ;</li>
-<li>hypnotique ;</li>
-<li>facile à concevoir.</li>
-</ul>
-<p>==&gt; il est constitué de != éléments</p>
+<p>Transforme mvt de rotation en translation alternatif, idem moteur.</p>
 </aside>
 </section>
 <section id="section-3" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/poussoir.png" height="600" /></p>
 <aside class="notes">
-<p><strong>Le poussoir</strong></p>
 <ul>
-<li>mouvement bielle-manivelle ;</li>
-<li>rotation -&gt; translation.</li>
+<li>sujet en soi ;</li>
+<li>explication des différentes pièces ;</li>
+<li>penser à la méthode de production.</li>
 </ul>
-<p>==&gt; parce que j’aime bien le mouvement</p>
 </aside>
 </section>
 <section id="section-4" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/Impression%20clip.png" width="1000" /></p>
 <aside class="notes">
-<ul>
-<li>Toujours penser le design 3D en fonction de la technique de production</li>
-<li>paramètres d’impression dans Cura (Simplify3D) ;</li>
-<li>Pros’n Cons des 3 impressions ;</li>
-<li>insertion manivelle/poussoir ;</li>
-<li>mouvement rectiligne, support servo, réservoir pièce.</li>
-</ul>
-<p>==&gt; Je vous présente le support.</p>
+<p>=&gt; pour maintenir tout ça en place il faut un support.</p>
 </aside>
 </section>
 <section id="section-5" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/support.png" height="600" /></p>
 <aside class="notes">
-
+<p>=&gt; on peut distribuer, oui, mais combien ? il faut stocker la somme quelque part.</p>
 </aside>
 </section>
 <section id="sle-4442" class="slide level1">
@@ -128,51 +115,99 @@
 <aside class="notes">
 <ul>
 <li>carte sécurisée ;</li>
-<li>connecteur ; ==&gt; on y stocke</li>
+<li>connecteur ;</li>
+<li>on y stocke : code, prénom et somme.</li>
 </ul>
+<p>=&gt; il faut interagir avec l’utilisateur.</p>
 </aside>
 </section>
 <section id="section-6" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/LCD.png" height="250" /> <img data-src="assets/img/clavier.png" height="250" /></p>
+<aside class="notes">
+<p>==&gt; Il faut contrôler tout ça.</p>
+</aside>
 </section>
 <section id="section-7" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/arduino_nano.png" height="600" /></p>
 <aside class="notes">
-
+<ul>
+<li>peu de broches =&gt; I2C ;</li>
+<li>Retour aux bases de l’info : pointeurs, références, gestion de la mémoire (fragmentation).</li>
+</ul>
+<p>==&gt; Tous ces éléments il faut les connecter pendant le prototypage.</p>
 </aside>
 </section>
 <section id="section-8" class="slide level1">
 <h1></h1>
-<p><img data-src="assets/img/breadboard.jpg" width="500" /></p>
+<p><img data-src="assets/img/breadboard.jpg" height="600" /></p>
+<aside class="notes">
+<p>==&gt; Ce n’est pas utilisable pour le produit final, il faut un PCB.</p>
+</aside>
 </section>
 <section id="section-9" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/circuit.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>fait avec EasyEDA ;</li>
+<li>Pas de fils de connection, mais des étiquettes qui permettent de tout ordonner par fonction.</li>
+</ul>
+<p>==&gt; Cette description logique permet de passer au routage.</p>
+</aside>
 </section>
 <section id="section-10" class="slide level1">
 <h1></h1>
 <p><img data-src="assets/img/PCB2.png" height="600" /></p>
+<aside class="notes">
+<ul>
+<li>automatique ne marche pas trop ;</li>
+<li>on fait des aller-retour avec le schéma électronique pour affiner le routage.</li>
+</ul>
+<p>==&gt; ensuite on imprime et après un peu de chimie et avoir piqué le gemey-maybelline de ma chère moitié.</p>
+</aside>
 </section>
 <section id="section-11" class="slide level1">
 <h1></h1>
-<p><img data-src="assets/img/PCB%20étamé.jpg" width="400" /></p>
+<p><img data-src="assets/img/dissolvant.jpg" height="400" /></p>
+<aside class="notes">
+<p>==&gt; c’est bien le flacon rose qu’il faut, on obtient ça.</p>
+</aside>
 </section>
 <section id="section-12" class="slide level1">
 <h1></h1>
-<p><img data-src="assets/img/Circuit%20imprimé.jpg" width="500" /></p>
+<p><img data-src="assets/img/PCB%20étamé.jpg" width="400" /></p>
+<aside class="notes">
+<p>==&gt; après perçage et soudage on obtient un résultat bien plus propre que le tas de nouille.</p>
+</aside>
 </section>
 <section id="section-13" class="slide level1">
 <h1></h1>
-<p><img data-src="assets/img/boitier.png" width="500" /></p>
+<p><img data-src="assets/img/Circuit%20imprimé.jpg" width="500" /></p>
+<aside class="notes">
+<p>==&gt; Tout ça c’est beau mais il faudrait un beau boitier pour ranger le tout.</p>
+</aside>
 </section>
 <section id="section-14" class="slide level1">
 <h1></h1>
-<p>Sans cahnger les branchements mais uniquement le programme on peut se servir du DAAP comme programmateur de càp, d’éditer l’heure et de daap</p>
+<p><img data-src="assets/img/boitier.png" width="600" /></p>
 </section>
-<section id="démonstration" class="slide level1">
-<h1>Démonstration</h1>
+<section id="section-15" class="slide level1">
+<h1></h1>
+<p><img data-src="assets/img/boitier%20vrai.jpg" width="600" /></p>
+</section>
+<section id="démo" class="slide level1">
+<h1>Démo</h1>
+<p><a href="assets/video/demo.mp4" title="Démo"><img data-src="assets/img/boitier%20vrai.jpg" width="500" /></a></p>
+</section>
+<section id="section-16" class="slide level1">
+<h1></h1>
+<ul>
+<li>2 mois de travail++ ;</li>
+<li>Mécanique, Conception/Impression 3D, Électronique, Arduino, PCB, soudure… ;</li>
+<li>Office Hour.</li>
+</ul>
 </section>
     </div>
   </div>
