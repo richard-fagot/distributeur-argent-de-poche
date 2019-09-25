@@ -10,6 +10,8 @@ compile: pandoc -t revealjs -V theme=white -s Lightning.md -o lightning.html --c
 Richard Fagot
 
 :::notes
+supprimer le cadre noir des images. Parler un peu plus des problèmes.
+
 1. Tiens-toi bien ;
 1. Pense à ta première phrase ;
 1. Prend une inspiration ;
@@ -31,6 +33,8 @@ Passer rapidement.
 # 
 
 :::notes
+On trouve des règles qu'on a choisi d'appliquer. +image enfant qui fait omme les grands.
+
 - règles de l'argent de poche :
   - quantité libre,
   - distribution 1x/sem,
@@ -45,6 +49,7 @@ Passer rapidement.
 ![](assets/img/mouvement.gif){ height=600px }
 
 :::notes
+image du servomoteur
 Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 
 Transforme mvt de rotation en translation alternatif, idem moteur.
@@ -66,6 +71,7 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 ![](assets/img/Impression clip.png){ width=1000px }
 
 :::notes
+  mettre avec les supports et finir avec le troncage de la pièce.
   => pour maintenir tout ça en place il faut un support.
 :::
 
@@ -81,6 +87,7 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 ![](assets/img/carte+connecteur.png){height="400px"}
 
 :::notes
+  ne pas parler de la secu.
   - carte sécurisée ;
   - connecteur ;
   - on y stocke : code, prénom et somme.
@@ -139,6 +146,8 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 ![](assets/img/dissolvant.jpg){height="400px"}
 
 ::: notes
+comment ne pas perturber avec le solvant.
+
   ==> c'est bien le flacon rose qu'il faut, on obtient ça.
 :::
 
