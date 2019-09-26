@@ -4,13 +4,14 @@ lang: fr-FR
 compile: pandoc -t revealjs -V theme=white -s Lightning.md -o lightning.html --css=devfest.css 
 ---
 
-<!-- Phrase d'introduction -->
+
+
+
 # Distributeur Automatique d'Argent de Poche
 
 Richard Fagot
 
 :::notes
-supprimer le cadre noir des images. Parler un peu plus des problèmes.
 
 1. Tiens-toi bien ;
 1. Pense à ta première phrase ;
@@ -19,7 +20,8 @@ supprimer le cadre noir des images. Parler un peu plus des problèmes.
 :::
 
 
-<!-- Extrait BD de Calvin & Hobbs-->
+
+
 # 
 ![](assets/img/calvin.png)
 
@@ -29,11 +31,15 @@ Passer rapidement.
 ==> littérature sur le sujet
 :::
 
-<!-- Courte introduction à l'argent de poche et genèse du projet -->
+
+
+
 # 
 
+* Parler un peu plus des problèmes.
+
 :::notes
-On trouve des règles qu'on a choisi d'appliquer. +image enfant qui fait omme les grands.
+On trouve des règles qu'on a choisi d'appliquer. 
 
 - règles de l'argent de poche :
   - quantité libre,
@@ -45,17 +51,28 @@ On trouve des règles qu'on a choisi d'appliquer. +image enfant qui fait omme le
 ==> quitte à faire comme les grands, est-ce qu'on peu aller plus loin ?
 :::
 
+
+
+
 # 
+ * image enfant qui fait omme les grands.
+
+
+
+
+
+# image du servomoteur {data-background-color="#FDFAFE"}
 ![](assets/img/mouvement.gif){ height=600px }
 
 :::notes
-image du servomoteur
+
 Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 
 Transforme mvt de rotation en translation alternatif, idem moteur.
-
-
 :::
+
+
+
 
 # 
 ![](assets/img/poussoir.png){ height=600px }
@@ -64,16 +81,24 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
   - sujet en soi ;
   - explication des différentes pièces ;
   - penser à la méthode de production.
+
+  ==> vous pourrez venir me voi à l'office hour pour savoir pourquoi il y a un trou dans la bielle.
 :::
+
+
 
 
 # 
+  mettre avec les supports et finir avec le troncage de la pièce.
+
 ![](assets/img/Impression clip.png){ width=1000px }
 
 :::notes
-  mettre avec les supports et finir avec le troncage de la pièce.
   => pour maintenir tout ça en place il faut un support.
 :::
+
+
+
 
 # 
 ![](assets/img/support.png){ height=600px }
@@ -83,17 +108,22 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 :::
 
 
-# SLE 4442
-![](assets/img/carte+connecteur.png){height="400px"}
+
+
+# 
+![](assets/img/carte+connecteur.png){height="600px"}
 
 :::notes
   ne pas parler de la secu.
-  - carte sécurisée ;
+  - ~~carte sécurisée~~ ;
   - connecteur ;
   - on y stocke : code, prénom et somme.
 
   => il faut interagir avec l'utilisateur.
 :::
+
+
+
 
 # 
 ![](assets/img/LCD.png){height="250px"}
@@ -102,6 +132,9 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 ::: notes
   ==> Il faut contrôler tout ça.
 :::
+
+
+
 
 # 
 ![](assets/img/arduino_nano.png){ height=600px }
@@ -113,13 +146,20 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
   ==> Tous ces éléments il faut les connecter pendant le prototypage.
 :::
 
-# 
-![](assets/img/breadboard.jpg){ height=600px }
+
+
+
+# {data-background-image="assets/img/prototype.jpg"}
+<!--![](assets/img/prototype.jpg){ height=1080px }
+![](assets/img/breadboard.jpg){ height=600px }-->
 
 ::: notes
 
   ==> Ce n'est pas utilisable pour le produit final, il faut un PCB.
 :::
+
+
+
 
 # 
 ![](assets/img/circuit.png){ height=600px }
@@ -131,8 +171,12 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
   ==> Cette description logique permet de passer au routage.
 :::
 
+
+
+
 # 
-![](assets/img/PCB2.png){ height=600px }
+![](assets/img/routing_Bleu.png){ height=600px }
+<!--![](assets/img/PCB2.png){ height=600px }-->
 
 ::: notes
   - automatique ne marche pas trop ;
@@ -142,8 +186,10 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 :::
 
 
+
+
 # 
-![](assets/img/dissolvant.jpg){height="400px"}
+![](assets/img/dissolvant.jpg){height="600px"}
 
 ::: notes
 comment ne pas perturber avec le solvant.
@@ -151,12 +197,20 @@ comment ne pas perturber avec le solvant.
   ==> c'est bien le flacon rose qu'il faut, on obtient ça.
 :::
 
+
+
+
 # 
+Refaire avec les différentes étapes (impression, transfert, gravure)pour remplir le slide avec le schéma électronique et la planche à découper.
+
 ![](assets/img/PCB étamé.jpg){ width=400px }
 
 ::: notes
   ==> après perçage et soudage on obtient un résultat bien plus propre que le tas de nouille.
 :::
+
+
+
 
 # 
 ![](assets/img/Circuit imprimé.jpg){ width=500px }
@@ -165,16 +219,29 @@ comment ne pas perturber avec le solvant.
   ==> Tout ça c'est beau mais il faudrait un beau boitier pour ranger le tout.
 :::
 
+
+
+
 # 
 ![](assets/img/boitier.png){ width=600px }
+
+
+
 
 # 
 ![](assets/img/boitier vrai.jpg){ width=600px }
 
+
+
+
 # Démo
 [![](assets/img/boitier vrai.jpg){ width=500px }](assets/video/demo.mp4 "Démo")
 
+
+
+
 # 
+
 * 2 mois de travail++ ;
 * Mécanique, Conception/Impression 3D, Électronique, Arduino, PCB, soudure... ;
 * Office Hour.
