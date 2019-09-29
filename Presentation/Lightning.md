@@ -22,8 +22,8 @@ Richard Fagot
 
 
 
-# 
-![](assets/img/calvin.png)
+# {data-background-image="assets/img/calvin.png" data-background-size="contain"}
+<!--![](assets/img/calvin.png)-->
 
 ::: notes
 Passer rapidement.
@@ -35,8 +35,6 @@ Passer rapidement.
 
 
 # 
-
-* Parler un peu plus des problèmes.
 
 :::notes
 On trouve des règles qu'on a choisi d'appliquer. 
@@ -61,8 +59,9 @@ On trouve des règles qu'on a choisi d'appliquer.
 
 
 
-# image du servomoteur {data-background-color="#FDFAFE"}
-![](assets/img/mouvement.gif){ height=600px }
+# {data-background-image="assets/img/fond-mouvement.png"}
+<!-- image du servomoteur {data-background-color="#FDFAFE"}-->
+![](assets/img/mouvement2.gif){ height=600px }
 
 :::notes
 
@@ -88,11 +87,10 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 
-# 
-  mettre avec les supports et finir avec le troncage de la pièce.
-
+# {data-background-image="assets/img/impressionPosition.png"}
+<!--
 ![](assets/img/Impression clip.png){ width=1000px }
-
+-->
 :::notes
   => pour maintenir tout ça en place il faut un support.
 :::
@@ -101,7 +99,7 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 # 
-![](assets/img/support.png){ height=600px }
+![](assets/img/support.png){ height=700px }
 
 ::: notes
   => on peut distribuer, oui, mais combien ? il faut stocker la somme quelque part.
@@ -111,7 +109,7 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 # 
-![](assets/img/carte+connecteur.png){height="600px"}
+![](assets/img/carte+connecteur2.png){width="1000px"}
 
 :::notes
   ne pas parler de la secu.
@@ -126,8 +124,8 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 # 
-![](assets/img/LCD.png){height="250px"}
-![](assets/img/clavier.png){height="250px"}
+![](assets/img/LCD.png){height="300px"}
+![](assets/img/clavier.png){height="300px"}
 
 ::: notes
   ==> Il faut contrôler tout ça.
@@ -162,7 +160,7 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 # 
-![](assets/img/circuit.png){ height=600px }
+![](assets/img/circuit.png){ height=650px }
 
 ::: notes
   - fait avec EasyEDA ;
@@ -174,8 +172,8 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 
-# 
-![](assets/img/routing_Bleu.png){ height=600px }
+# {data-background-image="assets/img/routing_Bleu.png" data-background-size="60%"}
+<!--![](assets/img/routing_Bleu.png){ height=700px }-->
 <!--![](assets/img/PCB2.png){ height=600px }-->
 
 ::: notes
@@ -188,8 +186,8 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 
-# 
-![](assets/img/dissolvant.jpg){height="600px"}
+# {data-background-image="assets/img/dissolvant.jpg" data-background-size="50%"}
+<!--![](assets/img/dissolvant.jpg){height="700px"}-->
 
 ::: notes
 comment ne pas perturber avec le solvant.
@@ -200,10 +198,8 @@ comment ne pas perturber avec le solvant.
 
 
 
-# 
-Refaire avec les différentes étapes (impression, transfert, gravure)pour remplir le slide avec le schéma électronique et la planche à découper.
-
-![](assets/img/PCB étamé.jpg){ width=400px }
+# {data-background-image="assets/img/PCB étamé.jpg" data-background-size="60%"}
+<!--![](assets/img/PCB étamé.jpg){ width=800px }-->
 
 ::: notes
   ==> après perçage et soudage on obtient un résultat bien plus propre que le tas de nouille.
@@ -212,24 +208,30 @@ Refaire avec les différentes étapes (impression, transfert, gravure)pour rempl
 
 
 
-# 
-![](assets/img/Circuit imprimé.jpg){ width=500px }
+# {data-background-image="assets/img/Circuit imprimé.jpg" data-background-size="40%"}
+<!--![](assets/img/Circuit imprimé.jpg){ width=700px }-->
 
 ::: notes
   ==> Tout ça c'est beau mais il faudrait un beau boitier pour ranger le tout.
+  ==> Et après de nombreux tests.
 :::
 
 
 
 
-# 
-![](assets/img/boitier.png){ width=600px }
+# {data-background-image="assets/img/tests.png"}
 
 
 
 
 # 
-![](assets/img/boitier vrai.jpg){ width=600px }
+![](assets/img/boitier.png){ width=800px }
+
+
+
+
+# 
+![](assets/img/boitier vrai.jpg){ width=800px }
 
 
 
@@ -244,4 +246,5 @@ Refaire avec les différentes étapes (impression, transfert, gravure)pour rempl
 
 * 2 mois de travail++ ;
 * Mécanique, Conception/Impression 3D, Électronique, Arduino, PCB, soudure... ;
-* Office Hour.
+
+# Office Hour

@@ -53,11 +53,11 @@ boolean DistributionAllower::isAllowed(const char *name, MyTime &time) {
       Serial.println(badDate(time));
     #endif
 
-    
+    /*
     if(badDate(time) || yetDistributed(name, time)) {
         isAllowed = false;
     }
-
+   */
     return isAllowed;
 }
 
