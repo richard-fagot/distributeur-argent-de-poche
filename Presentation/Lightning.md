@@ -17,6 +17,8 @@ Richard Fagot
 1. Pense à ta première phrase ;
 1. Prend une inspiration ;
 1. Embrasse la salle d'un regard et lance-toi.
+
+==> Bonjour à tous et bienvenu. Il y a quelques temps avec mon épouse...
 :::
 
 
@@ -28,14 +30,13 @@ Richard Fagot
 ::: notes
 Passer rapidement.
 
-==> littérature sur le sujet
+==> Mais on ne s'est pas lancé comme ça...
 :::
 
 
 
 
 # 
-
 :::notes
 On trouve des règles qu'on a choisi d'appliquer. 
 
@@ -46,7 +47,7 @@ On trouve des règles qu'on a choisi d'appliquer.
   - not(rémunération),
   - l'enfant dépense librement.
 
-==> quitte à faire comme les grands, est-ce qu'on peu aller plus loin ?
+==> L'idée étant qu'ils puissent faire comme les grands...
 :::
 
 
@@ -55,6 +56,11 @@ On trouve des règles qu'on a choisi d'appliquer.
 # 
  * image enfant qui fait omme les grands.
 
+::: notes
+
+==> quitte à faire comme les grands, est-ce qu'on ne pourrait pas aller plus loin ?
+
+:::
 
 
 
@@ -67,7 +73,9 @@ On trouve des règles qu'on a choisi d'appliquer.
 
 Passez rapidement pour ne pas perdre l'attention de l'auditoire.
 
-Transforme mvt de rotation en translation alternatif, idem moteur.
+Transforme mvt de rotation en translation alternatif
+
+==> Il y a une colonne de pièce, on pousse celle du dessous...
 :::
 
 
@@ -159,8 +167,8 @@ Transforme mvt de rotation en translation alternatif, idem moteur.
 
 
 
-# 
-![](assets/img/circuit.png){ height=650px }
+# {data-background-image="assets/img/circuit.png" data-background-size="90%"}
+<!--![](assets/img/circuit.png){ height=650px }-->
 
 ::: notes
   - fait avec EasyEDA ;
