@@ -53,8 +53,7 @@ On trouve des règles qu'on a choisi d'appliquer.
 
 
 
-# 
- * image enfant qui fait omme les grands.
+# {data-background-image="assets/img/comme-les-grands.jpg"}
 
 ::: notes
 
@@ -216,7 +215,7 @@ comment ne pas perturber avec le solvant.
 
 
 
-# {data-background-image="assets/img/Circuit imprimé.jpg" data-background-size="40%"}
+# {data-background-image="assets/img/circuit-monté.jpg" data-background-size="100%"}
 <!--![](assets/img/Circuit imprimé.jpg){ width=700px }-->
 
 ::: notes
